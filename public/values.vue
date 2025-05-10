@@ -19,7 +19,7 @@
           </h5>
         </div>
         <div class="w-full lg:pt-32">
-          <Image1 />
+          <ImageValue />
         </div>
       </div>
     </div>
@@ -129,6 +129,7 @@ import Confiance from "@/assets/images/cresaf/confiance.webp"
 import Girl from "@/assets/images/girl.webp"
 import Sommet from "@/assets/images/sommet.webp"
 import Check from"@/assets/images/svg/check-rounded.svg"
+import ImageValue from "@public/components/imageValue.vue";
 
 const valeurs = Valeur
 const confiance = Confiance

@@ -1,21 +1,21 @@
 <template>
-  <div class="relative w-full h-full max-w-2xl">
+  <div class="w-full">
     <!-- Carousel wrapper -->
     <div
         v-for="(image, index) in images"
         :key="index"
-        class="absolute inset-0 transition-opacity duration-700 ease-in-out"
+        class="absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center"
         :class="{'opacity-100': currentIndex === index, 'opacity-0': currentIndex !== index}"
     >
       <img
           :src="image"
-          class="rounded-xl object-contain"
+          class="rounded-xl object-cover object-center"
           alt="Carousel Image"
       />
     </div>
 
     <!-- Slider indicators -->
-    <div class="absolute left-1/2 transform -translate-x-1/2 flex space-x-3">
+    <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-3">
       <button
           v-for="(image, index) in images"
           :key="index"
@@ -52,9 +52,9 @@
 
 <script setup>
 import {ref, onMounted, onUnmounted} from "vue";
-import Image from "@/assets/images/cresaf/association2.webp";
-import Image1 from "@/assets/images/cresaf/association1.webp";
-import Image2 from "@/assets/images/cresaf/collecte3.webp";
+import Image from "@/assets/images/woman3.webp";
+import Image1 from "@/assets/images/woman2.webp";
+import Image2 from "@/assets/images/woman1.webp";
 
 const images = ref([Image, Image1, Image2]);
 const currentIndex = ref(0);

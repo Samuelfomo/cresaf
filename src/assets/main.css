@@ -4,10 +4,110 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --primary: #1c3461;
+    --primary-accent: #FFED66;
+    --primary-accent-rgb: 255, 237, 102;
+
+    --secondary: #45ab34;
+    --secondary-accent: #FFED66;
+
+    --font-primary: "Montserrat", sans-serif;
+}
+
 body, html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.text-italic {
+    font-style: italic !important;
+}
+
+.bg-test {
+    background-color: #ff002f !important;
+}
+
+.bg-primary {
+    background-color: var(--primary) !important;
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.text-primary-accent {
+    color: var(--primary-accent) !important;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-family: var(--font-primary), sans-serif !important;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 0.25rem !important;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.btn-primary {
+    color: var(--primary-accent) !important;
+    background-color: var(--primary) !important;
+}
+.btn-primary-accent {
+    color: var(--primary) !important;
+    background-color: var(--primary-accent) !important;
+}
+.btn-primary-accent:hover {
+    color: var(--primary-accent) !important;
+    background-color: rgba(var(--primary-accent-rgb), 0.25) !important;
+}
+
+.montserrat {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.montserrat-100 {
+    font-weight: 100 !important;
+}
+
+.montserrat-200 {
+    font-weight: 200 !important;
+}
+
+.montserrat-300 {
+    font-weight: 300 !important;
+}
+
+.montserrat-400 {
+    font-weight: 400 !important;
+}
+
+.montserrat-500 {
+    font-weight: 500 !important;
+}
+
+.montserrat-600 {
+    font-weight: 600 !important;
+}
+
+.montserrat-700 {
+    font-weight: 700 !important;
+}
+
+.montserrat-800 {
+    font-weight: 800 !important;
+}
+
+.montserrat-900 {
+    font-weight: 900 !important;
 }
 
 

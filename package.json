@@ -9,6 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@tabler/icons-vue": "^3.31.0",
     "axios": "^1.7.9",
     "core-js": "^3.39.0",
     "cors": "^2.8.5",

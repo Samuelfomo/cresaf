@@ -11,13 +11,17 @@ export default {
       fontFamily: {
         'roboto': ['Roboto', 'sans-serif'],
         'patrick-hand': ['Patrick Hand', 'cursive'],
-        accent: ['Merriweather', 'serif'],
+        accent: ['Merriweather', 'sans-serif'],
         primary: [
         'Montserrat', '-apple-system', 'BlinkMacSystemFont',
           'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif',
           'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
         ],
-        openSans: ['Open Sans','sans-serif']
+        openSans: ['Open Sans','sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+        poppins:['Poppins', 'sans-serif'],
+        playfair:['Playfair Display', 'serif'],
+        inter:['Inter', 'sans-serif'],
       },
       animation: {
         blink: "blink 3s infinite",
