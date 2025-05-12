@@ -23,7 +23,8 @@
 <!--        </div>-->
 <!--      </div>-->
 <!--    </div>-->
-    <div class="w-full mx-auto px-4 pt-40 pb-12 lg:pt-48">
+    <div class="px-4 pt-40 pb-12 lg:pt-48">
+    <div class="w-full mx-auto">
       <div class="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between">
         <div v-for="(service, index) in services" :key="index" class="w-full flex flex-col lg:px-10 lg:text-start text-start lg:justify-normal justify-center lg:items-start">
           <h1 class="lg:text-5xl text-3xl text-center montserrat montserrat-600 text-secondary pb-3">
@@ -44,91 +45,100 @@
         </div>
       </div>
     </div>
+    </div>
 
-    <div id="section1" class="bg-blue-50 lg:px-8 flex flex-col py-12  justify-center container mx-auto">
-      <h1 class="text-secondary lg:text-5xl text-3xl montserrat montserrat-600 text-center">Nos valeurs fondamentales</h1>
-      <p class="text-primary text-xl py-10 w-full lg:px-10 px-5 font-primary">
-        Nos employés partagent des valeurs fortes qui sous-tendent notre engagement et notre responsabilité de fournir à nos clients et partenaires une expérience enrichissante.
-      </p>
-     <div class="w-full h-full flex justify-between gap-2 lg:flex-nowrap flex-wrap">
-       <div class="hidden w-full max-w-md lg:flex">
-<!--       <div class="hidden w-full h-full max-w-lg lg:flex justify-center items-center lg:pb-10">-->
-         <img :src="valeurs" alt="image secrétaire" class="object-cover rounded-lg transition-transform duration-500 hover:scale-105">
-       </div>
-       <div class="w-full h-full flex flex-col justify-start px-6 py-1">
-         <h3 class="text-2xl pb-4 text-gray-800 font-roboto">
-           Ces valeurs sont les suivantes :
-         </h3>
-         <div class="flex justify-between items-start w-full py-2" v-for="(location, index) in locations" :key="index">
-           <h1 class="text-xl font-semibold font-roboto leading-relaxed text-gray-950 w-full">{{ location.titre }}
-           <span class="font-serif">
+    <div class="bg-blue-50 lg:px-8 flex flex-col py-12 justify-center ">
+      <div id="section1" class="container mx-auto">
+        <h1 class="text-secondary lg:text-5xl text-3xl montserrat montserrat-600 text-center">Nos valeurs fondamentales</h1>
+        <p class="text-primary text-xl py-10 w-full lg:px-10 px-5 font-primary">
+          Nos employés partagent des valeurs fortes qui sous-tendent notre engagement et notre responsabilité de fournir à nos clients et partenaires une expérience enrichissante.
+        </p>
+        <div class="w-full h-full flex justify-between gap-2 lg:flex-nowrap flex-wrap">
+          <div class="hidden w-full max-w-md lg:flex">
+            <!--       <div class="hidden w-full h-full max-w-lg lg:flex justify-center items-center lg:pb-10">-->
+            <img :src="valeurs" alt="image secrétaire" class="object-cover rounded-lg transition-transform duration-500 hover:scale-105">
+          </div>
+          <div class="w-full h-full flex flex-col justify-start px-6 py-1">
+            <h3 class="text-2xl pb-4 text-gray-800 font-roboto">
+              Ces valeurs sont les suivantes :
+            </h3>
+            <div class="flex justify-between items-start w-full py-2" v-for="(location, index) in locations" :key="index">
+              <h1 class="text-xl font-semibold font-roboto leading-relaxed text-gray-950 w-full">{{ location.titre }}
+                <span class="font-serif">
             {{location.description}}
            </span>
-           </h1>
-         </div>
-       </div>
-     </div>
-    </div>
-    <div id="section2" class="lg:px-8 flex flex-col py-12 justify-center container mx-auto">
-      <h1 class="text-green-600 lg:text-5xl text-2xl font-primary text-center">Pourquoi nous faire confiance ?</h1>
-      <p class="text-gray-500 font-sans text-xl py-8 w-full lg:px-20 px-6">
-        Nous disposons d'actifs de qualité que nous employons au profit de nos clients
-      </p>
-     <div class="w-full h-full flex justify-between gap-2 lg:flex-nowrap flex-wrap">
-       <div class="hidden w-full max-h-[450px] max-w-md lg:flex">
-         <img :src="confiance" alt="image secrétaire" class="w-full h-full rounded-lg object-cover transition-transform duration-500 hover:scale-105">
-       </div>
-       <div class="w-full h-full flex flex-col justify-start px-6 py-6">
-         <div class="flex justify-between items-stretch w-full py-2 gap-2" v-for="(location2, index) in locations2" :key="index">
-           <img :src="check" alt="checked rounded" class="w-8 h-8">
-           <h1 class="text-xl w-full leading-10 font-light">
-            {{location2.description}}
-           </h1>
-         </div>
-       </div>
-     </div>
-    </div>
-    <div id="section3" class="lg:px-8 flex flex-col py-12 justify-center container mx-auto bg-blue-950">
-      <div class="flex lg:flex-nowrap flex-wrap px-5 h-full justify-between items-center w-full gap-2">
-        <div class="flex flex-col w-full h-full items-start justify-between py-5 lg:px-5">
-          <h1 class="text-white lg:text-5xl text-3xl lg:text-left text-center font-primary w-full">Nous misons sur l'avenir</h1>
-          <p class="text-white text-xl font-sans lg:py-5 pt-5 w-full text-left">
-            Nous aspirons à être une force motrice du changement pour transformer et établir le standard du secteur de la microfinance au Cameroun.
-          </p>
-          <p class="text-white text-xl font-sans lg:py-5 py-3 w-full text-left">
-            Les entrepreneurs sont confrontés à des défis uniques dans leurs activités quotidiennes,
-            notamment le manque de solutions bancaires adaptées à leurs besoins spécifiques.
-          </p>
-          <p class="text-white text-xl font-sans lg:py-5 py-3 w-full text-left">
-            Nous tirons notre force de notre capacité à répondre à ces défis de manière directe, nous sommes déterminés à apporter des
-            solutions bancaires simples, fiables et accessibles aux entrepreneurs, aux salariés et aux travailleurs indépendants.
-          </p>
-        </div>
-
-        <div class="flex w-full h-full max-w-lg py-10 justify-start flex-wrap px-5 lg:px-20 gap-2 ">
-          <img :src="girl" alt="image girl" class="object-cover transition-transform duration-500 hover:scale-105">
+              </h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="section4" class="lg:px-8 flex flex-col py-12 justify-center container mx-auto">
-      <h1 class="text-green-600 lg:text-5xl text-3xl font-primary text-center">Créons des opportunités pour tous !</h1>
-<!--      <p class="text-gray-500 font-sans text-xl py-8 w-full lg:px-10 px-6">-->
-<!--        Notre mission se traduit par la mise à disposition de services financiers adaptés aux personnes exclues du secteur bancaire.-->
-<!--      </p>-->
-      <p class="text-gray-500 font-roboto text-xl py-8 w-full lg:px-10 px-6">
-        Notre mission, « développer des produits financiers capables de changer l’avenir des entrepreneurs », s’inscrit dans la vision d’entreprise telle qu’énoncée plus haut. À ce titre, les missions de Cresaf S.A peuvent aisément se deviner :
-      </p>
-      <div class="w-full h-full flex justify-between gap-2 lg:flex-nowrap flex-wrap">
-        <div class="hidden w-full max-w-md lg:flex">
-          <img :src="sommet" alt="image secrétaire" class="max-w-md h-full object-cover shadow shadow-blue-200 rounded-lg transition-transform duration-500 hover:scale-105">
+    <div class="lg:px-8 flex flex-col py-12 justify-center ">
+      <div id="section2" class="container mx-auto">
+        <h1 class="text-secondary lg:text-5xl text-2xl montserrat montserrat-700 text-center">Pourquoi nous faire confiance ?</h1>
+        <p class="text-gray-500 font-sans text-xl py-8 w-full lg:px-20 px-6">
+          Nous disposons d'actifs de qualité que nous employons au profit de nos clients
+        </p>
+        <div class="w-full h-full flex justify-between gap-2 lg:flex-nowrap flex-wrap">
+          <div class="hidden w-full max-h-[450px] max-w-md lg:flex">
+            <img :src="confiance" alt="image secrétaire" class="w-full h-full rounded-lg object-cover transition-transform duration-500 hover:scale-105">
+          </div>
+          <div class="w-full h-full flex flex-col justify-start px-6 py-6">
+            <div class="flex justify-between items-stretch w-full py-2 gap-2" v-for="(location2, index) in locations2" :key="index">
+              <img :src="check" alt="checked rounded" class="w-8 h-8">
+              <h1 class="text-xl w-full leading-10 font-light">
+                {{location2.description}}
+              </h1>
+            </div>
+          </div>
         </div>
-        <div class="w-full h-full flex flex-col justify-start px-6 py-1">
-          <div class="flex justify-between items-stretch w-full py-2 gap-2" v-for="(location3, index) in locations3" :key="index">
-            <img :src="check" alt="checked rounded" class="w-8 h-8">
-            <h1 class="text-xl w-full leading-relaxed font-sans text-gray-600">
-              {{location3.description}}
-            </h1>
+      </div>
+    </div>
+    <div class="lg:px-8 flex flex-col py-12 bg-primary">
+      <div id="section3" class="container mx-auto">
+        <div class="flex lg:flex-nowrap flex-wrap px-5 h-full justify-between items-center w-full gap-2">
+          <div class="flex flex-col w-full h-full items-start justify-between lg:py-0 py-5 lg:px-5">
+            <h1 class="text-white lg:text-5xl text-3xl pb-10 lg:text-left text-center montserrat montserrat-700 w-full">Nous misons sur l'avenir</h1>
+            <p class="text-white text-xl font-sans lg:py-5 pt-5 w-full text-left">
+              Nous aspirons à être une force motrice du changement pour transformer et établir le standard du secteur de la microfinance au Cameroun.
+            </p>
+            <p class="text-white text-xl font-sans lg:py-5 py-3 w-full text-left">
+              Les entrepreneurs sont confrontés à des défis uniques dans leurs activités quotidiennes,
+              notamment le manque de solutions bancaires adaptées à leurs besoins spécifiques.
+            </p>
+            <p class="text-white text-xl font-sans lg:py-5 py-3 w-full text-left">
+              Nous tirons notre force de notre capacité à répondre à ces défis de manière directe, nous sommes déterminés à apporter des
+              solutions bancaires simples, fiables et accessibles aux entrepreneurs, aux salariés et aux travailleurs indépendants.
+            </p>
+          </div>
+
+          <div class="flex w-full h-full max-w-lg py-10 justify-start flex-wrap px-5 lg:px-20 gap-2 ">
+            <img :src="girl" alt="image girl" class="object-cover transition-transform duration-500 hover:scale-105">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lg:px-8 flex flex-col py-12 justify-center">
+      <div id="section4" class="container mx-auto">
+        <h1 class="text-secondary lg:text-5xl text-3xl montserrat-700 montserrat text-center">Créons des opportunités pour tous !</h1>
+        <!--      <p class="text-gray-500 font-sans text-xl py-8 w-full lg:px-10 px-6">-->
+        <!--        Notre mission se traduit par la mise à disposition de services financiers adaptés aux personnes exclues du secteur bancaire.-->
+        <!--      </p>-->
+        <p class="text-gray-500 font-roboto text-xl py-8 w-full lg:px-10 px-6">
+          Notre mission, « développer des produits financiers capables de changer l’avenir des entrepreneurs », s’inscrit dans la vision d’entreprise telle qu’énoncée plus haut. À ce titre, les missions de Cresaf S.A peuvent aisément se deviner :
+        </p>
+        <div class="w-full h-full flex justify-between gap-2 lg:flex-nowrap flex-wrap">
+          <div class="hidden w-full max-w-md lg:flex">
+            <img :src="sommet" alt="image secrétaire" class="max-w-md h-full object-cover shadow shadow-blue-200 rounded-lg transition-transform duration-500 hover:scale-105">
+          </div>
+          <div class="w-full h-full flex flex-col justify-start px-6 py-1">
+            <div class="flex justify-between items-stretch w-full py-2 gap-2" v-for="(location3, index) in locations3" :key="index">
+              <img :src="check" alt="checked rounded" class="w-8 h-8">
+              <h1 class="text-xl w-full leading-relaxed font-sans text-gray-600">
+                {{location3.description}}
+              </h1>
+            </div>
           </div>
         </div>
       </div>

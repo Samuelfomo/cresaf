@@ -270,68 +270,76 @@ onUnmounted(() => {
 
     <!-- Sections des produits -->
     <!--Compte chèque particulier-->
-    <main id="section1" class="bg-blue-950 lg:px-16 px-8 py-12">
-      <h2 class="text-white font-accent text-4xl w-full justify-center text-center pb-5">
-        Compte chèque particulier
-      </h2>
-      <p class="text-gray-300 font-primary text-lg w-full justify-start pb-10">
-        Le compte chèque à destination des entrepreneurs quel que soit le secteur d’activité,
-        permettra d’effectuer les transactions bancaires courantes lies à leurs activités.
-      </p>
-      <div class="lg:flex w-full gap-2 justify-center lg:px-10">
-<!--        <div class="flex w-full max-w-xl h-full lg:max-h-[28rem]">-->
-<!--          <img :src="Cheque" alt="image" class="object-cover rounded-lg transition-transform duration-500 hover:scale-105">-->
-<!--        </div>-->
-        <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">
-          <Image_compteAss :images="Cheque" />
-        </div>
-        <div class="w-full max-w-xl flex flex-col lg:pt-0 pt-64">
-          <h2 class="text-xl w-full lg:text-center font-semibold text-gray-300 lg:p-0 pt-5">
-            Ce compte offre plusieurs avantages qui facilitent la gestion financière des entrepreneurs
-          </h2>
-          <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">
-<!--            <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
-<!--              <h2 class="font-light text-white">Crédit après 03 mois de fonctionnement</h2>-->
-<!--              <span class="text-lg font-bold text-white"> à la demande du client </span>-->
-<!--            </div>-->
-            <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">
-              <h2 class="font-light text-white">Mise en place d’un découvert</h2>
-              <span class="text-lg font-bold text-white"> À la demande du client </span>
-            </div>
-            <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">
-              <h2 class="font-light text-white">Dépôt minimum </h2>
-              <span class="text-lg font-bold text-white my-auto"> 30.000 XAF</span>
-            </div>
+    <div class="bg-primary lg:px-16 px-8 py-12">
+      <div id="section1" class="flex flex-col justify-center container mx-auto">
+        <h2 class="text-white montserrat montserrat-700 2xl:text-5xl text-4xl w-full justify-center text-center pb-5">
+          Compte chèque particulier
+        </h2>
 
+        <div class="w-full container mx-auto pb-10">
+          <p class="text-gray-300 open-sans 2xl:text-xl text-lg w-full justify-center">
+            Le compte chèque à destination des entrepreneurs quel que soit le secteur d’activité,
+            permettra d’effectuer les transactions bancaires courantes lies à leurs activités.
+          </p>
+        </div>
+
+        <div class="lg:flex w-full gap-x-4 justify-center lg:px-10">
+          <!--        <div class="flex w-full max-w-xl h-full lg:max-h-[28rem]">-->
+          <!--          <img :src="Cheque" alt="image" class="object-cover rounded-lg transition-transform duration-500 hover:scale-105">-->
+          <!--        </div>-->
+          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">
+            <Image_compteAss :images="Cheque" />
+          </div>
+          <div class="w-full max-w-xl flex flex-col py-10">
+            <h2 class="text-xl w-full lg:text-center font-semibold text-gray-300">
+              Ce compte offre plusieurs avantages qui facilitent la gestion financière des entrepreneurs
+            </h2>
+            <div class="w-full flex justify-center lg:p-6 pt-6 gap-x-6 lg:gap-y-0 gap-y-4 lg:flex-nowrap flex-wrap">
+              <!--            <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+              <!--              <h2 class="font-light text-white">Crédit après 03 mois de fonctionnement</h2>-->
+              <!--              <span class="text-lg font-bold text-white"> à la demande du client </span>-->
+              <!--            </div>-->
+              <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">
+                <h2 class="font-light text-white">Mise en place d’un découvert</h2>
+                <span class="text-lg font-bold text-white"> À la demande du client </span>
+              </div>
+              <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">
+                <h2 class="font-light text-white">Dépôt minimum </h2>
+                <span class="text-lg font-bold text-white my-auto"> 30.000 XAF</span>
+              </div>
+
+            </div>
           </div>
         </div>
-      </div>
 
-    </main>
+      </div>
+    </div>
+
     <!--Bon de caisse-->
-    <main id="section2" class="bg-blue-50 lg:px-16 px-8 py-12">
-        <h2 class="text-green-600 font-accent text-4xl w-full justify-center text-center pb-5">
+    <div id="section2" class="bg-blue-50 lg:px-16 px-8 py-12">
+        <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">
           Bon de caisse
         </h2>
-        <p class="text-gray-800 font-primary text-lg w-full justify-center pb-10">
-          Le bon de caisse permet aux entreprises et aux investisseurs d’effectuer des placements de fonds en toute sécurité
-          sur une période minimale d’un an. Le placement a pour vocation à terme de générer d’importants bénéfices grâce à des taux
-          d’intérêts négociables.
-          <!--          d’intérêts allant jusqu’à 5%.-->
-        </p>
+        <div class="pb-10 w-full container mx-auto">
+          <p class="text-gray-800 font-primary text-lg w-full justify-center">
+            Le bon de caisse permet aux entreprises et aux investisseurs d’effectuer des placements de fonds en toute sécurité
+            sur une période minimale d’un an. Le placement a pour vocation à terme de générer d’importants bénéfices grâce à des taux
+            d’intérêts négociables.
+          </p>
+        </div>
         <div class="flex flex-wrap lg:flex-nowrap w-full gap-2 justify-center lg:px-10">
           <div class="w-full lg:max-w-xl flex flex-col lg:py-16 pt-64 order-2 lg:order-1" >
           <h2 class="text-xl w-full lg:text-center font-semibold text-gray-600">Les placements en bon de caisse offrent les conditions suivantes</h2>
           <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">
-<!--            <div class="flex w-full lg:max-w-[12rem] flex-col bg-blue-950 border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--            <div class="flex w-full lg:max-w-[12rem] flex-col bg-primary border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
 <!--              <h2 class="font-light text-white ">dépôt minimum à l’ouverture</h2>-->
 <!--              <span class="text-lg font-bold text-white">5.000.000 CFA</span>-->
 <!--            </div>-->
-            <div class="flex w-full lg:max-w-[12rem] flex-col bg-blue-950 border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">
+            <div class="flex w-full lg:max-w-[12rem] flex-col bg-primary border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">
               <h2 class="font-light text-white">Taux de rémunération</h2>
               <span class="text-lg font-bold text-white my-auto"> Négociable</span>
             </div>
-            <div class="flex w-full lg:max-w-[12rem] flex-col bg-blue-950 border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">
+            <div class="flex w-full lg:max-w-[12rem] flex-col bg-primary border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">
               <h2 class="font-light text-white">Intérêt  précompte ou post compte</h2>
               <span class="text-lg font-bold text-white"> À la demande du client</span>
             </div>
@@ -344,17 +352,20 @@ onUnmounted(() => {
 
           </div>
         </div>
-    </main>
+    </div>
+
     <!--Dépôt à terme-->
-    <main id="section3" class="bg-blue-950 lg:px-16 px-8 py-12">
-      <h2 class="text-white font-accent text-4xl w-full justify-center text-center pb-5">
+    <div id="section3" class="bg-primary lg:px-16 px-8 py-12">
+      <h2 class="text-white montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">
         Dépôt à terme
       </h2>
-      <p class="text-gray-300 font-primary text-lg w-full justify-start pb-10">
-        Le dépôt à terme permet au souscripteur de déposer des fonds sur un compte bloqué afin de
-        bénéficier d’intérêts supérieurs au taux applicable sur un compte d’épargne classique. Le souscripteur
-        pouvant à tout moment disposer des intérêts générés par le compte.
-      </p>
+      <div class="w-full container mx-auto">
+        <p class="text-gray-300 font-primary text-lg w-full justify-start pb-10">
+          Le dépôt à terme permet au souscripteur de déposer des fonds sur un compte bloqué afin de
+          bénéficier d’intérêts supérieurs au taux applicable sur un compte d’épargne classique. Le souscripteur
+          pouvant à tout moment disposer des intérêts générés par le compte.
+        </p>
+      </div>
       <div class="lg:flex w-full gap-2 justify-center lg:px-10">
         <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">
           <Image_compteAss :images="Terme" />
@@ -378,24 +389,26 @@ onUnmounted(() => {
         </div>
       </div>
 
-    </main>
+    </div>
+
     <!--Compte d’épargne association-->
-    <main id="section4" class="pb-6 bg-blue-50 py-12">
-      <div class="bg-blue-50 lg:px-8 px-5">
-      <h2 class="text-green-600 font-accent text-4xl w-full justify-center text-center pb-8">
+    <main id="section4" class="pb-6 bg-blue-50 py-12 lg:px-8 px-5">
+      <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-8">
         Compte d’épargne association
       </h2>
-      <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">
-        Le compte d’épargne association a été mis sur pied afin de permettre aux associations
-        de protéger leurs finances grâce à des comptes d’épargne fiables et sécurisés.
-      </p>
+      <div class="w-full container mx-auto">
+        <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">
+          Le compte d’épargne association a été mis sur pied afin de permettre aux associations
+          de protéger leurs finances grâce à des comptes d’épargne fiables et sécurisés.
+        </p>
+      </div>
       <div class="lg:flex w-full gap-2 justify-center lg:px-10 px-4 lg:pb-20">
 <!--        <div class="flex w-full max-w-xl h-full lg:min-h-[28rem] order-1 lg:order-2 relative bg-black">-->
 <!--&lt;!&ndash;        <div class="flex w-full lg:max-w-sm h-full lg:min-h-[24rem] relative">&ndash;&gt;-->
 <!--&lt;!&ndash;          <img :src="Epargne" alt="image" class="object-cover transition-transform duration-500 hover:scale-105 rounded-lg">&ndash;&gt;-->
 <!--        <Image_compteAss :images="imagesList" />-->
 <!--        </div>-->
-        <div class="flex w-full h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">
+        <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">
           <Image_compteAss :images="Association" />
 
         </div>
@@ -404,28 +417,29 @@ onUnmounted(() => {
             Les associations bénéficient des avantages et conditions suivantes pour leur compte d’épargne
           </h2>
           <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">
-            <div class="bg-blue-950 bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-2 gap-5">
+            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-2 gap-5">
               <h2 class="font-light text-lg text-white">Dépôt minimum à l’ouverture</h2>
               <span class="text-lg font-bold text-white my-auto"> 50.000 XAF </span>
             </div>
-            <div class="bg-blue-950 bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
+            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
               <h2 class="font-light text-lg text-white">Taux d’intérêt</h2>
               <span class="text-lg font-bold text-white my-auto">4% sur l’année</span>
             </div>
           </div>
         </div>
       </div>
-      </div>
 <!--    </main>-->
 <!--    <main id="section4" class="lg:px-8 px-5 py-12 bg-blue-50">-->
       <div class="py-12 lg:px-8 px-5 bg-white">
-      <h2 class="text-green-600 font-accent text-4xl w-full justify-center text-center pb-8">
+      <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-8">
         Compte d’épargne sur livret
       </h2>
-      <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">
-        Le compte d’épargne sur livret est destiné à sécuriser les économies de nos clients.
-        Le client pourra ainsi faire fructifier l’argent déposé grâce à des taux d’intérêts les plus intéressants du marché.
-      </p>
+      <div class="w-full container mx-auto">
+        <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">
+          Le compte d’épargne sur livret est destiné à sécuriser les économies de nos clients.
+          Le client pourra ainsi faire fructifier l’argent déposé grâce à des taux d’intérêts les plus intéressants du marché.
+        </p>
+      </div>
       <div class="flex flex-wrap lg:flex-nowrap w-full gap-2 justify-center lg:px-10 px-4">
         <div class="w-full max-w-xl flex flex-col lg:pt-0 pt-64 order-2 lg:order-1">
           <h2 class="text-xl w-full lg:text-center font-semibold text-gray-500">
@@ -433,12 +447,12 @@ onUnmounted(() => {
             Les conditions d'ouverture d'un compte d'épargne sur livret sont les suivantes :
           </h2>
           <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">
-            <div class="bg-blue-950 bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
+            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
               <h2 class="font-light text-lg text-white">Dépôt minimum à l’ouverture</h2>
 <!--              <span class="text-lg font-bold text-white"> 15.000 XAF<span> Hors Taxes </span></span>-->
               <span class="text-lg font-bold text-white my-auto"> 16.000 XAF<span> TTC</span></span>
             </div>
-            <div class="bg-blue-950 bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
+            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
               <h2 class="font-light text-lg text-white">Solde minimum permanent en compte</h2>
               <span class="text-lg font-bold text-white my-auto">10.000 XAF</span>
             </div>
@@ -447,24 +461,26 @@ onUnmounted(() => {
 <!--        <div class="flex w-full lg:max-w-sm h-full lg:min-h-[24rem] order-1 lg:order-2">-->
 <!--          <img :src="Livret" alt="image" class="object-contain transition-transform duration-500 hover:scale-105 rounded-lg">-->
 <!--        </div>-->
-        <div class="flex w-full h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">
+        <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">
           <Image_compteAss :images="Epargne" />
 
         </div>
       </div>
       </div>
       <div class="py-12 bg-blue-50 lg:px-8 px-5">
-        <h2 class="text-green-600 font-accent text-3xl md:text-4xl text-center mb-10">
+        <h2 class="text-secondary montserrat montserrat-700 text-3xl md:text-4xl text-center mb-10">
           Compte courant entreprise
         </h2>
-        <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">
-          Le compte courant entreprise permet aux entrepreneurs ou aux entreprises clientes
-          d’avoir leurs fonds à disposition et de bénéficier à tout moment des avantages liés à celui-ci.
-          Les entreprises clientes pourront effectuer toutes les transactions financières courantes liées à leur fonctionnement
-          grâce à un service simplifié.
-        </p>
+        <div class="w-full container mx-auto">
+          <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">
+            Le compte courant entreprise permet aux entrepreneurs ou aux entreprises clientes
+            d’avoir leurs fonds à disposition et de bénéficier à tout moment des avantages liés à celui-ci.
+            Les entreprises clientes pourront effectuer toutes les transactions financières courantes liées à leur fonctionnement
+            grâce à un service simplifié.
+          </p>
+        </div>
         <div class="lg:flex w-full gap-2 justify-center lg:px-10">
-          <div class="flex w-full h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">
+          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">
             <Image_compteAss :images="Entreprise" />
 
           </div>
@@ -500,14 +516,14 @@ onUnmounted(() => {
               Les entreprises bénéficient des avantages et conditions suivantes pour leur compte courant entreprise
             </h2>
             <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">
-              <div class="bg-blue-950 bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
+              <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
                 <h2 class="font-light text-lg text-white">Dépôt minimum à l’ouverture</h2>
                 <span class="text-lg font-bold text-white my-auto"> 30.000 XAF </span>
               </div>
-              <div class="bg-blue-950 bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
+              <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
                 <h2 class="font-light text-lg text-white">Facilité de compensation chèque</h2>
               </div>
-              <div class="bg-blue-950 bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
+              <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
                 <h2 class="font-light text-lg text-white">Possibilité de préfinancer les salaires</h2>
               </div>
             </div>
@@ -519,7 +535,7 @@ onUnmounted(() => {
 <!--      <div class="container mx-auto py-12 px-4 md:px-0 lg:px-0 bg-white">-->
         <div class="min-w-6xl mx-auto shadow-sm overflow-hidden p-6 md:py-12 md:px-16">
             <!-- Titre -->
-            <h2 class="text-green-600 font-accent text-3xl md:text-4xl text-center mb-10">
+            <h2 class="text-secondary font-accent text-3xl md:text-4xl text-center mb-10">
               Épargne islamique
             </h2>
 
@@ -549,7 +565,7 @@ onUnmounted(() => {
       </div>
 
       <div class="py-12 bg-white lg:px-8 px-5">
-        <h2 class="text-green-600 font-accent text-3xl md:text-4xl text-center mb-10">
+        <h2 class="text-secondary montserrat montserrat-700 text-3xl md:text-4xl text-center mb-10">
           Compte virement salaire
         </h2>
 <!--        <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">-->
@@ -557,33 +573,35 @@ onUnmounted(() => {
 <!--          banquières courantes. Il donne droit à un découvert permanent, ainsi qu’à des crédits de plusieurs sortes.-->
 <!--        </p>-->
 
-        <div class="lg:flex w-full gap-2 justify-between lg:px-10 px-4">
+        <div class="lg:flex w-full gap-2 justify-between lg:px-10 px-4 container mx-auto">
 <!--          <div class="w-full lg:max-w-xl h-full lg:min-h-[24rem] hidden" >-->
 <!--            <img :src="Virement" alt="image" class="w-full h-auto object-cover transition-transform duration-500 hover:scale-105 rounded-xl border">-->
 <!--          </div>-->
-          <div class="flex w-full h-full items-center justify-center lg:min-h-[28rem] relative">
+          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">
             <Image_compteAss :images="Salaire" />
 
           </div>
-          <div class="w-full flex flex-col pt-64 lg:pl-5 lg:py-16">
-            <h2 class="lg:text-xl text-lg w-full font-serif text-gray-700 leading-relaxed">
-              Le compte virement salaire permet de recevoir son salaire mensuel, mais aussi d’effectuer ses transactions
-              banquières courantes. Il donne droit à un découvert permanent, ainsi qu’à des crédits de plusieurs sortes.
-            </h2>
+          <div class="w-full flex pt-64 lg:pl-5 lg:py-16">
+              <h2 class="lg:text-xl text-lg w-full font-serif text-gray-700 leading-relaxed">
+                Le compte virement salaire permet de recevoir son salaire mensuel, mais aussi d’effectuer ses transactions
+                banquières courantes. Il donne droit à un découvert permanent, ainsi qu’à des crédits de plusieurs sortes.
+              </h2>
           </div>
         </div>
       </div>
     </main>
+
     <!--Collecte journalière-->
-    <main id="section5" class="bg-blue-950 lg:px-16 px-8 py-12">
-      <h1 class="text-white w-full text-center font-accent lg:text-4xl text-3xl lg:pb-4">Collecte journalière</h1>
+    <div id="section5" class="bg-primary lg:px-16 px-8 py-12">
+      <div class="container mx-auto">
+        <h1 class="text-white w-full text-center montserrat montserrat-700 lg:text-4xl text-3xl lg:pb-4">Collecte journalière</h1>
         <p class="w-full py-6 text-lg text-gray-200">
           La collecte journalière destinée principalement aux travailleurs indépendants (commerçants ou autre)
           permet de sécuriser l’argent sans avoir à se déplacer.
           Nos agents déployés sur le terrain collectent les fonds et les déposent directement
           sur les comptes de chaque souscripteur.
         </p>
-      <h1 class="text-white w-full font-accent lg:text-3xl text-2xl text-center lg:text-left pb-4">Collecte journalière mensuelle </h1>
+        <h1 class="text-white w-full montserrat montserrat-600 lg:text-3xl text-2xl text-center lg:text-left pb-4">Collecte journalière mensuelle </h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
               class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
@@ -592,7 +610,7 @@ onUnmounted(() => {
                  class="w-full object-cover">
             <div class="p-6">
               <h3 class="text-xl font-bold mb-2">Minimum d’épargne</h3>
-                <p class="text-gray-600 mb-4">500 XAF/jour</p>
+              <p class="text-gray-600 mb-4">500 XAF/jour</p>
             </div>
           </div>
           <div
@@ -615,8 +633,8 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
-      <br>
-      <h1 class="text-white w-full font-accent lg:text-3xl text-2xl text-center lg:text-left pb-4">Collecte journalière annuelle </h1>
+        <br>
+        <h1 class="text-white w-full montserrat montserrat-600 lg:text-3xl text-2xl text-center lg:text-left pb-4">Collecte journalière annuelle </h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
               class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
@@ -625,7 +643,7 @@ onUnmounted(() => {
                  class="w-full object-cover">
             <div class="p-6">
               <h3 class="text-xl font-bold mb-2">Minimum d’épargne</h3>
-                <p class="text-gray-600 mb-4">200 XAF/jour</p>
+              <p class="text-gray-600 mb-4">200 XAF/jour</p>
             </div>
           </div>
           <div
@@ -648,10 +666,14 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
-    </main>
+      </div>
+
+    </div>
+
     <!--Carte visa-->
-    <main id="section6" class="bg-blue-50 lg:px-16 px-8 py-12">
-        <h2 class="text-green-600 font-accent text-4xl w-full justify-center text-center pb-5">
+    <div id="section6" class="bg-blue-50 lg:px-16 px-8 py-12">
+      <div class="container mx-auto">
+        <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">
           Carte visa
         </h2>
         <p class="text-gray-800 font-primary text-lg w-full justify-center leading-relaxed pb-10">
@@ -670,7 +692,7 @@ onUnmounted(() => {
             </div>
           </div>
           <div
-               class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
             <img :src="Electronic"
                  alt="Electronic"
                  class="w-full object-cover">
@@ -680,7 +702,7 @@ onUnmounted(() => {
 
           </div>
           <div
-               class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
 
             <img :src="Order"
                  alt="Order"
@@ -690,9 +712,11 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
+      </div>
+
 <!--      <div class="absolute inset-0 bg-blue-700 bg-opacity-30">-->
 <!--      </div>-->
-    </main>
+    </div>
 
     <!-- Navigation latérale -->
     <div class="fixed right-8 top-1/2 transform -translate-y-1/2 space-y-4 z-50">
