@@ -19,6 +19,7 @@
           </button>
         </div>
         <div class="w-full lg:w-4/12">
+          <Image />
         </div>
       </div>
     </div>
@@ -45,7 +46,7 @@
 
       <div class="flex w-full h-full py-5 justify-center flex-wrap gap-5">
         <div v-for="(location, index) in locations" :key="index" class="group h-full w-full min-h-80 max-w-sm
-         border rounded-lg p-8 bg-blue-50  hover:bg-blue-950 hover:bg-opacity-90 group-hover:text-white hover:text-white">
+         border rounded-lg p-8 bg-blue-50  hover:bg-primary hover:bg-opacity-90 group-hover:text-white hover:text-white">
           <div class="flex justify-start items-center mb-7">
             <img :src="location.icon" alt="img" class="h-20 w-20 rounded-full border-2 border-white">
             <!--            <p class="text-red-500 w-full flex justify-end font-light text-lg animate-blink">Bientôt disponible...</p>-->
@@ -87,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-blue-950  lg:px-8 flex flex-col h-full py-12 items-center">
+    <div class="bg-primary  lg:px-8 flex flex-col h-full py-12 items-center">
       <h1 class="text-white lg:text-4xl text-3xl font-bold text-center">Pourquoi plus de 5 millions de membres
         aiment-ils ?</h1>
       <p class="text-gray-300 text-lg p-5 w-full lg:text-start text-center lg:px-10">
@@ -110,7 +111,7 @@
       <!--        </div>-->
       <!--      </div>-->
     </div>
-    <div class="min-h-full flex justify-between items-center w-full flex-wrap lg:px-8 px-1 bg-blue-950 pb-2">
+    <div class="min-h-full flex justify-between items-center w-full flex-wrap lg:px-8 px-1 bg-primary pb-2">
       <table class="w-full border-t-2 border-white">
         <thead>
         <tr class="flex w-full flex-wrap justify-between lg:flex-nowrap lg:gap-0 gap-8 lg:pt-0 py-10">

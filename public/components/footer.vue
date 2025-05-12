@@ -1,6 +1,6 @@
 <!-- Footer.vue -->
 <template>
-  <footer class="bg-blue-950 pt-10 lg:pt-12">
+  <footer class="bg-primary pt-10 lg:pt-12">
     <div class="container mx-auto px-4 w-full">
       <!-- Call to Action Section -->
       <div class="flex flex-col items-center text-center lg:mb-36 mb-10">
@@ -8,7 +8,7 @@
           Construisons ensemble votre avenir financier
         </h2>
         <p class="text-gray-200 font-roboto text-base lg:text-lg mb-6">
-          CRESAF s'engage à vos côtés pour concrétiser vos projets grâce à des solutions de financement adaptées
+          Cresaf s'engage à vos côtés pour concrétiser vos projets grâce à des solutions de financement adaptées
           et un accompagnement personnalisé. Que vous soyez commerçant, entrepreneur ou agriculteur, nous sommes
           là pour soutenir votre réussite.
         </p>

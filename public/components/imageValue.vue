@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full relative">
     <!-- Carousel wrapper -->
     <div
         v-for="(image, index) in images"

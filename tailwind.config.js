@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: '#1c3461',
+        'primary-accent': '#00bcd4'
+      },
       fontFamily: {
         'roboto': ['Roboto', 'sans-serif'],
         'patrick-hand': ['Patrick Hand', 'cursive'],

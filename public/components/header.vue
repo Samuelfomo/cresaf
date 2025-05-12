@@ -1,6 +1,6 @@
 <template>
   <header class="fixed w-full z-50 flex flex-col">
-    <div class="bg-blue-950 flex justify-between lg:px-14 px-5 items-center py-1">
+    <div class="bg-primary flex justify-between lg:px-14 px-5 items-center py-1">
       <div class="flex lg:space-x-4 space-x-1">
         <div class="flex justify-center py-3 hover:bg-green-600 items-center h-6 w-6 cursor-pointer transition-transform duration-500 hover:scale-105"
              v-for="(logo , index) in logos" :key="index"
