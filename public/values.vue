@@ -2,30 +2,52 @@
   <div class="flex flex-col min-h-screen">
     <Header />
 
-    <div class="flex-grow px-8 pt-32 lg:mt-0 lg:mb-5 lg:pb-32">
-      <div class="flex flex-wrap sm:flex-nowrap py-10">
+<!--    <div class="flex-grow px-8 pt-32 lg:mt-0 lg:mb-5 lg:pb-32">-->
+<!--      <div class="flex flex-wrap sm:flex-nowrap py-10">-->
+<!--        <div v-for="(service, index) in services" :key="index" class="w-full flex flex-col lg:px-10 lg:text-start text-start lg:justify-normal justify-center lg:items-start">-->
+<!--          <h1 class="lg:text-5xl text-3xl text-center font-primary text-white pb-3">-->
+<!--            <span class="text-green-600">{{service.value}}</span>-->
+<!--          </h1>-->
+<!--          <h5 class="text-gray-700 font-primary text-xl py-3 leading-relaxed">-->
+<!--            Notre objectif est de répondre aux besoins de tous ceux qui, dans le secteur informel ou non, ont besoin d'une assistance financière fiable, directe et personnalisée, en devenant le premier pourvoyeur de microcrédits.-->
+<!--          </h5>-->
+<!--          <h5 class="text-gray-700 font-primary text-xl py-3 leading-relaxed">-->
+<!--            Le Crédit Solidaire d'Afrique (CRESAF) est une société anonyme créée par un groupe d'entrepreneurs locaux désireux de contribuer au progrès économique et social du Cameroun en proposant des solutions de financement adaptées aux besoins des micros, petites et moyennes entreprises.-->
+<!--          </h5>-->
+<!--          <h5 class="text-gray-700 font-primary text-xl py-3 leading-relaxed">-->
+<!--            CRESAF s'appuie sur des valeurs de solidarité, de confiance, de transparence et de responsabilité pour renforcer l'inclusion financière, soutenir l'innovation et favoriser le développement durable dans le pays.-->
+<!--          </h5>-->
+<!--        </div>-->
+<!--        <div class="w-full lg:pt-32">-->
+<!--          <ImageValue/>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div class="w-full mx-auto px-4 pt-40 pb-12 lg:pt-48">
+      <div class="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between">
         <div v-for="(service, index) in services" :key="index" class="w-full flex flex-col lg:px-10 lg:text-start text-start lg:justify-normal justify-center lg:items-start">
-          <h1 class="lg:text-5xl text-3xl text-center font-primary text-white pb-3">
-            <span class="text-green-600">{{service.value}}</span>
+          <h1 class="lg:text-5xl text-3xl text-center montserrat montserrat-600 text-secondary pb-3">
+            {{service.value}}
           </h1>
-          <h5 class="text-gray-700 font-primary text-xl py-3 leading-relaxed">
+          <h5 class="montserrat text-xl py-3 leading-relaxed">
             Notre objectif est de répondre aux besoins de tous ceux qui, dans le secteur informel ou non, ont besoin d'une assistance financière fiable, directe et personnalisée, en devenant le premier pourvoyeur de microcrédits.
           </h5>
-          <h5 class="text-gray-700 font-primary text-xl py-3 leading-relaxed">
+          <h5 class="montserrat text-xl py-3 leading-relaxed">
             Le Crédit Solidaire d'Afrique (CRESAF) est une société anonyme créée par un groupe d'entrepreneurs locaux désireux de contribuer au progrès économique et social du Cameroun en proposant des solutions de financement adaptées aux besoins des micros, petites et moyennes entreprises.
           </h5>
-          <h5 class="text-gray-700 font-primary text-xl py-3 leading-relaxed">
-            CRESAF s'appuie sur des valeurs de solidarité, de confiance, de transparence et de responsabilité pour renforcer l'inclusion financière, soutenir l'innovation et favoriser le développement durable dans le pays.
+          <h5 class="montserrat text-xl py-3 leading-relaxed">
+            Cresaf s'appuie sur des valeurs de solidarité, de confiance, de transparence et de responsabilité pour renforcer l'inclusion financière, soutenir l'innovation et favoriser le développement durable dans le pays.
           </h5>
         </div>
-        <div class="w-full lg:pt-32">
-          <ImageValue />
+        <div class="w-full lg:w-6/12 hidden lg:flex">
+          <Image1 />
         </div>
       </div>
     </div>
-    <div id="section1" class="bg-blue-50 opacity-90 lg:px-8 flex flex-col py-12  justify-start ">
-      <h1 class="text-green-600 lg:text-5xl text-3xl font-primary text-center">Nos valeurs fondamentales</h1>
-      <p class="text-black text-xl py-10 w-full lg:px-10 px-5 font-primary">
+
+    <div id="section1" class="bg-blue-50 lg:px-8 flex flex-col py-12  justify-center container mx-auto">
+      <h1 class="text-secondary lg:text-5xl text-3xl montserrat montserrat-600 text-center">Nos valeurs fondamentales</h1>
+      <p class="text-primary text-xl py-10 w-full lg:px-10 px-5 font-primary">
         Nos employés partagent des valeurs fortes qui sous-tendent notre engagement et notre responsabilité de fournir à nos clients et partenaires une expérience enrichissante.
       </p>
      <div class="w-full h-full flex justify-between gap-2 lg:flex-nowrap flex-wrap">
@@ -47,7 +69,7 @@
        </div>
      </div>
     </div>
-    <div id="section2" class="lg:px-8 flex flex-col py-12 justify-start ">
+    <div id="section2" class="lg:px-8 flex flex-col py-12 justify-center container mx-auto">
       <h1 class="text-green-600 lg:text-5xl text-2xl font-primary text-center">Pourquoi nous faire confiance ?</h1>
       <p class="text-gray-500 font-sans text-xl py-8 w-full lg:px-20 px-6">
         Nous disposons d'actifs de qualité que nous employons au profit de nos clients
@@ -66,7 +88,7 @@
        </div>
      </div>
     </div>
-    <div id="section3" class="min-h-full flex justify-between items-center w-full flex-wrap lg:px-8 px-1 bg-blue-950 py-5">
+    <div id="section3" class="lg:px-8 flex flex-col py-12 justify-center container mx-auto bg-blue-950">
       <div class="flex lg:flex-nowrap flex-wrap px-5 h-full justify-between items-center w-full gap-2">
         <div class="flex flex-col w-full h-full items-start justify-between py-5 lg:px-5">
           <h1 class="text-white lg:text-5xl text-3xl lg:text-left text-center font-primary w-full">Nous misons sur l'avenir</h1>
@@ -89,13 +111,13 @@
       </div>
     </div>
 
-    <div id="section4" class="lg:px-8 flex flex-col py-12 justify-center lg:justify-normal items-center">
+    <div id="section4" class="lg:px-8 flex flex-col py-12 justify-center container mx-auto">
       <h1 class="text-green-600 lg:text-5xl text-3xl font-primary text-center">Créons des opportunités pour tous !</h1>
 <!--      <p class="text-gray-500 font-sans text-xl py-8 w-full lg:px-10 px-6">-->
 <!--        Notre mission se traduit par la mise à disposition de services financiers adaptés aux personnes exclues du secteur bancaire.-->
 <!--      </p>-->
       <p class="text-gray-500 font-roboto text-xl py-8 w-full lg:px-10 px-6">
-        Notre mission, « développer des produits financiers capables de changer l’avenir des entrepreneurs », s’inscrit dans la vision d’entreprise telle qu’énoncée plus haut. À ce titre, les missions de CRESAF S.A peuvent aisément se deviner :
+        Notre mission, « développer des produits financiers capables de changer l’avenir des entrepreneurs », s’inscrit dans la vision d’entreprise telle qu’énoncée plus haut. À ce titre, les missions de Cresaf S.A peuvent aisément se deviner :
       </p>
       <div class="w-full h-full flex justify-between gap-2 lg:flex-nowrap flex-wrap">
         <div class="hidden w-full max-w-md lg:flex">
@@ -130,6 +152,7 @@ import Girl from "@/assets/images/girl.webp"
 import Sommet from "@/assets/images/sommet.webp"
 import Check from"@/assets/images/svg/check-rounded.svg"
 import ImageValue from "@public/components/imageValue.vue";
+
 
 const valeurs = Valeur
 const confiance = Confiance

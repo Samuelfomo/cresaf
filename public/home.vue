@@ -3,9 +3,9 @@
   <div class="flex flex-col min-h-screen">
     <Header/>
 
-    <div class="w-full mx-auto px-4 pt-52 pb-24 lg:py-80 bg-primary">
+    <div class="w-full mx-auto px-4 pt-52 pb-24 lg:py-80 bg-primary hidden">
       <div class="flex flex-wrap">
-        <div class="w-full lg:w-8/12 md:px-10 lg:px-32">
+        <div class="w-full lg:w-6/12 md:px-10 lg:px-32 ">
           <h1 class="text-4xl lg:text-6xl text-left montserrat montserrat-700 text-white pb-0">
             Vous ambitionnez,<span class="text-primary-accent montserrat montserrat-700 block my-0">nous finan&ccedil;ons<em
                 class="montserrat montserrat-800 text-italic ms-3">!</em></span>
@@ -17,43 +17,67 @@
           <button type="button" @click="openWhatsApp" class="btn btn-primary-accent mt-0 mb-0">
             <IconBrandWhatsapp class="mr-2" stroke={2} />Parlez à un conseiller
           </button>
+<!--          <button type="button" @click="openWhatsApp" class="btn btn-primary-accent mt-0 mb-0">-->
+<!--            <IconBrandWhatsapp class="mr-2" stroke={2} />Parlez à un conseiller-->
+<!--          </button>-->
         </div>
-        <div class="w-full lg:w-4/12">
-          <Image />
+        <div class="w-full lg:w-6/12 ">
+          <Image1 />
         </div>
       </div>
     </div>
 
-    <div class="bg-white px-8 flex flex-col min-h-screen py-12 z-30">
-      <h2 class="text-blue-950 font-semibold text-3xl uppercase text-center pb-5">nos services de transfert
-        d'argent</h2>
+    <div class="w-full mx-auto px-4 pt-40 pb-12 lg:pt-48 bg-primary">
+      <div class="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between">
+        <div class="w-full lg:w-6/12 text-center lg:text-left px-4 lg:px-10">
+          <h1 class="text-4xl lg:text-6xl text-left montserrat montserrat-700 text-white pb-0">
+            Vous ambitionnez, <span class="text-primary-accent block">nous finan&ccedil;ons<em class="montserrat montserrat-800 text-italic ms-3">!</em></span>
+          </h1>
+          <p class="text-white text-left montserrat montserrat-200 text-2xl my-10 lg:mr-20">
+            Favoriser le développement économique par l'épargne, l'octroi de crédits et la facilitation des services financiers
+          </p>
+          <button
+              type="button"
+              @click="openWhatsApp"
+              class="btn btn-primary-accent m-0"
+          >
+            <IconBrandWhatsapp class="mr-2" :stroke="2" />
+            Parlez à un conseiller
+          </button>
+        </div>
+        <div class="w-full lg:w-6/12 hidden lg:flex">
+          <Image1 />
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white px-8 flex flex-col py-12 z-30">
+      <h2 class="text-primary montserrat montserrat-700 lg:text-3xl text-lg uppercase text-center pb-5">
+        nos services de transfert d'argent
+      </h2>
 
       <Image2/>
 
-      <div class="w-full h-full flex flex-col justify-end items-center mt-auto lg:pt-16 pt-10 border-t lg:border-none">
-        <h1 class="text-3xl font-semibold text-center text-black">Un guichet unique pour
-          <span class="text-green-600 font-semibold">vos finances </span>
+      <div class="w-full h-full flex flex-col justify-end items-center pt-5 border-t lg:border-none">
+        <h1 class="lg:text-3xl text-2xl open-sans open-sans-700 text-center text-primary">Un guichet unique pour
+          <span class="text-secondary open-sans open-sans-700">vos finances </span>
         </h1>
 <!--        <button type="button" @click="openWhatsApp" class="btn btn-primary mt-6 mb-0">-->
 <!--          <IconBrandWhatsapp class="mr-2" stroke={2} />-->
 <!--          Parlez à un conseiller-->
 <!--        </button>-->
-        <p class="w-full justify-center items-start max-w-6xl lg:px-10 text-lg py-10">
-          Avec le CRESAF, vous bénéficiez d'un compte courant gratuit, d'une carte bancaire personnalisable,
+        <p class="w-full justify-center items-start lg:text-left text-center max-w-6xl lg:px-10 text-lg py-10">
+          Avec le Cresaf, vous bénéficiez d'un compte courant gratuit, d'une carte bancaire personnalisable,
           d'un livret d'épargne rémunéré, d'un crédit à la consommation et bien plus encore !
         </p>
       </div>
 
-      <div class="flex w-full h-full py-5 justify-center flex-wrap gap-5">
+      <div class="flex w-full h-full py-5 justify-center flex-wrap 2xl:space-x-12 space-x-6 lg:space-y-0 space-y-5">
         <div v-for="(location, index) in locations" :key="index" class="group h-full w-full min-h-80 max-w-sm
          border rounded-lg p-8 bg-blue-50  hover:bg-primary hover:bg-opacity-90 group-hover:text-white hover:text-white">
           <div class="flex justify-start items-center mb-7">
             <img :src="location.icon" alt="img" class="h-20 w-20 rounded-full border-2 border-white">
-            <!--            <p class="text-red-500 w-full flex justify-end font-light text-lg animate-blink">Bientôt disponible...</p>-->
-          </div>
-          <div class="justify-between items-start mb-7 hidden">
-            <img :src="location.icon" alt="img" class="h-20 w-20 rounded-full border-2 border-white">
-            <p class="text-red-500 w-full flex justify-end font-light text-lg animate-blink">Bientôt disponible...</p>
+<!--                        <p class="text-red-500 w-full flex justify-end font-light text-lg animate-blink">Bientôt disponible...</p>-->
           </div>
           <p class="py-1 text-xl font-semibold">
             {{ location.titre }}
@@ -74,19 +98,19 @@
           </div>
         </div>
       </div>
-      <div class="flex lg:justify-center justify-between items-center w-full flex-wrap my-5">
-        <div class="flex p-2 items-center gap-2" v-for="(location2, index) in locations2" :key="index">
-          <div class="rounded-full h-4 w-4 flex justify-center items-center bg-green-500">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                 class="text-white">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M5 12l5 5l10 -10"/>
-            </svg>
-          </div>
-          <h3 class="text-lg text-black">{{ location2.titre }}</h3>
-        </div>
-      </div>
+<!--      <div class="flex lg:justify-center justify-between items-center w-full flex-wrap my-5">-->
+<!--        <div class="flex p-2 items-center gap-2" v-for="(location2, index) in locations2" :key="index">-->
+<!--          <div class="rounded-full h-4 w-4 flex justify-center items-center bg-green-500">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"-->
+<!--                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"-->
+<!--                 class="text-white">-->
+<!--              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>-->
+<!--              <path d="M5 12l5 5l10 -10"/>-->
+<!--            </svg>-->
+<!--          </div>-->
+<!--          <h3 class="text-lg text-black">{{ location2.titre }}</h3>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
     <div class="bg-primary  lg:px-8 flex flex-col h-full py-12 items-center">
       <h1 class="text-white lg:text-4xl text-3xl font-bold text-center">Pourquoi plus de 5 millions de membres

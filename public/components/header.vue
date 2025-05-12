@@ -2,7 +2,7 @@
   <header class="fixed w-full z-50 flex flex-col">
     <div class="bg-primary flex justify-between lg:px-14 px-5 items-center py-1">
       <div class="flex lg:space-x-4 space-x-1">
-        <div class="flex justify-center py-3 hover:bg-green-600 items-center h-6 w-6 cursor-pointer transition-transform duration-500 hover:scale-105"
+        <div class="flex justify-center py-3 hover:bg-secondary items-center h-6 w-6 cursor-pointer transition-transform duration-500 hover:scale-105"
              v-for="(logo , index) in logos" :key="index"
              @click="openSocial(logo.link)"
         >
@@ -54,7 +54,7 @@
 <!--      <div class="relative text-xl font-bold text-blue-600 cursor-pointer h-40 flex z-50 mt-auto shadow-lg" @click="router.push('/')">-->
 <!--        <img :src="logo" alt="Logo" class="object-scale-down">-->
 <!--      </div>-->
-      <div class="relative">
+      <div class="relative lg:flex hidden">
         <div class="absolute left-0 cursor-pointer z-50" @click="router.push('/')">
           <div class="bg-white py-2 px-4 rounded-b-lg">
             <img :src="logo" alt="Logo" class="h-28 object-contain">
@@ -63,10 +63,10 @@
         <!-- Espace réservé pour le logo -->
         <div class="w-40 h-10 invisible"></div>
       </div>
-      <div class="relative hidden">
-        <div class="absolute left-0 -top-5 cursor-pointer z-50" @click="router.push('/')">
+      <div class="relative lg:hidden flex justify-center items-center">
+        <div class="absolute left-0 cursor-pointer z-50" @click="router.push('/')">
           <div class="">
-            <img :src="logo" alt="Logo" class="h-20 object-contain">
+            <img :src="logo" alt="Logo" class="h-16 object-contain">
           </div>
         </div>
         <!-- Espace réservé pour le logo -->
@@ -94,7 +94,7 @@
                 <path v-if="open" d="M9 9l6 8l7 -8" />
                 <path v-if="close" d="M9 18l6 -8l7 8" />
               </svg>
-              <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-300 group-hover:w-full"></span>
+              <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full"></span>
             </h2>
           </div>
 
@@ -110,7 +110,7 @@
                              @click="closeAndScroll1"
                 >
                   <h2 class="group relative">Nos valeurs
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Confiance, Intégrité et solidarité </span>
                 </router-link>
@@ -122,7 +122,7 @@
                              @click="closeAndScroll2"
                 >
                   <h2 class="relative group">Nos atouts
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Culture de la performance </span>
                 </router-link>
@@ -133,7 +133,7 @@
                              @click="closeAndScroll3"
                 >
                   <h2 class="group relative">Notre vision
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Miser sur l'avenir </span>
                 </router-link>
@@ -152,7 +152,7 @@
                              @click="closeAndScroll4"
                 >
                   <h2 class="relative group">Notre mission
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Renforcer la solidarité</span>
                 </router-link>
@@ -172,7 +172,7 @@
                 <path v-if="open2" d="M9 9l6 8l7 -8" />
                 <path v-if="close2" d="M9 18l6 -8l7 8" />
               </svg>
-              <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+              <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
             </h2>
           </div>
 
@@ -189,7 +189,7 @@
                              @click="closeAndScrollProducts1"
                 >
                   <h2 class="group relative">Compte chèque
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Particulier, entreprise & salaire</span>
                 </router-link>
@@ -201,7 +201,7 @@
                              @click="closeAndScrollProducts2"
                 >
                   <h2 class="relative group">Bons de caisse
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Bon plan pour votre épargne</span>
                 </router-link>
@@ -213,7 +213,7 @@
                              @click="closeAndScrollProducts3"
                 >
                   <h2 class="group relative">Dépôt à terme
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Fructifier votre argent</span>
                 </router-link>
@@ -225,7 +225,7 @@
                              @click="closeAndScrollProducts4"
                 >
                   <h2 class="relative group">Compte d'épargne
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Livret & Association</span>
                 </router-link>
@@ -237,7 +237,7 @@
                              @click="closeAndScrollProducts5"
                 >
                   <h2 class="group relative">Collecte journalière
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Nous suivre au quotidien</span>
                 </router-link>
@@ -249,7 +249,7 @@
                              @click="closeAndScrollProducts6"
                 >
                   <h2 class="relative group">Carte VISA
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Vous ouvrir au monde</span>
                 </router-link>
@@ -269,7 +269,7 @@
                 <path v-if="open3" d="M9 9l6 8l7 -8" />
                 <path v-if="close3" d="M9 18l6 -8l7 8" />
               </svg>
-              <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+              <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
             </h2>
           </div>
 
@@ -286,7 +286,7 @@
                              @click="closeAndScrollSolutions1"
                 >
                   <h1 class="relative group">Financement de projets
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h1>
                   <span class="text-xs text-gray-500">Sur mésure pour vos projets</span>
                 </router-link>
@@ -298,7 +298,7 @@
                              @click="closeAndScrollSolutions2"
                 >
                   <h2 class="group relative">Financement de la trésorerie
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Financement des besoins de trésorerie ponctuels</span>
                 </router-link>
@@ -310,7 +310,7 @@
                              @click="closeAndScrollSolutions3"
                 >
                   <h2 class="relative group">Financement Import/Export
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-blue-950 transition-all duration-500 group-hover:w-full"></span>
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
                   </h2>
                   <span class="text-xs text-gray-500">Financer votre développement international</span>
                 </router-link>
@@ -330,8 +330,8 @@
           </svg>
         </button>
         <button type="button"
-                class="text-lg bg-green-600 p-2 text-white font-semibold border border-white rounded-lg
-               hover:bg-blue-950"
+                class="text-lg bg-secondary p-2 text-white font-semibold border border-white rounded-lg
+               hover:bg-primary"
                 @click="contact"
         >
           Ouvrir un compte
@@ -341,7 +341,7 @@
       <!-- Drawer (Menu latéral pour mobile) -->
       <transition name="slide">
         <div v-if="isDrawerOpen" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex">
-          <div class="w-full max-w-[300px] p-5 shadow-lg transform transition-all bg-blue-950 border-r border-white">
+          <div class="w-full max-w-[300px] p-5 shadow-lg transform transition-all bg-primary border-r border-white">
             <button class="py-2 text-gray-700 w-full flex justify-between items-center" @click="isDrawerOpen = false">
               <img :src="logoDrewa" alt="logo Cresaf drewa" class="w-16">
               <span class="drop-shadow-[0_0_2px_blue] uppercase font-bold text-3xl text-white">cresaf</span>
@@ -622,7 +622,7 @@
               </div>
             </nav>
             <button type="button"
-                    class="flex justify-center items-center gap-2 text-lg bg-blue-950 p-2 mt-2 font-semibold border border-white rounded-lg hover:text-green-600 hover:border-green-500"
+                    class="flex justify-center items-center gap-2 text-lg bg-primary p-2 mt-2 font-semibold border border-white rounded-lg hover:text-green-600 hover:border-green-500"
                     :class="[$route.name === 'contact' ? 'border-green-600 text-green-600' : 'text-white']"
                     @click="router.push('/contact')"
             >

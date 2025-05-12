@@ -45,7 +45,8 @@ body, html {
     border: none;
     outline: none;
     cursor: pointer;
-    display: inline-block;
+    /*display: inline-block;*/
+    display: flex;
     padding: 1rem 2rem;
     font-family: var(--font-primary), sans-serif !important;
     font-size: 1rem;
@@ -108,6 +109,33 @@ body, html {
 
 .montserrat-900 {
     font-weight: 900 !important;
+}
+
+.open-sans{
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.open-sans-300{
+    font-weight: 300 !important;
+}
+
+.open-sans-400{
+    font-weight: 400 !important;
+}
+
+.open-sans-600{
+    font-weight: 600 !important;
+}
+
+.open-sans-700{
+    font-weight: 700 !important;
+}
+.open-sans-800{
+    font-weight: 800 !important;
 }
 
 

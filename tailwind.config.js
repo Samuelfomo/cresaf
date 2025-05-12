@@ -10,7 +10,12 @@ export default {
     extend: {
       colors: {
         primary: '#1c3461',
-        'primary-accent': '#00bcd4'
+        'primary-accent': '#FFED66',
+        'primary-accent-rgb': '255, 237, 102',
+
+        secondary: '#45ab34',
+        'secondary-accent': '#FFED66',
+
       },
       fontFamily: {
         'roboto': ['Roboto', 'sans-serif'],
