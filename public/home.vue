@@ -112,7 +112,7 @@
 <!--        </div>-->
 <!--      </div>-->
     </div>
-    <div class="bg-primary  lg:px-8 flex flex-col h-full py-12 items-center">
+    <div class="bg-primary  lg:px-8 flex flex-col h-full py-12 items-center hidden">
       <h1 class="text-white lg:text-4xl text-3xl font-bold text-center">Pourquoi plus de 5 millions de membres
         aiment-ils ?</h1>
       <p class="text-gray-300 text-lg p-5 w-full lg:text-start text-center lg:px-10">
@@ -135,7 +135,7 @@
       <!--        </div>-->
       <!--      </div>-->
     </div>
-    <div class="min-h-full flex justify-between items-center w-full flex-wrap lg:px-8 px-1 bg-primary pb-2">
+    <div class="min-h-full flex justify-between items-center w-full flex-wrap lg:px-8 px-1 bg-primary pb-2 hidden ">
       <table class="w-full border-t-2 border-white">
         <thead>
         <tr class="flex w-full flex-wrap justify-between lg:flex-nowrap lg:gap-0 gap-8 lg:pt-0 py-10">
@@ -244,7 +244,42 @@
 
     </div>
 
-    <Scroll/>
+    <Scroll class="hidden"/>
+    <div class="bg-blue-50 flex flex-col h-full py-12">
+      <h1 class="text-primary lg:text-4xl text-3xl montserrat montserrat-700 text-center">
+        Nos produits
+      </h1>
+      <p class="flex w-full justify-center items-center montserrat text-xl">
+        Nos produits sont conc&ccedil;us pour les entreprises de toutes les tailles
+      </p>
+      <div class="grid lg:grid-cols-3 grid-cols-1 py-5 container mx-auto gap-4 max-w-7xl">
+        <div v-for="(location, index) in locations1" :key="index" class="group h-full w-full min-h-80 max-w-sm
+         border rounded-lg p-8 bg-white hover:bg-primary group-hover:text-white hover:text-white">
+          <div class="flex justify-center items-center mb-7">
+            <img :src="location.icon" alt="img" class="h-44 rounded-full border-2 border-white">
+            <!--                        <p class="text-red-500 w-full flex justify-end font-light text-lg animate-blink">Bientôt disponible...</p>-->
+          </div>
+          <p class="py-1 text-xl open-sans-700 open-sans">
+            {{ location.titre }}
+          </p>
+          <h3 class="font-sans py-2">{{ location.description }}</h3>
+          <div
+              class="flex text-lg open-sans justify-start items-center pt-5 text-secondary group-hover:text-white cursor-pointer"
+              @click="openPdf(location.pdfContent)">
+            {{ location.suite }}
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M5 12l14 0"/>
+              <path d="M13 18l6 -6"/>
+              <path d="M13 6l6 6"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
 
     <Footer/>
   </div>
@@ -288,6 +323,50 @@ const services = ref([
   }
 ])
 const locations = ref([
+  {
+    icon: icon,
+    titre: 'Ouverture d\'un compte',
+    description: 'Simplifiez-vous la vie avec nos services personnalisés et notre soutien pour tous vos projets',
+    suite: 'Voir conditions',
+    pdfContent: Pdf,
+  },
+  {
+    icon: icon,
+    titre: 'Cartes Bancaire',
+    description: 'Choisissez une carte bancaire qui vous offre plus de liberté, de sécurité et de fonctionnalités',
+    suite: 'Demander une carte',
+    pdfContent: null,
+  },
+  {
+    icon: icon,
+    titre: 'Investissement',
+    description: 'Profiter d\'un suivi et d\'un accompagnement de qualité, de la définition de votre stratégie à sa mise en œuvre',
+    suite: 'Démarrer un investissement',
+    pdfContent: null,
+  },
+])
+const locations1 = ref([
+  {
+    icon: icon,
+    titre: 'Compte Chèque',
+    description: 'Pour faciliter vos retraits, paiements et virements.',
+    suite: 'Plus de détailles',
+    pdfContent: Pdf,
+  },
+  {
+    icon: icon,
+    titre: 'Cartes Bancaire',
+    description: 'Choisissez une carte bancaire qui vous offre plus de liberté, de sécurité et de fonctionnalités',
+    suite: 'Demander une carte',
+    pdfContent: null,
+  },
+  {
+    icon: icon,
+    titre: 'Investissement',
+    description: 'Profiter d\'un suivi et d\'un accompagnement de qualité, de la définition de votre stratégie à sa mise en œuvre',
+    suite: 'Démarrer un investissement',
+    pdfContent: null,
+  },
   {
     icon: icon,
     titre: 'Ouverture d\'un compte',
