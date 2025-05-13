@@ -249,34 +249,31 @@
       <h1 class="text-primary lg:text-4xl text-3xl montserrat montserrat-700 text-center">
         Nos produits
       </h1>
-      <p class="flex w-full justify-center items-center montserrat text-xl">
+      <p class="flex w-full justify-center items-center montserrat text-xl my-6">
         Nos produits sont conc&ccedil;us pour les entreprises de toutes les tailles
       </p>
-      <div class="grid lg:grid-cols-3 grid-cols-1 py-5 container mx-auto gap-4 max-w-7xl">
-        <div v-for="(location, index) in locations1" :key="index" class="group h-full w-full min-h-80 max-w-sm
-         border rounded-lg p-8 bg-white hover:bg-primary group-hover:text-white hover:text-white">
-          <div class="flex justify-center items-center mb-7">
-            <img :src="location.icon" alt="img" class="h-44 rounded-full border-2 border-white">
-            <!--                        <p class="text-red-500 w-full flex justify-end font-light text-lg animate-blink">Bientôt disponible...</p>-->
+      <div class="grid lg:grid-cols-3 grid-cols-1 py-5 container mx-auto lg:gap-y-10 max-w-7xl">
+
+        <div v-for="(location1, index) in locations1" :key="index" class="group h-full w-full max-w-sm
+   border rounded-lg bg-white cursor-pointer transition hover:scale-105 duration-500">
+
+          <img :src="location1.icon" alt="img">
+          <div class="py-6 px-6">
+            <h2 class="text-xl montserrat montserrat-700 open-sans mb-4 text-left">
+              {{ location1.titre }}
+            </h2>
+            <p class="montserrat montserrat-400 text-primary text-base mb-4">{{ location1.description }}</p>
+            <a  @click="openPdf(location1.pdfContent)"
+                @mouseenter="animateArrow(index, true)"
+                @mouseleave="animateArrow(index, false)"
+                class="gap-x-2 flex justify-end items-center montserrat montserrat-600 text-lg text-secondary">
+              {{ location1.suite }}
+              <IconArrowRight stroke={2} :ref="el => { if (el) arrowRefs[index] = el }" class="transition-transform"/>
+            </a>
           </div>
-          <p class="py-1 text-xl open-sans-700 open-sans">
-            {{ location.titre }}
-          </p>
-          <h3 class="font-sans py-2">{{ location.description }}</h3>
-          <div
-              class="flex text-lg open-sans justify-start items-center pt-5 text-secondary group-hover:text-white cursor-pointer"
-              @click="openPdf(location.pdfContent)">
-            {{ location.suite }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor"
-                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M5 12l14 0"/>
-              <path d="M13 18l6 -6"/>
-              <path d="M13 6l6 6"/>
-            </svg>
-          </div>
+
         </div>
+
       </div>
 
     </div>
@@ -286,16 +283,23 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {ref, onMounted} from "vue";
 import Header from "@public/components/header.vue";
 import Footer from "@public/components/footer.vue";
 import Image from "@public/components/image.vue";
+import {gsap} from "gsap";
 
 import Icon from "@/assets/images/logo-cref.webp"
+import cheque from "@/assets/images/cheque.jpg"
+import caisse from "@/assets/images/caisse.jpg"
+import collecte from "@/assets/images/collecte.jpg"
+import depot from "@/assets/images/depot.jpg"
+import epargne from "@/assets/images/epargne.jpg"
+import visa from "@/assets/images/visa.jpg"
 import Arrow from "@/assets/images/svg/arow.svg"
 import Image2 from "@public/components/image2.vue";
 import Scroll from "@public/components/scroll.vue";
-import { IconBrandWhatsapp } from '@tabler/icons-vue';
+import { IconBrandWhatsapp, IconArrowRight } from '@tabler/icons-vue';
 
 import Pdf from "@/assets/pdf/account-condition.pdf"
 import Image1 from "@public/components/image.vue";
@@ -314,6 +318,9 @@ const openPdf = async (pdf) => {
   }
 }
 
+// Crée un tableau pour stocker les références des icônes de flèches
+const arrowRefs = ref([]);
+const arrowAnimations = ref({});
 const icon = Icon
 const arrow = Arrow
 
@@ -347,45 +354,45 @@ const locations = ref([
 ])
 const locations1 = ref([
   {
-    icon: icon,
+    icon: cheque,
     titre: 'Compte Chèque',
-    description: 'Pour faciliter vos retraits, paiements et virements.',
-    suite: 'Plus de détailles',
-    pdfContent: Pdf,
-  },
-  {
-    icon: icon,
-    titre: 'Cartes Bancaire',
-    description: 'Choisissez une carte bancaire qui vous offre plus de liberté, de sécurité et de fonctionnalités',
-    suite: 'Demander une carte',
+    description: 'Un compte courant flexible pour gérer vos opérations quotidiennes avec simplicité. Idéal pour vos retraits, paiements et virements.',
+    suite: 'Accéder aux informations',
     pdfContent: null,
   },
   {
-    icon: icon,
-    titre: 'Investissement',
-    description: 'Profiter d\'un suivi et d\'un accompagnement de qualité, de la définition de votre stratégie à sa mise en œuvre',
-    suite: 'Démarrer un investissement',
+    icon: caisse,
+    titre: 'Bon de caisse',
+    description: 'Solution d\'épargne à court terme avec un rendement fixe et garanti. Faites fructifier votre argent en toute sécurité.',
+    suite: 'Accéder aux informations',
     pdfContent: null,
   },
   {
-    icon: icon,
-    titre: 'Ouverture d\'un compte',
-    description: 'Simplifiez-vous la vie avec nos services personnalisés et notre soutien pour tous vos projets',
-    suite: 'Voir conditions',
-    pdfContent: Pdf,
-  },
-  {
-    icon: icon,
-    titre: 'Cartes Bancaire',
-    description: 'Choisissez une carte bancaire qui vous offre plus de liberté, de sécurité et de fonctionnalités',
-    suite: 'Demander une carte',
+    icon: collecte,
+    titre: 'Collecte journalière',
+    description: 'Service destiné aux travailleurs indépendants pour sécuriser vos recettes quotidiennes sans avoir à vous déplacer en agence.',
+    suite: 'Accéder aux informations',
     pdfContent: null,
   },
   {
-    icon: icon,
-    titre: 'Investissement',
-    description: 'Profiter d\'un suivi et d\'un accompagnement de qualité, de la définition de votre stratégie à sa mise en œuvre',
-    suite: 'Démarrer un investissement',
+    icon: depot,
+    titre: 'Dépôt à terme',
+    description: 'Placement à échéance fixe offrant un taux d\'intérêt garanti. Plus la durée est longue, plus le rendement est avantageux.',
+    suite: 'Accéder aux informations',
+    pdfContent: null,
+  },
+  {
+    icon: epargne,
+    titre: 'Compte d\'épargne',
+    description: 'Solution d\'épargne flexible et sécurisée avec disponibilité permanente des fonds et rémunération progressive selon votre encours.',
+    suite: 'Accéder aux informations',
+    pdfContent: null,
+  },
+  {
+    icon: visa,
+    titre: 'Carte visa',
+    description: 'Moyen de paiement international accepté chez des millions de commerçants. Retirez de l\'argent et effectuez vos achats partout dans le monde.',
+    suite: 'Accéder aux informations',
     pdfContent: null,
   },
 ])
@@ -460,6 +467,53 @@ const openWhatsApp = () => {
   window.open("https://api.whatsapp.com/send/?phone=23799623303&text&type=phone_number&app_absent=0", "_blank");
 }
 
+
+// Initialiser le tableau avec assez d'éléments null
+onMounted(() => {
+  arrowRefs.value = new Array(locations1.value.length).fill(null);
+});
+// Fonction pour animer la flèche
+const animateArrow = (index, isEnter) => {
+  const arrowElement = arrowRefs.value[index];
+
+  if (!arrowElement) return;
+
+  // // Si une animation existe déjà, on la tue
+  if (arrowAnimations.value[index]) {
+    arrowAnimations.value[index].kill();
+  }
+
+  if (isEnter) {
+    // Animation quand la souris entre
+    arrowAnimations.value[index] = gsap.to(arrowElement, {
+      x: 10,
+      duration: 0.7,
+      yoyo: true,
+      repeat: 100,
+      ease: 'power1.out'
+    });
+  } else {
+    // Animation quand la souris quitte
+    arrowAnimations.value[index] = gsap.to(arrowElement, {
+      x: 0,
+      duration: 0.7,
+      ease: 'power1.in'
+    });
+  }
+};
+// const bounceIcon = () => {
+//   gsap.fromTo(
+//       arrowIcon.value,
+//       { x: 0 },
+//       {
+//         x: 10,
+//         duration: 1,
+//         yoyo: true,
+//         repeat: 100,
+//         ease: 'power1.inOut'
+//       }
+//   )
+// }
 
 </script>
 

@@ -11,6 +11,7 @@
 
     --secondary: #45ab34;
     --secondary-accent: #FFED66;
+    --secondary-accent-rgb: 255, 237, 102;
 
     --font-primary: "Montserrat", sans-serif;
 }
@@ -67,6 +68,23 @@ body, html {
     color: var(--primary-accent) !important;
     background-color: rgba(var(--primary-accent-rgb), 0.25) !important;
 }
+
+.btn-secondary {
+    color: var(--vt-c-white) !important;
+    background-color: var(--secondary) !important;
+}
+/*.btn-secondary:hover {*/
+/*    color: var(--secondary-accent) !important;*/
+/*    background-color: rgba(var(--secondary-accent-rgb), 0.25) !important;*/
+/*}*/
+/*.btn-secondary-accent {*/
+/*    color: var(--secondary) !important;*/
+/*    background-color: var(--secondary-accent) !important;*/
+/*}*/
+/*.btn-secondary-accent:hover {*/
+/*    color: var(--secondary-accent) !important;*/
+/*    background-color: rgba(var(--secondary-accent-rgb), 0.25) !important;*/
+/*}*/
 
 .montserrat {
     font-family: "Montserrat", sans-serif;

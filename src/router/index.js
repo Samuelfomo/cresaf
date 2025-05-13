@@ -7,6 +7,7 @@ import Image from "@public/components/image2.vue";
 import SCroll from "@public/components/scroll.vue";
 import Login from "@public/login.vue";
 import Contact from "@public/contact.vue";
+import Card from "@public/cards.vue";
 const routes = [
 
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/contact',
     name: 'contact',
     component: Contact
+  },
+  {
+    path: '/card',
+    name: 'card',
+    component: Card
   },
 ];
 
