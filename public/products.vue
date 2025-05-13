@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import {ref, onMounted, onUnmounted, nextTick} from 'vue';
+import {useRoute} from "vue-router";
 import Header from "@public/components/header.vue";
 import Footer from "@public/components/footer.vue";
 
@@ -44,7 +45,7 @@ const Entreprise = [Entreprise1, Entreprise2];
 const Salaire = [Salaire1, Salaire2];
 const Association = [Association1, Association2];
 
-
+const route = useRoute();
 
 const products = ref([
   {
@@ -183,6 +184,19 @@ onMounted(() => {
   document.querySelectorAll('main[id^="section"]').forEach(section => {
     observer.observe(section);
   });
+
+  nextTick(() => {
+    const sectionId = route.query.scrollTo
+    if (sectionId) {
+      // Utilise scrollIntoView pour scroller jusqu'à la section
+      setTimeout(() => {
+        const sectionElement = document.getElementById(sectionId)
+        if (sectionElement) {
+          sectionElement.scrollIntoView({behavior: 'smooth'})
+        }
+      }, 500);
+    }
+  })
   // const observer = new IntersectionObserver(observerCallback, {
   //   threshold: 0.5
   // });
@@ -734,6 +748,7 @@ onUnmounted(() => {
 
     <Footer />
   </div>
+
 </template>
 
 <style scoped>

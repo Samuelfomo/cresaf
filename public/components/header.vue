@@ -11,7 +11,7 @@
       </div>
       <div class="flex space-x-1 cursor-pointer group">
         <div class="flex justify-center items-center h-6 w-6 cursor-pointer transition-transform duration-200
-         hover:scale-105 group-hover:text-green-500 text-white"
+         hover:scale-105 group-hover:text-green-500 text-white order-2"
         >
           <svg  xmlns="http://www.w3.org/2000/svg"  width="18"  height="18"  viewBox="0 0 24 24"  fill="none"
                 stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"
@@ -21,7 +21,7 @@
             <path d="M3 7l9 6l9 -6" />
           </svg>
         </div>
-        <a class="group-hover:text-green-500 text-white hover:underline hover:underline-offset-2 transition">info@cresaf.com</a>
+        <a class="group-hover:text-green-500 text-white hover:underline hover:underline-offset-2 transition">Nous écrire</a>
       </div>
       <div class="hidden space-x-1 cursor-pointer group">
         <div class="flex justify-center items-center h-6 w-6 cursor-pointer transition-transform duration-200
@@ -86,6 +86,7 @@
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownAboutUs" @mouseleave="closeDropdown1">
             <h2 class="relative hover:text-green-600 lg:text-lg text-xs flex group"
                 :class="[$route.name === 'values' ? activeClass : inactiveClass]"
+                @click="router.push('/values')"
             >
               Qui sommes-nous ?
               <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24" viewBox="0 0 24 24"  fill="none"
@@ -164,6 +165,7 @@
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover=toggleDropdownProducts @mouseleave="closeDropdown2">
             <h2 class="relative hover:text-green-600 lg:text-lg text-xs flex group"
                 :class="[$route.name === 'products' ? activeClass : inactiveClass]"
+                @click="router.push('/products')"
             >
               Nos produits
               <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24" viewBox="0 0 24 24"  fill="none"
@@ -261,6 +263,7 @@
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownSolutions" @mouseleave="closeDropdown3">
             <h2 class="relative hover:text-green-600 lg:text-lg text-xs flex group"
                 :class="[$route.name === 'solutions' ? activeClass : inactiveClass]"
+                @click="router.push('/solutions')"
             >
               Nos solutions
               <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24" viewBox="0 0 24 24"  fill="none"

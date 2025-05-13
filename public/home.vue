@@ -263,7 +263,7 @@
               {{ location1.titre }}
             </h2>
             <p class="montserrat montserrat-400 text-primary text-base mb-4">{{ location1.description }}</p>
-            <a  @click="openPdf(location1.pdfContent)"
+            <a  @click="goToSection(location1.section)"
                 @mouseenter="animateArrow(index, true)"
                 @mouseleave="animateArrow(index, false)"
                 class="gap-x-2 flex justify-end items-center montserrat montserrat-600 text-lg text-secondary">
@@ -283,7 +283,8 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from "vue";
+import {ref, onMounted, nextTick} from "vue";
+import {useRouter} from "vue-router";
 import Header from "@public/components/header.vue";
 import Footer from "@public/components/footer.vue";
 import Image from "@public/components/image.vue";
@@ -323,6 +324,7 @@ const arrowRefs = ref([]);
 const arrowAnimations = ref({});
 const icon = Icon
 const arrow = Arrow
+const router = useRouter();
 
 const services = ref([
   {
@@ -357,43 +359,43 @@ const locations1 = ref([
     icon: cheque,
     titre: 'Compte Chèque',
     description: 'Un compte courant flexible pour gérer vos opérations quotidiennes avec simplicité. Idéal pour vos retraits, paiements et virements.',
-    suite: 'Accéder aux informations',
-    pdfContent: null,
+    suite: 'En savoir plus',
+    section: 'section1',
   },
   {
     icon: caisse,
     titre: 'Bon de caisse',
     description: 'Solution d\'épargne à court terme avec un rendement fixe et garanti. Faites fructifier votre argent en toute sécurité.',
-    suite: 'Accéder aux informations',
-    pdfContent: null,
-  },
-  {
-    icon: collecte,
-    titre: 'Collecte journalière',
-    description: 'Service destiné aux travailleurs indépendants pour sécuriser vos recettes quotidiennes sans avoir à vous déplacer en agence.',
-    suite: 'Accéder aux informations',
-    pdfContent: null,
+    suite: 'En savoir plus',
+    section: 'section2',
   },
   {
     icon: depot,
     titre: 'Dépôt à terme',
     description: 'Placement à échéance fixe offrant un taux d\'intérêt garanti. Plus la durée est longue, plus le rendement est avantageux.',
-    suite: 'Accéder aux informations',
-    pdfContent: null,
+    suite: 'En savoir plus',
+    section: 'section3',
   },
   {
     icon: epargne,
     titre: 'Compte d\'épargne',
     description: 'Solution d\'épargne flexible et sécurisée avec disponibilité permanente des fonds et rémunération progressive selon votre encours.',
-    suite: 'Accéder aux informations',
-    pdfContent: null,
+    suite: 'En savoir plus',
+    section: 'section4',
+  },
+  {
+    icon: collecte,
+    titre: 'Collecte journalière',
+    description: 'Service destiné aux travailleurs indépendants pour sécuriser vos recettes quotidiennes sans avoir à vous déplacer en agence.',
+    suite: 'En savoir plus',
+    section: 'section5',
   },
   {
     icon: visa,
     titre: 'Carte visa',
     description: 'Moyen de paiement international accepté chez des millions de commerçants. Retirez de l\'argent et effectuez vos achats partout dans le monde.',
-    suite: 'Accéder aux informations',
-    pdfContent: null,
+    suite: 'En savoir plus',
+    section: 'section6',
   },
 ])
 const locations2 = ref([
@@ -467,7 +469,6 @@ const openWhatsApp = () => {
   window.open("https://api.whatsapp.com/send/?phone=23799623303&text&type=phone_number&app_absent=0", "_blank");
 }
 
-
 // Initialiser le tableau avec assez d'éléments null
 onMounted(() => {
   arrowRefs.value = new Array(locations1.value.length).fill(null);
@@ -487,7 +488,7 @@ const animateArrow = (index, isEnter) => {
     // Animation quand la souris entre
     arrowAnimations.value[index] = gsap.to(arrowElement, {
       x: 10,
-      duration: 0.7,
+      duration: 0.3,
       yoyo: true,
       repeat: 100,
       ease: 'power1.out'
@@ -496,24 +497,16 @@ const animateArrow = (index, isEnter) => {
     // Animation quand la souris quitte
     arrowAnimations.value[index] = gsap.to(arrowElement, {
       x: 0,
-      duration: 0.7,
+      duration: 0.3,
       ease: 'power1.in'
     });
   }
 };
-// const bounceIcon = () => {
-//   gsap.fromTo(
-//       arrowIcon.value,
-//       { x: 0 },
-//       {
-//         x: 10,
-//         duration: 1,
-//         yoyo: true,
-//         repeat: 100,
-//         ease: 'power1.inOut'
-//       }
-//   )
-// }
+
+const goToSection = async (section) => {
+  await router.push({ path: '/products', query: { scrollTo: section } });
+  await router.replace({query: null})
+}
 
 </script>
 

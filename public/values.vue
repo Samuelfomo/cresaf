@@ -53,21 +53,11 @@
         <p class="text-primary text-xl py-10 w-full lg:px-10 px-5 font-primary">
           Nos employés partagent des valeurs fortes qui sous-tendent notre engagement et notre responsabilité de fournir à nos clients et partenaires une expérience enrichissante.
         </p>
-        <div class="w-full h-full flex justify-between gap-2 lg:flex-nowrap flex-wrap">
-          <div class="hidden w-full max-w-md lg:flex">
-            <!--       <div class="hidden w-full h-full max-w-lg lg:flex justify-center items-center lg:pb-10">-->
-            <img :src="valeurs" alt="image secrétaire" class="object-cover rounded-lg transition-transform duration-500 hover:scale-105">
-          </div>
-          <div class="w-full h-full flex flex-col justify-start px-6 py-1">
-            <h3 class="text-2xl pb-4 text-gray-800 font-roboto">
-              Ces valeurs sont les suivantes :
-            </h3>
-            <div class="flex justify-between items-start w-full py-2" v-for="(location, index) in locations" :key="index">
-              <h1 class="text-xl font-semibold font-roboto leading-relaxed text-gray-950 w-full">{{ location.titre }}
-                <span class="font-serif">
-            {{location.description}}
-           </span>
-              </h1>
+        <div class="md:grid lg:grid-cols-4 md:grid-cols-2 flex flex-col justify-center items-center py-5 container mx-auto gap-4">
+          <div v-for="(location, index) in locations" :key="index" class="group h-full w-full max-w-sm
+   border rounded-lg bg-white cursor-pointer transition hover:scale-105 duration-500 shadow-lg">
+            <div class="py-6 px-6">
+              <p class="montserrat text-gray-700 text-lg">{{ location.description }}</p>
             </div>
           </div>
         </div>
@@ -77,24 +67,20 @@
     <div class="lg:px-8 flex flex-col py-12 justify-center ">
       <div id="section2" class="container mx-auto">
         <h1 class="text-secondary lg:text-5xl text-2xl montserrat montserrat-700 text-center">Pourquoi nous faire confiance ?</h1>
-        <p class="text-gray-500 font-sans text-xl py-8 w-full lg:px-20 px-6">
+        <p class="text-gray-700 font-sans text-xl py-8 w-full lg:px-20 px-6">
           Nous disposons d'actifs de qualité que nous employons au profit de nos clients
         </p>
-        <div class="w-full h-full flex justify-between gap-2 lg:flex-nowrap flex-wrap">
-          <div class="hidden w-full max-h-[450px] max-w-md lg:flex">
-            <img :src="confiance" alt="image secrétaire" class="w-full h-full rounded-lg object-cover transition-transform duration-500 hover:scale-105">
-          </div>
-          <div class="w-full h-full flex flex-col justify-start px-6 py-6">
-            <div class="flex justify-between items-stretch w-full py-2 gap-2" v-for="(location2, index) in locations2" :key="index">
-              <img :src="check" alt="checked rounded" class="w-8 h-8">
-              <h1 class="text-xl w-full leading-10 font-light">
-                {{location2.description}}
-              </h1>
+        <div class="md:grid lg:grid-cols-4 md:grid-cols-2 flex flex-col justify-center items-center py-5 container mx-auto gap-4">
+          <div v-for="(location2, index) in locations2" :key="index" class="group h-full w-full max-w-sm
+   border rounded-lg bg-white cursor-pointer transition hover:scale-105 duration-500 shadow-lg">
+            <div class="py-6 px-6">
+              <p class="montserrat text-gray-700 text-lg">{{ location2.description }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="lg:px-8 flex flex-col py-12 bg-primary">
       <div id="section3" class="container mx-auto">
         <div class="flex lg:flex-nowrap flex-wrap px-5 h-full justify-between items-center w-full gap-2">
@@ -121,7 +107,7 @@
     </div>
     <div class="lg:px-8 flex flex-col py-12 justify-center">
       <div id="section4" class="container mx-auto">
-        <h1 class="text-secondary lg:text-5xl text-3xl montserrat-700 montserrat text-center">Créons des opportunités pour tous !</h1>
+          <h1 class="text-secondary lg:text-5xl text-3xl montserrat-700 montserrat text-center">Créons des opportunités pour tous !</h1>
         <!--      <p class="text-gray-500 font-sans text-xl py-8 w-full lg:px-10 px-6">-->
         <!--        Notre mission se traduit par la mise à disposition de services financiers adaptés aux personnes exclues du secteur bancaire.-->
         <!--      </p>-->
@@ -162,6 +148,7 @@ import Girl from "@/assets/images/girl.webp"
 import Sommet from "@/assets/images/sommet.webp"
 import Check from"@/assets/images/svg/check-rounded.svg"
 import ImageValue from "@public/components/imageValue.vue";
+import {IconArrowRight} from "@tabler/icons-vue";
 
 
 const valeurs = Valeur
@@ -230,16 +217,16 @@ const locations = ref([
 ])
 const locations2 = ref([
   {
-    description:'Nous garantissons et protégeons les intérêts financiers de nos épargnants et investisseurs.'
+    description:'Notre connaissance fine du terrain nous permet d’offrir des solutions adaptées aux besoins réels des populations et des entrepreneurs.'
   },
   {
-    description:'Nous recrutons des personnes talentueuses sur la base de leurs compétences avérées et de leur adhésion à nos valeurs et à notre éthique.'
+    description:'Nous combinons rigueur financière, innovation sociale et engagement humain pour maximiser l’impact de nos interventions.'
   },
   {
-    description:'Notre priorité est d\'assurer la satisfaction de nos clients en simplifiant les opérations bancaires et en mettant à leur disposition une équipe de service à la clientèle toujours à l\'écoute.'
+    description:'Notre réseau de partenaires locaux et internationaux renforce notre capacité à agir efficacement et durablement.'
   },
   {
-    description:'Nous apportons différents services qui répondent aux besoins de tous les clients, quel que soit leur secteur d\'activité.'
+    description:'Avec une équipe engagée et des outils flexibles, nous faisons de chaque accompagnement une opportunité de transformation.'
   }
 ])
 const locations3 = ref([
