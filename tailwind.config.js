@@ -14,7 +14,7 @@ export default {
         'primary-accent-rgb': '255, 237, 102',
 
         secondary: '#45ab34',
-        'secondary-accent': '#FFED66',
+        'secondary-accent': '#ff002f',
 
       },
       fontFamily: {

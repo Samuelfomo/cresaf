@@ -27,17 +27,11 @@
     <div class="w-full mx-auto">
       <div class="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between">
         <div v-for="(service, index) in services" :key="index" class="w-full flex flex-col lg:px-10 lg:text-start text-start lg:justify-normal justify-center lg:items-start">
-          <h1 class="lg:text-5xl text-3xl text-center montserrat montserrat-600 text-secondary pb-3">
+          <h1 class="lg:text-5xl text-3xl text-center montserrat montserrat-700 text-secondary mb-6">
             {{service.value}}
           </h1>
-          <h5 class="montserrat text-xl py-3 leading-relaxed">
-            Notre objectif est de répondre aux besoins de tous ceux qui, dans le secteur informel ou non, ont besoin d'une assistance financière fiable, directe et personnalisée, en devenant le premier pourvoyeur de microcrédits.
-          </h5>
-          <h5 class="montserrat text-xl py-3 leading-relaxed">
-            Le Crédit Solidaire d'Afrique (CRESAF) est une société anonyme créée par un groupe d'entrepreneurs locaux désireux de contribuer au progrès économique et social du Cameroun en proposant des solutions de financement adaptées aux besoins des micros, petites et moyennes entreprises.
-          </h5>
-          <h5 class="montserrat text-xl py-3 leading-relaxed">
-            Cresaf s'appuie sur des valeurs de solidarité, de confiance, de transparence et de responsabilité pour renforcer l'inclusion financière, soutenir l'innovation et favoriser le développement durable dans le pays.
+          <h5 class="lg:montserrat montserrat-400 lg:text-xl text-base py-3 lg:leading-relaxed"  v-for="(description, index) in descriptions" :key="index">
+            {{description.value}}
           </h5>
         </div>
         <div class="w-full lg:w-6/12 hidden lg:flex">
@@ -54,10 +48,24 @@
           Nos employés partagent des valeurs fortes qui sous-tendent notre engagement et notre responsabilité de fournir à nos clients et partenaires une expérience enrichissante.
         </p>
         <div class="md:grid lg:grid-cols-4 md:grid-cols-2 flex flex-col justify-center items-center py-5 container mx-auto gap-4">
-          <div v-for="(location, index) in locations" :key="index" class="group h-full w-full max-w-sm
-   border rounded-lg bg-white cursor-pointer transition hover:scale-105 duration-500 shadow-lg">
-            <div class="py-6 px-6">
-              <p class="montserrat text-gray-700 text-lg">{{ location.description }}</p>
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-full" v-for="(location, index) in locations" :key="index">
+            <!-- Header with icon -->
+            <div class="p-6 flex justify-center items-center" :class="location.bg">
+              <div class="text-white flex flex-col items-center">
+                <div class="mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 4L4 8l8 4 8-4-8-4zM4 12l8 4 8-4M4 16l8 4 8-4"/>
+                  </svg>
+                </div>
+                <h2 class="text-xl font-bold tracking-wider">{{location.title}}</h2>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6 flex-grow">
+              <p class="text-gray-800 leading-relaxed text-lg">
+                  {{location.description}}
+              </p>
             </div>
           </div>
         </div>
@@ -157,6 +165,17 @@ const girl = Girl
 const sommet = Sommet
 const check = Check
 
+const descriptions = ref([
+  {
+    value: 'Notre objectif est de répondre aux besoins de tous ceux qui, dans le secteur informel ou non, ont besoin d\'une assistance financière fiable, directe et personnalisée, en devenant le premier pourvoyeur de microcrédits.'
+  },
+  {
+    value: 'Le Crédit Solidaire d\'Afrique (CRESAF) est une société anonyme créée par un groupe d\'entrepreneurs locaux désireux de contribuer au progrès économique et social du Cameroun en proposant des solutions de financement adaptées aux besoins des micros, petites et moyennes entreprises.'
+  },
+  {
+    value: 'Cresaf s\'appuie sur des valeurs de solidarité, de confiance, de transparence et de responsabilité pour renforcer l\'inclusion financière, soutenir l\'innovation et favoriser le développement durable dans le pays.'
+  }
+])
 const services =ref( [
   {
     value: 'Qui sommes-nous ?'
@@ -164,56 +183,35 @@ const services =ref( [
 ])
 const locations = ref([
   {
-    titre: 'La responsabilité :',
-    description:'La responsabilité vis-à-vis des engagements pris\n' +
-        'et dans la conduite des projets.'
+    title:'Confiance',
+    description: 'Nous bâtissons des relations de confiance avec nos clients, en garantissant la transparence et la sécurité de toutes nos transactions.',
+    bg: 'bg-secondary',
   },
   {
-    titre: 'L\'excellence :',
-    description:'La recherche constante de l\'excellence à travers la\n' +
-        'qualité des services rendus.'
+    title:'Responsabilité',
+    description: 'Nous agissons de manière responsable, en intégrant les enjeux sociaux et environnementaux dans chacune de nos décisions.',
+    bg: 'bg-primary',
   },
   {
-    titre: 'La Sécurité :',
-    description:'Fort de notre esprit de conquérant, nous ne ménageons\n' +
-        'aucun effort en vue de fournir à nos membres des services et des\n' +
-        'solutions de qualité, dans un esprit de confiance mutuelle et de\n' +
-        'sécurité des transactions.'
+    title:'Innovation',
+    description: 'Nous nous engageons à proposer des services bancaires innovants, adaptés aux besoins spécifiques de nos clients et à l’évolution de l’économie.',
+    bg: 'bg-primary-accent',
   },
   {
-    titre: 'La Confidentialité :',
-    description:'Nous reconnaissons que le client qui domicilie une\n' +
-        'partie de son patrimoine nous fait confiance. En retour nous lui\n' +
-        'garantissons la protection de ce patrimoine en toute confidentialité\n' +
-        'grâce à notre professionnalisme.'
+    title:'Proximité',
+    description: 'Nous valorisons la proximité avec nos clients, en offrant un service personnalisé, humain et réactif pour répondre à leurs attentes',
+    bg: 'bg-secondary-accent',
   },
   {
-    titre: 'La Fiabilité :',
-    description:'Valeurs personnelles de toutes les personnes exerçant\n' +
-        'dans notre entreprise en vue d’une conduite et d’un caractère\n' +
-        'professionnel irréprochable. Nous sommes loyaux vis-à-vis de notre\n' +
-        'entreprise ainsi que toutes les parties prenantes.'
+    title:'Sécurité',
+    description: 'Nous assurons une sécurité optimale pour vos transactions et la protection de vos données, afin de garantir votre tranquillité d’esprit.',
+    bg: 'bg-secondary',
   },
-  // {
-  //   titre: 'L\'excellence :',
-  //   description:'Nous visons à dépasser les attentes de nos clients et partenaires en leur offrant des solutions innovantes, personnalisées et de qualité.'
-  // },
-  // {
-  //   titre: 'L\'intégrité :',
-  //   description:'Nous agissons avec honnêteté, transparence et respect envers nos clients, partenaires, collègues et l\'environnement.'
-  // },
-  // {
-  //   titre: 'La collaboration :',
-  //   description:'Nous favorisons la coopération, la communication et la confiance au sein de nos équipes et avec nos clients et partenaires.'
-  // },
-  // {
-  //   titre: 'La diversité :',
-  //   description:'Nous reconnaissons et valorisons la richesse des différences culturelles, professionnelles et personnelles de nos employés, clients et partenaires.'
-  // },
-  // {
-  //   titre: 'La passion :',
-  //   description:'Nous nous impliquons pleinement dans notre travail et nous nous efforçons de créer de la valeur ajoutée pour nos clients et partenaires.'
-  // },
+  {
+    title:'Excellence',
+    description: 'Nous visons l’excellence dans la qualité de nos services et l’efficacité de nos solutions, en plaçant toujours le client au centre de nos préoccupations.',
+    bg: 'bg-primary',
+  },
 ])
 const locations2 = ref([
   {

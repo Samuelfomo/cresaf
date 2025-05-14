@@ -71,46 +71,26 @@
           d'un livret d'épargne rémunéré, d'un crédit à la consommation et bien plus encore !
         </p>
       </div>
+      <div class="grid lg:grid-cols-3 grid-cols-1 py-5 container mx-auto lg:gap-y-10 gap-y-5 max-w-7xl">
 
-      <div class="flex w-full h-full py-5 justify-center flex-wrap 2xl:space-x-12 space-x-6 lg:space-y-0 space-y-5">
-        <div v-for="(location, index) in locations" :key="index" class="group h-full w-full min-h-80 max-w-sm
-         border rounded-lg p-8 bg-blue-50  hover:bg-primary hover:bg-opacity-90 group-hover:text-white hover:text-white">
-          <div class="flex justify-start items-center mb-7">
-            <img :src="location.icon" alt="img" class="h-20 w-20 rounded-full border-2 border-white">
-<!--                        <p class="text-red-500 w-full flex justify-end font-light text-lg animate-blink">Bientôt disponible...</p>-->
-          </div>
-          <p class="py-1 text-xl font-semibold">
-            {{ location.titre }}
-          </p>
-          <h3 class="font-sans py-2">{{ location.description }}</h3>
-          <div
-              class="flex text-lg font-primary justify-start items-center pt-5 text-green-600 group-hover:text-white cursor-pointer"
-              @click="openPdf(location.pdfContent)">
-            {{ location.suite }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor"
-                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M5 12l14 0"/>
-              <path d="M13 18l6 -6"/>
-              <path d="M13 6l6 6"/>
-            </svg>
+        <div v-for="(location, index) in locations" :key="index" class="group h-full w-full max-w-sm
+   border rounded-lg bg-blue-50 hover:bg-primary  cursor-pointer">
+
+          <img :src="location.icon" alt="'location.alt'">
+          <div class="py-6 px-6 group-hover:text-white">
+            <h2 class="text-xl open-sans open-sans-700 open-sans mb-4 text-left">
+              {{ location.titre }}
+            </h2>
+            <p class="open-sans open-sans-400 text-primary text-base mb-4 group-hover:text-white ">{{ location.description }}</p>
+            <a
+                @click="openPdf(location.pdfContent)"
+                class="gap-x-2 flex justify-end items-center montserrat montserrat-600 text-lg text-secondary group-hover:text-white">
+              {{ location.suite }}
+              <IconArrowRight stroke={2} class="transition-transform"/>
+            </a>
           </div>
         </div>
       </div>
-<!--      <div class="flex lg:justify-center justify-between items-center w-full flex-wrap my-5">-->
-<!--        <div class="flex p-2 items-center gap-2" v-for="(location2, index) in locations2" :key="index">-->
-<!--          <div class="rounded-full h-4 w-4 flex justify-center items-center bg-green-500">-->
-<!--            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"-->
-<!--                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"-->
-<!--                 class="text-white">-->
-<!--              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>-->
-<!--              <path d="M5 12l5 5l10 -10"/>-->
-<!--            </svg>-->
-<!--          </div>-->
-<!--          <h3 class="text-lg text-black">{{ location2.titre }}</h3>-->
-<!--        </div>-->
-<!--      </div>-->
     </div>
     <div class="bg-primary  lg:px-8 flex flex-col h-full py-12 items-center hidden">
       <h1 class="text-white lg:text-4xl text-3xl font-bold text-center">Pourquoi plus de 5 millions de membres
@@ -249,15 +229,15 @@
       <h1 class="text-primary lg:text-4xl text-3xl montserrat montserrat-700 text-center">
         Nos produits
       </h1>
-      <p class="flex w-full justify-center items-center montserrat text-xl my-6">
+      <p class="flex w-full justify-center items-center montserrat lg:text-xl text-base px-5 lg:my-6 my-4">
         Nos produits sont conc&ccedil;us pour les entreprises de toutes les tailles
       </p>
-      <div class="grid lg:grid-cols-3 grid-cols-1 py-5 container mx-auto lg:gap-y-10 max-w-7xl">
+      <div class="grid lg:grid-cols-3 grid-cols-1 py-5 container mx-auto lg:gap-y-10 gap-y-5 lg:px-0 px-5 max-w-7xl">
 
         <div v-for="(location1, index) in locations1" :key="index" class="group h-full w-full max-w-sm
    border rounded-lg bg-white cursor-pointer transition hover:scale-105 duration-500">
 
-          <img :src="location1.icon" alt="img">
+          <img :src="location1.icon" :alt="location1.alt" @click="goToSection(location1.section)">
           <div class="py-6 px-6">
             <h2 class="text-xl montserrat montserrat-700 open-sans mb-4 text-left">
               {{ location1.titre }}
@@ -294,9 +274,13 @@ import Icon from "@/assets/images/logo-cref.webp"
 import cheque from "@/assets/images/cheque.jpg"
 import caisse from "@/assets/images/caisse.jpg"
 import collecte from "@/assets/images/collecte.jpg"
+import carte from "@/assets/images/carte.jpg"
+import investissement from "@/assets/images/investissement.jpg"
+import invest from "@/assets/images/invest.jpg"
 import depot from "@/assets/images/depot.jpg"
 import epargne from "@/assets/images/epargne.jpg"
 import visa from "@/assets/images/visa.jpg"
+import condition from "@/assets/images/condition.jpg"
 import Arrow from "@/assets/images/svg/arow.svg"
 import Image2 from "@public/components/image2.vue";
 import Scroll from "@public/components/scroll.vue";
@@ -333,26 +317,26 @@ const services = ref([
 ])
 const locations = ref([
   {
-    icon: icon,
+    icon: condition,
     titre: 'Ouverture d\'un compte',
     description: 'Simplifiez-vous la vie avec nos services personnalisés et notre soutien pour tous vos projets',
     suite: 'Voir conditions',
     pdfContent: Pdf,
   },
   {
-    icon: icon,
+    icon: carte,
     titre: 'Cartes Bancaire',
     description: 'Choisissez une carte bancaire qui vous offre plus de liberté, de sécurité et de fonctionnalités',
     suite: 'Demander une carte',
     pdfContent: null,
   },
   {
-    icon: icon,
+    icon: investissement,
     titre: 'Investissement',
     description: 'Profiter d\'un suivi et d\'un accompagnement de qualité, de la définition de votre stratégie à sa mise en œuvre',
     suite: 'Démarrer un investissement',
     pdfContent: null,
-  },
+  }
 ])
 const locations1 = ref([
   {
@@ -361,6 +345,7 @@ const locations1 = ref([
     description: 'Un compte courant flexible pour gérer vos opérations quotidiennes avec simplicité. Idéal pour vos retraits, paiements et virements.',
     suite: 'En savoir plus',
     section: 'section1',
+    alt: 'Image Compte Chèque'
   },
   {
     icon: caisse,
@@ -368,6 +353,7 @@ const locations1 = ref([
     description: 'Solution d\'épargne à court terme avec un rendement fixe et garanti. Faites fructifier votre argent en toute sécurité.',
     suite: 'En savoir plus',
     section: 'section2',
+    alt: 'Image Bon de caisse'
   },
   {
     icon: depot,
@@ -375,6 +361,7 @@ const locations1 = ref([
     description: 'Placement à échéance fixe offrant un taux d\'intérêt garanti. Plus la durée est longue, plus le rendement est avantageux.',
     suite: 'En savoir plus',
     section: 'section3',
+    alt: 'Image Dépôt à terme'
   },
   {
     icon: epargne,
@@ -382,6 +369,7 @@ const locations1 = ref([
     description: 'Solution d\'épargne flexible et sécurisée avec disponibilité permanente des fonds et rémunération progressive selon votre encours.',
     suite: 'En savoir plus',
     section: 'section4',
+    alt: 'Image Compte d\'épargne'
   },
   {
     icon: collecte,
@@ -389,6 +377,7 @@ const locations1 = ref([
     description: 'Service destiné aux travailleurs indépendants pour sécuriser vos recettes quotidiennes sans avoir à vous déplacer en agence.',
     suite: 'En savoir plus',
     section: 'section5',
+    alt: 'Image Collecte journalière'
   },
   {
     icon: visa,
@@ -396,6 +385,7 @@ const locations1 = ref([
     description: 'Moyen de paiement international accepté chez des millions de commerçants. Retirez de l\'argent et effectuez vos achats partout dans le monde.',
     suite: 'En savoir plus',
     section: 'section6',
+    alt: 'Image Carte visa'
   },
 ])
 const locations2 = ref([
