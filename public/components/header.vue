@@ -321,6 +321,68 @@
             </div>
           </div>
         </div>
+        <div class="text-sm text-gray-700 hidden relative">
+          <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownSolutions" @mouseleave="closeDropdown3">
+            <h2 class="relative hover:text-green-600 lg:text-lg text-xs flex group"
+                :class="[$route.name === 'solutions' ? activeClass : inactiveClass]"
+                @click="router.push('/solutions')"
+            >
+              i banking
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24" viewBox="0 0 24 24"  fill="none"
+                    stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                    stroke-linejoin="round">
+                <path v-if="open3" d="M9 9l6 8l7 -8" />
+                <path v-if="close3" d="M9 18l6 -8l7 8" />
+              </svg>
+              <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+            </h2>
+          </div>
+
+          <!-- Menu déroulant -->
+          <div v-if="isDropdownOpen3" class="absolute right-0 mt-12 min-w-[385px] bg-white rounded-md shadow-lg border p-5 z-50"
+               @mouseenter="toggleDropdownSolutions"
+               @mouseleave="closeDropdown3"
+          >
+            <div class="py-1">
+              <div class="flex items-center hover:text-green-600">
+                <img :src="smile" alt="smile emoji" class="h-5 w-5">
+                <router-link to="solutions" class="flex flex-col font-medium text-lg px-5 py-2"
+                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                             @click="closeAndScrollSolutions1"
+                >
+                  <h1 class="relative group">Financement de projets
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+                  </h1>
+                  <span class="text-xs text-gray-500">Sur mésure pour vos projets</span>
+                </router-link>
+              </div>
+              <div class="flex items-center hover:text-green-600">
+                <img :src="heart" alt="heart emoji" class="h-5 w-5">
+                <router-link to="solutions" class="flex flex-col justify-start font-medium text-lg px-5 py-2"
+                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                             @click="closeAndScrollSolutions2"
+                >
+                  <h2 class="group relative">Financement de la trésorerie
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+                  </h2>
+                  <span class="text-xs text-gray-500">Financement des besoins de trésorerie ponctuels</span>
+                </router-link>
+              </div>
+              <div class="flex items-center hover:text-green-600">
+                <img :src="sunglasses" alt="sunglasses emoji" class="h-5 w-5">
+                <router-link to="solutions" class="flex flex-col justify-start font-medium text-lg px-5 py-2"
+                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                             @click="closeAndScrollSolutions3"
+                >
+                  <h2 class="relative group">Financement Import/Export
+                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+                  </h2>
+                  <span class="text-xs text-gray-500">Financer votre développement international</span>
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class=" hidden lg:flex justify-between gap-x-2">
         <button type="button" class="flex justify-center items-center text-lg  px-3 font-semibold border rounded-lg hover:border-blue-950"

@@ -3,35 +3,35 @@ import {ref} from "vue";
 import Header from "@public/components/header.vue";
 import Footer from "@public/components/footer.vue";
 import Image from "@public/components/contact-image.vue";
-import FaceBook from "@/assets/images/svg/social/facebook.svg"
-import Youtube from "@/assets/images/svg/social/youtube.svg"
-import Twitter from "@/assets/images/svg/social/twitter.svg"
-import Linkedin from "@/assets/images/svg/social/linkedin.svg"
+// import FaceBook from "@/assets/images/svg/social/facebook.svg"
+// import Youtube from "@/assets/images/svg/social/youtube.svg"
+// import Twitter from "@/assets/images/svg/social/twitter.svg"
+// import Linkedin from "@/assets/images/svg/social/linkedin.svg"
 import Playstore from "@/assets/images/svg/social/playstore.svg"
 import Logo from "@/assets/images/logo-cref.webp"
 
-const logos = ref([
-  {
-    name :FaceBook,
-    title: "logo Facebook",
-    link: "https://www.facebook.com/cresaf.sa"
-  },
-  {
-    name :Youtube,
-    title: "logo Youtube",
-    link: ""
-  },
-  {
-    name :Twitter,
-    title: "logo Twitter",
-    link: ""
-  },
-  {
-    name :Linkedin,
-    title: "logo Linkedin",
-    link: "https://cm.linkedin.com/company/cr%C3%A9saf-credit-solidaire-d-afrique"
-  },
-])
+// const logos = ref([
+//   {
+//     name :FaceBook,
+//     title: "logo Facebook",
+//     link: "https://www.facebook.com/cresaf.sa"
+//   },
+//   {
+//     name :Youtube,
+//     title: "logo Youtube",
+//     link: ""
+//   },
+//   {
+//     name :Twitter,
+//     title: "logo Twitter",
+//     link: ""
+//   },
+//   {
+//     name :Linkedin,
+//     title: "logo Linkedin",
+//     link: "https://cm.linkedin.com/company/cr%C3%A9saf-credit-solidaire-d-afrique"
+//   },
+// ])
 
 const locations = ref([
   {
@@ -69,13 +69,13 @@ const openWhatsApp = (phone) =>{
     console.error("Numéro de téléphone non disponible !");
   }
 }
-const openSocial = (link) =>{
-  if (link) {
-    window.open(link, "_blank");
-  } else {
-    console.log("Réseau social non disponible !");
-  }
-}
+// const openSocial = (link) =>{
+//   if (link) {
+//     window.open(link, "_blank");
+//   } else {
+//     console.log("Réseau social non disponible !");
+//   }
+// }
 
 const mockupImage = Logo;
 const playStoreIcon = Playstore
@@ -119,20 +119,20 @@ const openPlaystore = () => {
 
         <div class="space-y-2 lg:pb-4">
           <h2 class="text-2xl font-semibold text-white">
-            Laissez-nous <span class="text-green-500">un message</span>
+            Laissez-nous <span class="text-primary-accent">un message</span>
           </h2>
-          <div class="h-1 w-20 bg-green-500 rounded"></div>
+          <div class="h-1 w-20 bg-secondary rounded"></div>
         </div>
-        <div class="flex gap-2 lg:py-4 py-10">
-          <div class="flex justify-center items-center rounded-full bg-white h-8 w-8 cursor-pointer transition-transform duration-200 hover:scale-105"
-               v-for="(logo , index) in logos" :key="index"
-                @click="openSocial(logo.link)"
-          >
-            <img :src="logo.name" :alt="logo.title" class=" object-cover">
-          </div>
-        </div>
+<!--        <div class="flex gap-2 lg:py-4 py-10">-->
+<!--          <div class="flex justify-center items-center rounded-full bg-secondary h-8 w-8 cursor-pointer transition-transform duration-200 hover:scale-105"-->
+<!--               v-for="(logo , index) in logos" :key="index"-->
+<!--                @click="openSocial(logo.link)"-->
+<!--          >-->
+<!--            <img :src="logo.name" :alt="logo.title" class=" object-cover">-->
+<!--          </div>-->
+<!--        </div>-->
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2 cursor-pointer mt-auto">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2 cursor-pointer">
           <div
             v-for="location in locations"
             :key="location.city"

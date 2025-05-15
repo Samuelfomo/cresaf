@@ -406,7 +406,7 @@ onUnmounted(() => {
     </div>
 
     <!--Compte d’épargne association-->
-    <main id="section4" class="pb-6 bg-blue-50 py-12 lg:px-8 px-5">
+    <div id="section4" class="pb-6 bg-blue-50 py-12 lg:px-8 px-5">
       <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-8">
         Compte d’épargne association
       </h2>
@@ -442,8 +442,8 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
-<!--    </main>-->
-<!--    <main id="section4" class="lg:px-8 px-5 py-12 bg-blue-50">-->
+<!--    </div>-->
+<!--    <div id="section4" class="lg:px-8 px-5 py-12 bg-blue-50">-->
       <div class="py-12 lg:px-8 px-5 bg-white">
       <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-8">
         Compte d’épargne sur livret
@@ -603,7 +603,7 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
-    </main>
+    </div>
 
     <!--Collecte journalière-->
     <div id="section5" class="bg-primary lg:px-16 px-8 py-12">

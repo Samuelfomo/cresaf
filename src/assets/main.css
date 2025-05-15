@@ -30,9 +30,9 @@ body, html {
     background-color: #ff002f !important;
 }
 
-.bg-primary {
-    background-color: var(--primary) !important;
-}
+/*.bg-primary {*/
+/*    background-color: var(--primary) !important;*/
+/*}*/
 
 /*.text-primary {*/
 /*    color: var(--primary) !important;*/

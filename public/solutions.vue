@@ -39,7 +39,7 @@ const solutions = ref([
       "Proposition de financement",
       "Mise en place"
     ],
-    class:'bg-blue-950',
+    class:'bg-primary',
     font:'text-white',
     section : 'section1'
   },
@@ -85,7 +85,7 @@ const solutions = ref([
       "Préfinancement import",
       // "Remise documentaire"
     ],
-    class: "bg-blue-950",
+    class: "bg-primary",
     font:'text-white',
     section : 'section3'
   }
@@ -131,7 +131,7 @@ const scrollToSection = (sectionId) => {
       <section id="presentation" class="relative min-h-screen flex items-center">
         <div class="absolute inset-0">
           <img :src="solutions[0].image" alt="Background" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-blue-950 bg-opacity-40"></div>
+          <div class="absolute inset-0 bg-primary bg-opacity-40"></div>
         </div>
 
         <div class="relative container mx-auto lg:px-8 py-32">
@@ -164,51 +164,6 @@ const scrollToSection = (sectionId) => {
              :class="{ 'text-white text-opacity-70': solution.font, 'text-gray-700': !solution.font, 'text-center':solution.id === 'importexport'}">
             {{solution.description}}
           </p>
-          <div class="flex-col lg:flex-row gap-16 items-center hidden">
-<!--          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">-->
-            <!-- Contenu -->
-            <div :class="{ 'order-2': index % 2 === 0, [solution.font]:true }">
-<!--              <h2 class="text-4xl font-bold mb-6" :class="{ [solution.font]: solution.font, 'text-green-600': !solution.font }">{{ solution.title }}</h2>-->
-              <p class="lg:text-2xl text-xl font-sans lg:mb-12 mb-3" >{{ solution.subtitle }}</p>
-
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-12">
-                <div v-for="feature in solution.features" :key="feature.title"
-                     class="p-6 rounded-lg backdrop-blur-sm flex flex-col justify-between"
-                     :class="{ 'bg-white bg-opacity-10': solution.font, 'bg-blue-950 bg-opacity-90 text-white': !solution.font }"
-                >
-                  <h3 class="text-lg font-semibold mb-2">{{ feature.title }}</h3>
-                  <p>{{ feature.description }} </p>
-                </div>
-              </div>
-
-              <!-- Process/Tools/Services -->
-              <div class="rounded-lg backdrop-blur-sm p-8"
-                   :class="{ 'bg-white bg-opacity-10': solution.font, 'bg-blue-950 bg-opacity-90 text-white': !solution.font }"
-              >
-                <h3 class="text-xl font-semibold mb-6">
-                  {{ solution.process ? 'Processus' :
-                    solution.tools ? 'Outils disponibles' :
-                        'Services proposés' }}
-                </h3>
-                <ul class="space-y-4">
-                  <li v-for="item in (solution.process || solution.tools || solution.services)"
-                      :key="item"
-                      class="flex items-center">
-                    <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                    {{ item }}
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Image -->
-            <div :class="{ 'order-1': index % 2 === 0 }"
-                 class="relative h-96 lg:h-[600px] overflow-hidden rounded-lg">
-              <img :src="solution.image" :alt="solution.title"
-                   class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
-            </div>
-          </div>
-
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <!-- Conteneur pour petit écran -->
             <div class="contents lg:hidden">
@@ -225,7 +180,7 @@ const scrollToSection = (sectionId) => {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-12">
                   <div v-for="feature in solution.features" :key="feature.title"
                        class="p-6 rounded-lg backdrop-blur-sm flex flex-col justify-between"
-                       :class="{ 'bg-white bg-opacity-10': solution.font, 'bg-blue-950 bg-opacity-90 text-white': !solution.font }"
+                       :class="{ 'bg-white bg-opacity-10': solution.font, 'bg-primary bg-opacity-90 text-white': !solution.font }"
                   >
                     <h3 class="text-lg font-semibold mb-2">{{ feature.title }}</h3>
                     <p>{{ feature.description }} </p>
@@ -234,7 +189,7 @@ const scrollToSection = (sectionId) => {
 
                 <!-- Process/Tools/Services -->
                 <div class="rounded-lg backdrop-blur-sm p-8"
-                     :class="{ 'bg-white bg-opacity-10': solution.font, 'bg-blue-950 bg-opacity-90 text-white': !solution.font }"
+                     :class="{ 'bg-white bg-opacity-10': solution.font, 'bg-primary bg-opacity-90 text-white': !solution.font }"
                 >
                   <h3 class="text-xl font-semibold mb-6">
                     {{ solution.process ? 'Processus' :
@@ -263,7 +218,7 @@ const scrollToSection = (sectionId) => {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-12">
                   <div v-for="feature in solution.features" :key="feature.title"
                        class="p-6 rounded-lg backdrop-blur-sm flex flex-col justify-between"
-                       :class="{ 'bg-white bg-opacity-10': solution.font, 'bg-blue-950 bg-opacity-90 text-white': !solution.font }"
+                       :class="{ 'bg-white bg-opacity-10': solution.font, 'bg-primary bg-opacity-90 text-white': !solution.font }"
                   >
                     <h3 class="text-lg font-semibold mb-2">{{ feature.title }}</h3>
                     <p>{{ feature.description }} </p>
@@ -272,7 +227,7 @@ const scrollToSection = (sectionId) => {
 
                 <!-- Process/Tools/Services -->
                 <div class="rounded-lg backdrop-blur-sm p-8"
-                     :class="{ 'bg-white bg-opacity-10': solution.font, 'bg-blue-950 bg-opacity-90 text-white': !solution.font }"
+                     :class="{ 'bg-white bg-opacity-10': solution.font, 'bg-primary bg-opacity-90 text-white': !solution.font }"
                 >
                   <h3 class="text-xl font-semibold mb-6">
                     {{ solution.process ? 'Processus' :
@@ -449,7 +404,7 @@ main {
 <!--              class="w-full h-full object-cover transform scale-110"-->
 <!--              :style="`transform: translateY(${activeSection === index ? '-5%' : '0'})`"-->
 <!--          >-->
-<!--          <div class="absolute inset-0 bg-blue-950 bg-opacity-75"></div>-->
+<!--          <div class="absolute inset-0 bg-primary bg-opacity-75"></div>-->
 <!--        </div>-->
 
 <!--        &lt;!&ndash; Contenu de la section &ndash;&gt;-->

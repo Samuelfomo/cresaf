@@ -71,7 +71,7 @@
           d'un livret d'épargne rémunéré, d'un crédit à la consommation et bien plus encore !
         </p>
       </div>
-      <div class="grid lg:grid-cols-3 grid-cols-1 py-5 container mx-auto lg:gap-y-10 gap-y-5 max-w-7xl">
+      <div class="lg:grid xl:gap-0 lg:gap-3 grid-cols-3 flex flex-col justify-center items-center py-5 container mx-auto lg:gap-y-10 gap-y-5 max-w-7xl">
 
         <div v-for="(location, index) in locations" :key="index" class="group h-full w-full max-w-sm
    border rounded-lg bg-blue-50 hover:bg-primary  cursor-pointer">
@@ -232,7 +232,7 @@
       <p class="flex w-full justify-center items-center montserrat lg:text-xl text-base px-5 lg:my-6 my-4">
         Nos produits sont conc&ccedil;us pour les entreprises de toutes les tailles
       </p>
-      <div class="grid lg:grid-cols-3 grid-cols-1 py-5 container mx-auto lg:gap-y-10 gap-y-5 lg:px-0 px-5 max-w-7xl">
+      <div class="grid lg:grid-cols-3 lg:gap-3 xl:gap-x-0 grid-cols-1 py-5 container mx-auto lg:gap-y-10 gap-y-5 lg:px-0 px-5 max-w-7xl">
 
         <div v-for="(location1, index) in locations1" :key="index" class="group h-full w-full max-w-sm
    border rounded-lg bg-white cursor-pointer transition hover:scale-105 duration-500">
