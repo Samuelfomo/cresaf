@@ -3,30 +3,6 @@
   <div class="flex flex-col min-h-screen">
     <Header/>
 
-    <div class="w-full mx-auto px-4 pt-52 pb-24 lg:py-80 bg-primary hidden">
-      <div class="flex flex-wrap">
-        <div class="w-full lg:w-6/12 md:px-10 lg:px-32 ">
-          <h1 class="text-4xl lg:text-6xl text-left montserrat montserrat-700 text-white pb-0">
-            Vous ambitionnez,<span class="text-primary-accent montserrat montserrat-700 block my-0">nous finan&ccedil;ons<em
-                class="montserrat montserrat-800 text-italic ms-3">!</em></span>
-          </h1>
-          <p class="text-white text-left montserrat montserrat-200 text-2xl my-10 lg:mr-20" style="font-weight: 300">
-            Favoriser le développement économique par l'épargne, l'octroi de crédits et la facilitation des services
-            financiers
-          </p>
-          <button type="button" @click="openWhatsApp" class="btn btn-primary-accent mt-0 mb-0">
-            <IconBrandWhatsapp class="mr-2" stroke={2} />Parlez à un conseiller
-          </button>
-<!--          <button type="button" @click="openWhatsApp" class="btn btn-primary-accent mt-0 mb-0">-->
-<!--            <IconBrandWhatsapp class="mr-2" stroke={2} />Parlez à un conseiller-->
-<!--          </button>-->
-        </div>
-        <div class="w-full lg:w-6/12 ">
-          <Image1 />
-        </div>
-      </div>
-    </div>
-
     <div class="w-full mx-auto px-4 pt-40 pb-12 lg:pt-48 bg-primary">
       <div class="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between">
         <div class="w-full lg:w-6/12 text-center lg:text-left px-4 lg:px-10">

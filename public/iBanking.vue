@@ -1,0 +1,491 @@
+<!--
+Fichier: App.vue
+Description: Composant principal contenant la structure de base et les différentes sections
+-->
+<template>
+  <div class="min-h-screen bg-white">
+    <!-- Header -->
+    <Header />
+
+    <!-- Hero Section -->
+    <section class="pt-44 pb-20 bg-primary" ref="heroSection">
+      <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0 lg:px-10" ref="heroText">
+          <h1 class="text-4xl lg:text-6xl text-left montserrat montserrat-700 text-white pb-0">
+            Gérez vos finances simplement avec notre solution
+            <span class="text-primary-accent block">i-Banking<em class="montserrat montserrat-800 text-italic ms-3">!</em></span>
+          </h1>
+          <p class="text-white text-left montserrat montserrat-200 text-2xl my-10 lg:mr-20">
+            Profitez d'une expérience bancaire innovante, sécurisée et accessible partout, à tout moment.
+          </p>
+          <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+<!--            <button class="bg-secondary hover:bg-opacity-80 text-white px-8 py-3 rounded-lg font-medium transform transition-all hover:scale-105 flex items-center justify-center">-->
+<!--              <span>Commencer maintenant</span>-->
+<!--              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">-->
+<!--                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />-->
+<!--              </svg>-->
+<!--            </button>-->
+            <button
+                type="button"
+                class="btn btn-primary-accent m-0 montserrat montserrat-600"
+            >
+              Commencer maintenant
+              <IconArrowRight stroke={2} class="ml-2" />
+            </button>
+            <button class="border border-white text-white px-8 py-3 rounded-md font-medium transition-transform duration-500 hover:scale-105 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+              </svg>
+              <span>Voir la démo</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="md:w-1/2 relative" ref="heroDevice">
+          <div class="relative z-10 transform transition-all">
+            <img :src="cresafApp" alt="Interface i-Banking" class=" w-full max-w-xl mx-auto rounded-md shadow-sm shadow-white" />
+            <img :src="App" alt="App Mobile" class="absolute -bottom-10 -right-10 w-40 md:w-44 shadow-lg rounded-full shadow-white" />
+          </div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-secondary rounded-full filter blur-3xl opacity-20"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-gray-50" ref="featuresSection">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl lg:text-5xl font-montserrat montserrat-700 text-primary mb-6">Fonctionnalités principales</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto text-base">
+            Notre solution i-Banking propose des fonctionnalités innovantes pour simplifier la gestion de vos finances au quotidien.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div v-for="(feature, index) in features" :key="index" class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow" ref="featureCards">
+            <div class="bg-primary text-primary bg-opacity-10 p-4 rounded-lg w-16 h-16 flex items-center justify-center mb-6">
+<!--              <component :is="feature.icon" class="w-8 h-8 text-primary" />-->
+              <svg v-if="index === 0" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+
+              <svg v-else-if="index === 1" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+              </svg>
+
+              <svg v-else-if="index === 2" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+              </svg>
+
+              <svg v-else-if="index === 3" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+
+              <svg v-else-if="index === 4" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+
+              <svg v-else-if="index === 5" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+
+              <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+
+            </div>
+            <h3 class="text-xl font-bold text-[#1c3461] mb-3">{{ feature.title }}</h3>
+            <p class="text-gray-600">{{ feature.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobile App Section -->
+    <section class="py-20 bg-white overflow-hidden hidden" ref="mobileAppSection">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center">
+          <div class="lg:w-1/2 mb-12 lg:mb-0" ref="mobileAppImage">
+              <img :src="App" alt="CRESAF Mobile App" class="w-64 mx-auto lg:mx-0 rounded-3xl shadow-2xl" />
+          </div>
+
+          <div class="lg:w-full lg:pl-16" ref="mobileAppText">
+            <div class="flex items-center space-x-2 mb-4">
+              <div class="bg-secondary h-1 w-16 rounded-full"></div>
+              <span class="text-secondary font-medium">Application Mobile</span>
+            </div>
+
+            <h2 class="text-3xl md:text-4xl font-bold text-[#1c3461] mb-6">
+              Votre banque dans votre poche
+            </h2>
+
+            <p class="text-gray-600 mb-8">
+              L'application mobile CRESAF vous offre une expérience bancaire complète, intuitive et sécurisée. Accédez à vos comptes, effectuez des transactions et gérez vos finances où que vous soyez, à tout moment.
+            </p>
+
+            <ul class="space-y-4 mb-8">
+              <li v-for="(feature, index) in mobileFeatures" :key="index" class="flex items-start" ref="mobileFeatureItems">
+                <div class="bg-secondary bg-opacity-20 p-1 rounded-full mt-1 mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-secondary" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-medium text-gray-900">{{ feature.title }}</h4>
+                  <p class="text-gray-600 text-sm">{{ feature.description }}</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="flex space-x-4">
+              <a href="#" class="transform transition hover:scale-105">
+                <img src="@/assets/images/logo/paytop.png" alt="Download on App Store" class="h-12" />
+              </a>
+              <a href="#" class="transform transition hover:scale-105">
+                <img src="@/assets/images/logo/paytop.png" alt="Get it on Google Play" class="h-12" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="w-full py-8 bg-blue-50 px-10 overflow-hidden">
+      <!--        <div class="w-full py-16 bg-gradient-to-b from-blue-50 to-white">-->
+      <div class="mx-auto container">
+        <div class="grid grid-cols-2 place-items-center">
+          <!-- Texte et features -->
+          <div class="space-y-8">
+            <div class="space-y-4">
+              <div class="flex items-center space-x-2 mb-4">
+                <div class="bg-secondary h-1 w-12 rounded-full"></div>
+                <span class="text-secondary montserrat montserrat-700">Application Mobile</span>
+              </div>
+              <h2 class="text-3xl md:text-4xl montserrat montserrat-700 text-primary mb-6">
+                Votre banque dans votre poche
+              </h2>
+              <p class="text-base montserrat text-gray-700">
+                L'application mobile CRESAF vous offre une expérience bancaire complète, intuitive et sécurisée. Accédez à vos comptes, effectuez des transactions et gérez vos finances où que vous soyez, à tout moment.
+              </p>
+            </div>
+
+            <!-- Features -->
+            <div class="grid grid-cols-2 gap-6">
+              <div
+                  v-for="feature in features"
+                  :key="feature.title"
+                  class="flex items-start gap-4 p-4 rounded-lg bg-white shadow-lg hover:shadow-xl transition-transform hover:scale-105 duration-500"
+              >
+                <div>
+                  <h3 class="montserrat-800 text-center text-xl text-primary mb-2">{{ feature.title }}</h3>
+                  <p class="text-gray-600 montserrat-400 text-base">{{ feature.description }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bouton de téléchargement -->
+            <div class="flex w-full justify-center lg:justify-normal items-center">
+              <div class="flex w-full justify-start items-center gap-1 border max-w-[15rem] rounded-xl bg-primary
+                 px-4 py-1 transition-transform duration-500 hover:scale-105 cursor-pointer hover:bg-green-700"
+                   @click="openPlaystore"
+              >
+                <a
+                    class="inline-block"
+                >
+                  <img
+                      :src="PlayStore"
+                      alt="Télécharger sur Google Play"
+                      class="h-12 hover:opacity-90 transition-opacity"
+                  />
+                </a>
+                <div class="flex flex-col justify-center items-start">
+                      <span class="font-roboto text-lg text-gray-300">
+                        Téléchargez sur
+                      </span>
+                  <span class="font-bold text-white text-2xl">
+                        Google Play
+                      </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image de l'application -->
+          <div class="flex justify-center lg:justify-end ">
+            <div class="relative">
+              <!-- Effet de brillance -->
+              <div class="absolute -inset-4 bg-gradient-to-r from-green-500 via-blue-500 to-green-500 opacity-30 blur-xl rounded-full"></div>
+              <!-- Mockup de l'application -->
+              <img
+                  @click="openPlaystore"
+                  :src="App"
+                  alt="CRESAF Mobile App"
+                  class="relative w-64 rounded-3xl shadow-2xl cursor-pointer transition-transform duration-500 hover:scale-105"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section avec Animation GSAP -->
+    <section class="py-16 bg-gradient-to-tr from-primary via-secondary to-primary text-white hidden">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div v-for="(stat, index) in stats" :key="index" class="flex flex-col items-center" ref="statItems">
+            <div class="text-4xl font-bold mb-2">
+              <span ref="statCounters">0</span>{{ stat.suffix }}
+            </div>
+            <p class="text-sm md:text-base opacity-80">{{ stat.label }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer basique -->
+    <Footer />
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Footer from "@public/components/footer.vue";
+import Header from "@public/components/header.vue";
+import { IconArrowRight } from '@tabler/icons-vue';
+import cresafApp from "@/assets/images/cresafApp.jpg"
+import App from "@/assets/images/logo-cref.webp"
+import PlayStore from "@/assets/images/svg/social/playstore.svg"
+gsap.registerPlugin(ScrollTrigger);
+
+    // Références pour les animations GSAP
+    const heroSection = ref(null);
+    const heroText = ref(null);
+    const heroDevice = ref(null);
+
+    const featuresSection = ref(null);
+    const featureCards = ref([]);
+
+    const mobileAppSection = ref(null);
+    const mobileAppImage = ref(null);
+    const mobileAppText = ref(null);
+    const featureCard1 = ref(null);
+    const featureCard2 = ref(null);
+    const featureCard3 = ref(null);
+    const mobileFeatureItems = ref([]);
+
+    const statItems = ref([]);
+    const statCounters = ref([]);
+
+    // Données des fonctionnalités
+    const features = [
+      {
+        title: 'Suivi des comptes',
+        description: 'Consultez en temps réel le solde et les mouvements de tous vos comptes bancaires en un seul endroit.'
+      },
+      {
+        title: 'Paiements sécurisés',
+        description: 'Effectuez vos paiements en ligne en toute sécurité avec notre système de validation à double facteur.'
+      },
+      {
+        title: 'Virements instantanés',
+        description: 'Transférez de l\'argent vers n\'importe quel compte en quelques secondes, sans frais supplémentaires.'
+      },
+      {
+        title: 'Rapport financier',
+        description: 'Générez des rapports détaillés pour suivre et analyser vos dépenses et revenus mensuels.'
+      },
+      {
+        title: 'Notifications personnalisées',
+        description: 'Configurez des alertes pour être informé des mouvements sur vos comptes selon vos critères.'
+      },
+      {
+        title: 'Support client 24/7',
+        description: 'Bénéficiez d\'une assistance personnalisée à tout moment via chat ou appel vidéo sécurisé.'
+      }
+    ];
+
+    // Données des fonctionnalités mobiles
+    const mobileFeatures = [
+      {
+        title: 'Consultation de comptes simplifiée',
+        description: 'Accédez à tous vos comptes en un clin d\'œil avec notre interface intuitive.'
+      },
+      {
+        title: 'Authentification biométrique',
+        description: 'Connectez-vous rapidement et en toute sécurité avec la reconnaissance faciale ou digitale.'
+      },
+      {
+        title: 'Paiement mobile',
+        description: 'Réglez vos achats directement depuis votre téléphone avec notre solution de paiement sans contact.'
+      },
+      {
+        title: 'Gestion de budget intégrée',
+        description: 'Suivez vos dépenses par catégorie et fixez des objectifs d\'épargne personnalisés.'
+      }
+    ];
+
+    // Données des statistiques
+    const stats = [
+      { value: 50, suffix: 'k+', label: 'Utilisateurs actifs' },
+      { value: 98, suffix: '%', label: 'Taux de satisfaction' },
+      { value: 24, suffix: '/7', label: 'Support client' },
+      { value: 5, suffix: 'M+', label: 'Transactions par mois' }
+    ];
+
+    // // Composants d'icônes simples
+    // const IconChartBar = {
+    //   render() {
+    //     return (
+    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+    //         </svg>
+    //     );
+    //   }
+    // };
+    //
+    // const IconCreditCard = {
+    //   render() {
+    //     return (
+    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+    //         </svg>
+    //     );
+    //   }
+    // };
+    //
+    // const IconArrowsExpand = {
+    //   render() {
+    //     return (
+    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+    //         </svg>
+    //     );
+    //   }
+    // };
+    //
+    // const IconDocumentReport = {
+    //   render() {
+    //     return (
+    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    //         </svg>
+    //     );
+    //   }
+    // };
+    //
+    // const IconBell = {
+    //   render() {
+    //     return (
+    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+    //         </svg>
+    //     );
+    //   }
+    // };
+    //
+    // const IconSupport = {
+    //   render() {
+    //     return (
+    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+    //         </svg>
+    //     );
+    //   }
+    // };
+
+    onMounted(() => {
+      // Animations pour la section Hero
+      const heroTimeline = gsap.timeline();
+
+      heroTimeline
+          .from(heroText.value, {
+            x: -50,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+          })
+          .from(heroDevice.value, {
+            x: 50,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+          }, "-=0.5");
+
+      // Animations pour la section des fonctionnalités
+      ScrollTrigger.create({
+        trigger: featuresSection.value,
+        start: 'top 80%',
+        onEnter: () => {
+          gsap.from(featureCards.value, {
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out'
+          });
+        }
+      });
+
+      // Animations pour la section App Mobile
+      const mobileAppTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: mobileAppSection.value,
+          start: 'top 70%'
+        }
+      });
+
+      mobileAppTimeline
+          .from(mobileAppImage.value, {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+          })
+          .from(mobileAppText.value, {
+            x: 50,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+          }, "-=0.7")
+          // .to([featureCard1.value, featureCard2.value, featureCard3.value], {
+          //   opacity: 1,
+          //   stagger: 0.2,
+          //   duration: 0.5,
+          //   ease: 'power2.out'
+          // })
+          .from(mobileFeatureItems.value, {
+            x: 20,
+            opacity: 0,
+            stagger: 0.2,
+            duration: 0.5,
+            ease: 'power2.out'
+          }, "-=0.5");
+
+      // Animation des compteurs de statistiques
+      ScrollTrigger.create({
+        trigger: statItems.value,
+        start: 'top 80%',
+        onEnter: () => {
+          statCounters.value.forEach((counter, index) => {
+            const value = stats[index].value;
+            gsap.to(counter, {
+              innerHTML: value,
+              duration: 2,
+              ease: 'power2.out',
+              snap: { innerHTML: 1 }
+            });
+          });
+
+          gsap.from(statItems.value, {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: 'power3.out'
+          });
+        }
+      });
+    });
+
+</script>
