@@ -216,19 +216,19 @@
             <!-- Bouton de téléchargement repositionné -->
             <div class="flex justify-center sm:justify-start">
               <div
-                  class="flex items-center gap-3 bg-gradient-to-r from-primary to-secondary rounded-2xl px-6 py-4 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg"
+                  class="flex items-center gap-3 bg-gradient-to-r from-primary to-secondary rounded-2xl px-8 py-4 cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-2xl shadow-lg"
                   @click="openPlaystore"
               >
                 <img
                     :src="PlayStore"
                     alt="Icône Google Play"
-                    class="h-8 w-8"
+                    class="h-10 w-10"
                 />
                 <div class="flex flex-col">
-              <span class="text-white text-xs font-medium opacity-90">
+              <span class="text-gray-200 text-sm montserrat montserrat-600">
                 Téléchargez sur
               </span>
-                  <span class="text-white text-lg font-bold">
+                  <span class="text-white text-lg montserrat montserrat-700">
                 Google Play
               </span>
                 </div>

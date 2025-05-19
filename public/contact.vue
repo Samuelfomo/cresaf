@@ -269,6 +269,10 @@ import Personnel1 from "@/assets/images/personnel1.jpg"
 import Personnel2 from "@/assets/images/personnel2.jpg"
 import Personnel3 from "@/assets/images/personnel3.jpg"
 import Personnel4 from "@/assets/images/personnel4.jpg"
+import Cresaf from "@/assets/images/cresafStructure.jpg"
+import Cresaf1 from "@/assets/images/cresafStructure1.jpg"
+import Cresaf2 from "@/assets/images/cresafStructure2.jpg"
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -280,9 +284,24 @@ const carouselImages = ref([
     title: "Notre équipe à votre service"
   },
   {
-    src: Personnel2,
+    src: Cresaf,
     alt: "Locaux CRESAF",
     title: "Des espaces modernes et accueillants"
+  },
+  {
+    src: Cresaf1,
+    alt: "Locaux CRESAF",
+    title: "Des espaces modernes et accueillants"
+  },
+  {
+    src: Cresaf2,
+    alt: "Locaux CRESAF",
+    title: "Des espaces modernes et accueillants"
+  },
+  {
+    src: Personnel2,
+    alt: "Formation CRESAF",
+    title: "Excellence et innovation"
   },
   {
     src: Personnel3,

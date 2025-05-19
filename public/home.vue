@@ -3,9 +3,9 @@
   <div class="flex flex-col min-h-screen">
     <Header/>
 
-    <div class="w-full mx-auto px-4 pt-40 pb-12 lg:pt-48 bg-primary">
+    <section class="w-full mx-auto px-4 pt-40 pb-12 lg:pt-48 bg-primary" ref="heroSection">
       <div class="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between">
-        <div class="w-full lg:w-6/12 text-center lg:text-left px-4 lg:px-10">
+        <div class="w-full lg:w-6/12 text-center lg:text-left px-4 lg:px-10" ref="heroText">
           <h1 class="text-4xl lg:text-6xl text-left montserrat montserrat-700 text-white pb-0">
             Vous ambitionnez, <span class="text-primary-accent block">nous finan&ccedil;ons<em class="montserrat montserrat-800 text-italic ms-3">!</em></span>
           </h1>
@@ -21,13 +21,13 @@
             Parlez à un conseiller
           </button>
         </div>
-        <div class="w-full lg:w-6/12 hidden lg:flex">
+        <div class="w-full lg:w-6/12 hidden lg:flex" ref="heroDevice">
           <Image1 />
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="bg-white px-8 flex flex-col py-12 z-30">
+    <section class="bg-white px-8 flex flex-col py-12 z-30">
       <h2 class="text-primary montserrat montserrat-700 lg:text-3xl text-lg uppercase text-center pb-5">
         nos services de transfert d'argent
       </h2>
@@ -67,8 +67,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="bg-primary  lg:px-8 flex flex-col h-full py-12 items-center hidden">
+    </section>
+    <section class="bg-primary  lg:px-8 flex flex-col h-full py-12 items-center hidden">
       <h1 class="text-white lg:text-4xl text-3xl font-bold text-center">Pourquoi plus de 5 millions de membres
         aiment-ils ?</h1>
       <p class="text-gray-300 text-lg p-5 w-full lg:text-start text-center lg:px-10">
@@ -90,8 +90,8 @@
       <!--          <p class="text-gray-300 text-lg text-center lg:text-start">{{location3.description}}</p>-->
       <!--        </div>-->
       <!--      </div>-->
-    </div>
-    <div class="min-h-full flex justify-between items-center w-full flex-wrap lg:px-8 px-1 bg-primary pb-2 hidden ">
+    </section>
+    <section class="min-h-full flex justify-between items-center w-full flex-wrap lg:px-8 px-1 bg-primary pb-2 hidden ">
       <table class="w-full border-t-2 border-white">
         <thead>
         <tr class="flex w-full flex-wrap justify-between lg:flex-nowrap lg:gap-0 gap-8 lg:pt-0 py-10">
@@ -198,10 +198,10 @@
         </button>
       </div>
 
-    </div>
+    </section>
 
     <Scroll class="hidden"/>
-    <div class="bg-blue-50 flex flex-col h-full py-12">
+    <section class="bg-blue-50 flex flex-col h-full py-12">
       <h1 class="text-primary lg:text-4xl text-3xl montserrat montserrat-700 text-center">
         Nos produits
       </h1>
@@ -232,7 +232,7 @@
 
       </div>
 
-    </div>
+    </section>
 
     <Footer/>
   </div>
@@ -266,6 +266,10 @@ import Pdf from "@/assets/pdf/account-condition.pdf"
 import Image1 from "@public/components/image.vue";
 // import Pdf1 from "@/assets/pdf/request-card.pdf"
 // import Pdf2 from "@/assets/pdf/start-investment.pdf"
+
+const heroSection = ref(null);
+const heroText = ref(null);
+const heroDevice = ref(null);
 
 const openPdf = async (pdf) => {
   try {
@@ -438,6 +442,23 @@ const openWhatsApp = () => {
 // Initialiser le tableau avec assez d'éléments null
 onMounted(() => {
   arrowRefs.value = new Array(locations1.value.length).fill(null);
+
+  // Animations pour la section Hero
+  const heroTimeline = gsap.timeline();
+
+  heroTimeline
+      .from(heroText.value, {
+        x: -50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out'
+      })
+      .from(heroDevice.value, {
+        x: 50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out'
+      }, "-=0.5");
 });
 // Fonction pour animer la flèche
 const animateArrow = (index, isEnter) => {
