@@ -7,7 +7,7 @@ import Image from "@public/components/image2.vue";
 import SCroll from "@public/components/scroll.vue";
 import Login from "@public/login.vue";
 import Contact from "@public/contact.vue";
-import Banking from "@public/iBanking.vue";
+import Mobile from "@public/mobile.vue";
 const routes = [
 
   {
@@ -51,9 +51,9 @@ const routes = [
     component: Contact
   },
   {
-    path: '/banking',
-    name: 'banking',
-    component: Banking
+    path: '/mobile',
+    name: 'Mobile App',
+    component: Mobile
   },
 ];
 

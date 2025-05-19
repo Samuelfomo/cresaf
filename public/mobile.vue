@@ -9,8 +9,9 @@
         <div class="md:w-1/2 mb-10 md:mb-0 lg:px-10" ref="heroText">
           <h1 class="text-4xl lg:text-6xl text-left montserrat montserrat-700 text-white pb-0">
             Gérez vos finances simplement avec notre solution
-            <span class="text-primary-accent block">i-Banking<em class="montserrat montserrat-800 text-italic ms-3">!</em></span>
+            <span class="text-primary-accent block">m-Banking<em class="montserrat montserrat-800 text-italic ms-3">!</em></span>
           </h1>
+
           <p class="text-white text-left montserrat montserrat-200 text-2xl my-10 lg:mr-20">
             Profitez d'une expérience bancaire innovante, sécurisée et accessible partout, à tout moment.
           </p>
@@ -48,7 +49,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="py-20 bg-gray-50" ref="featuresSection">
+    <section id="section1" class="py-20 bg-gray-50" ref="featuresSection">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
           <h2 class="text-3xl lg:text-5xl font-montserrat montserrat-700 text-primary mb-6">Fonctionnalités principales</h2>
@@ -58,7 +59,9 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          <div v-for="(feature, index) in features" :key="index" class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow" ref="featureCards">
+          <div v-for="(feature, index) in features" :key="index" class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+               ref="featureCards"
+          >
             <div class="bg-primary text-primary bg-opacity-10 p-4 rounded-lg w-16 h-16 flex items-center justify-center mb-6">
 <!--              <component :is="feature.icon" class="w-8 h-8 text-primary" />-->
               <svg v-if="index === 0" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -176,7 +179,7 @@
       </div>
     </section>
 
-    <section class="py-20 bg-blue-50 overflow-hidden" ref="mobileAppSection">
+    <section id="section2" class="py-20 bg-blue-50 overflow-hidden" ref="mobileAppSection">
       <div class="container mx-auto px-6">
         <!-- Header de la section -->
         <div class="text-center mb-16" ref="mobileAppText">
@@ -272,36 +275,24 @@
           </div>
         </div>
 
-        <!-- Section bonus : Avantages supplémentaires -->
+        <!--  Avantages supplémentaires -->
         <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="text-center p-6 bg-white/70 rounded-xl backdrop-blur-sm">
+          <div class="text-center p-6 bg-white/70 rounded-xl backdrop-blur-sm" v-for="(moreFeature, index) in moreFeatures" :key="index"
+               ref="featureCards"
+          >
             <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg v-if="index === 0" class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
               </svg>
-            </div>
-            <h3 class="font-bold text-primary mb-2">100% Sécurisé</h3>
-            <p class="text-gray-600 text-sm">Chiffrement bancaire de haut niveau</p>
-          </div>
-
-          <div class="text-center p-6 bg-white/70 rounded-xl backdrop-blur-sm">
-            <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg v-else-if="index === 1" class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
-            </div>
-            <h3 class="font-bold text-primary mb-2">Ultra Rapide</h3>
-            <p class="text-gray-600 text-sm">Transactions en temps réel</p>
-          </div>
-
-          <div class="text-center p-6 bg-white/70 rounded-xl backdrop-blur-sm">
-            <div class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg v-else class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
               </svg>
             </div>
-            <h3 class="font-bold text-primary mb-2">Interface Intuitive</h3>
-            <p class="text-gray-600 text-sm">Conçue pour tous les utilisateurs</p>
+            <h3 class="font-bold text-primary mb-2">{{moreFeature.title}}</h3>
+            <p class="text-gray-600 text-sm">{{ moreFeature.description }}</p>
           </div>
         </div>
       </div>
@@ -382,6 +373,20 @@ const mobileFeatures = [
     description: 'Suivez vos dépenses par catégorie et fixez des objectifs d\'épargne personnalisés.'
   }
 ];
+const moreFeatures = [
+  {
+    title: '100% Sécurisé',
+    description:'Chiffrement bancaire de haut niveau'
+  },
+  {
+    title: 'Ultra Rapide',
+    description:'Transactions en temps réel'
+  },
+  {
+    title: 'Interface Intuitive',
+    description:'Conçue pour tous les utilisateurs'
+  }
+]
 
 const openPlaystore = () => {
   window.open('https://play.google.com/store/apps/details?id=net.betterplanning.mobileBanking.cresaf&hl=fr','_blank' )

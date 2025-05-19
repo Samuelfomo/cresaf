@@ -21,8 +21,10 @@
       </div>
 
       <!-- Locations Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-5">
-        <div v-for="(location, index) in locations" :key="index" class="text-white md:text-start text-center">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-5" ref="featuresSection">
+        <div v-for="(location, index) in locations" :key="index" class="text-white md:text-start text-center"
+             ref="featureCards"
+        >
           <div>
                 <!-- Carte Google Maps intégrée -->
                 <div v-if="location.mapEmbedUrl" class="map-container rounded-lg overflow-hidden shadow-md cursor-pointer h-32 hover:opacity-80 transition-opacity duration-200"
@@ -106,11 +108,17 @@ import {useRouter} from "vue-router";
 // import FaceBook from "@/assets/images/svg/facebook.svg"
 import Phone from "@/assets/images/svg/phone.svg"
 import none from "@/assets/images/map_none.jpg"
+import {ref, onMounted} from "vue";
+import gsap from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const router = useRouter()
 
 // const facebookIcon = FaceBook
-const phone = Phone
+const phone = Phone;
+const featuresSection = ref(null);
+const featureCards = ref([]);
 
 const locations = [
   {
@@ -192,6 +200,22 @@ const openWhatsApp = (phone) => {
     console.error("Numéro de téléphone non disponible !");
   }
 }
+onMounted(()=>{
+  // Animations pour la section des fonctionnalités
+  ScrollTrigger.create({
+    trigger: featuresSection.value,
+    start: 'top 80%',
+    onEnter: () => {
+      gsap.from(featureCards.value, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out'
+      });
+    }
+  });
+});
 
 </script>
 
