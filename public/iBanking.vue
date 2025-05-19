@@ -1,7 +1,3 @@
-<!--
-Fichier: App.vue
-Description: Composant principal contenant la structure de base et les différentes sections
--->
 <template>
   <div class="min-h-screen bg-white">
     <!-- Header -->
@@ -94,82 +90,33 @@ Description: Composant principal contenant la structure de base et les différen
               </svg>
 
             </div>
-            <h3 class="text-xl font-bold text-[#1c3461] mb-3">{{ feature.title }}</h3>
+            <h3 class="text-xl font-bold text-primary mb-3">{{ feature.title }}</h3>
             <p class="text-gray-600">{{ feature.description }}</p>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Mobile App Section -->
-    <section class="py-20 bg-white overflow-hidden hidden" ref="mobileAppSection">
-      <div class="container mx-auto px-6">
-        <div class="flex flex-col lg:flex-row items-center">
-          <div class="lg:w-1/2 mb-12 lg:mb-0" ref="mobileAppImage">
-              <img :src="App" alt="CRESAF Mobile App" class="w-64 mx-auto lg:mx-0 rounded-3xl shadow-2xl" />
-          </div>
-
-          <div class="lg:w-full lg:pl-16" ref="mobileAppText">
-            <div class="flex items-center space-x-2 mb-4">
-              <div class="bg-secondary h-1 w-16 rounded-full"></div>
-              <span class="text-secondary font-medium">Application Mobile</span>
-            </div>
-
-            <h2 class="text-3xl md:text-4xl font-bold text-[#1c3461] mb-6">
-              Votre banque dans votre poche
-            </h2>
-
-            <p class="text-gray-600 mb-8">
-              L'application mobile CRESAF vous offre une expérience bancaire complète, intuitive et sécurisée. Accédez à vos comptes, effectuez des transactions et gérez vos finances où que vous soyez, à tout moment.
-            </p>
-
-            <ul class="space-y-4 mb-8">
-              <li v-for="(feature, index) in mobileFeatures" :key="index" class="flex items-start" ref="mobileFeatureItems">
-                <div class="bg-secondary bg-opacity-20 p-1 rounded-full mt-1 mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-secondary" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="font-medium text-gray-900">{{ feature.title }}</h4>
-                  <p class="text-gray-600 text-sm">{{ feature.description }}</p>
-                </div>
-              </li>
-            </ul>
-
-            <div class="flex space-x-4">
-              <a href="#" class="transform transition hover:scale-105">
-                <img src="@/assets/images/logo/paytop.png" alt="Download on App Store" class="h-12" />
-              </a>
-              <a href="#" class="transform transition hover:scale-105">
-                <img src="@/assets/images/logo/paytop.png" alt="Get it on Google Play" class="h-12" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="w-full py-8 bg-blue-50 px-10 overflow-hidden">
-      <!--        <div class="w-full py-16 bg-gradient-to-b from-blue-50 to-white">-->
+    <section class="py-8 bg-blue-50 px-10 overflow-hidden hidden" ref="mobileAppSection">
+<!--              <div class="w-full py-16 bg-gradient-to-b from-blue-50 to-white">-->
       <div class="mx-auto container">
-        <div class="grid grid-cols-2 place-items-center">
-          <!-- Texte et features -->
-          <div class="space-y-8">
-            <div class="space-y-4">
-              <div class="flex items-center space-x-2 mb-4">
+        <div ref="mobileAppText">
+          <div class="flex items-center space-x-2 mb-4">
                 <div class="bg-secondary h-1 w-12 rounded-full"></div>
                 <span class="text-secondary montserrat montserrat-700">Application Mobile</span>
               </div>
-              <h2 class="text-3xl md:text-4xl montserrat montserrat-700 text-primary mb-6">
-                Votre banque dans votre poche
-              </h2>
-              <p class="text-base montserrat text-gray-700">
-                L'application mobile CRESAF vous offre une expérience bancaire complète, intuitive et sécurisée. Accédez à vos comptes, effectuez des transactions et gérez vos finances où que vous soyez, à tout moment.
-              </p>
-            </div>
+          <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl montserrat montserrat-700 text-primary mb-6">
+                  Votre banque dans votre poche
+                </h2>
+                <p class="text-gray-600 max-w-4xl mx-auto text-base">
+                  L'application mobile Cresaf vous offre une expérience bancaire complète, intuitive et sécurisée. Accédez à vos comptes, effectuez des transactions et gérez vos finances où que vous soyez, à tout moment.
+                </p>
+              </div>
+        </div>
+        <div class="grid grid-cols-1">
 
             <!-- Features -->
-            <div class="grid grid-cols-2 gap-6">
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6" ref="mobileFeatureItems">
               <div
                   v-for="feature in features"
                   :key="feature.title"
@@ -181,11 +128,11 @@ Description: Composant principal contenant la structure de base et les différen
                 </div>
               </div>
             </div>
-
+          <div class="flex justify-end space-x-8">
             <!-- Bouton de téléchargement -->
-            <div class="flex w-full justify-center lg:justify-normal items-center">
+            <div class="flex justify-center lg:justify-normal items-center">
               <div class="flex w-full justify-start items-center gap-1 border max-w-[15rem] rounded-xl bg-primary
-                 px-4 py-1 transition-transform duration-500 hover:scale-105 cursor-pointer hover:bg-green-700"
+                 px-4 py-1 transition-transform duration-500 hover:scale-105 cursor-pointer hover:bg-secondary"
                    @click="openPlaystore"
               >
                 <a
@@ -207,40 +154,158 @@ Description: Composant principal contenant la structure de base et les différen
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Image de l'application -->
-          <div class="flex justify-center lg:justify-end ">
-            <div class="relative">
-              <!-- Effet de brillance -->
-              <div class="absolute -inset-4 bg-gradient-to-r from-green-500 via-blue-500 to-green-500 opacity-30 blur-xl rounded-full"></div>
-              <!-- Mockup de l'application -->
-              <img
-                  @click="openPlaystore"
-                  :src="App"
-                  alt="CRESAF Mobile App"
-                  class="relative w-64 rounded-3xl shadow-2xl cursor-pointer transition-transform duration-500 hover:scale-105"
-              />
+            <!-- Image de l'application -->
+            <div class="flex justify-center lg:justify-end" >
+              <div class="relative" ref="mobileAppImage">
+                <!-- Effet de brillance -->
+                <div class="absolute -inset-4 bg-gradient-to-r from-green-500 via-blue-500 to-green-500 opacity-30 blur-xl rounded-full"></div>
+                <!-- Mockup de l'application -->
+                <img
+                    @click="openPlaystore"
+                    :src="App"
+                    alt="CRESAF Mobile App"
+                    class="relative w-64 rounded-3xl shadow-2xl cursor-pointer transition-transform duration-500 hover:scale-105"
+                />
+              </div>
             </div>
           </div>
+
+
         </div>
       </div>
     </section>
 
-    <!-- Stats Section avec Animation GSAP -->
-    <section class="py-16 bg-gradient-to-tr from-primary via-secondary to-primary text-white hidden">
+    <section class="py-20 bg-blue-50 overflow-hidden" ref="mobileAppSection">
       <div class="container mx-auto px-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div v-for="(stat, index) in stats" :key="index" class="flex flex-col items-center" ref="statItems">
-            <div class="text-4xl font-bold mb-2">
-              <span ref="statCounters">0</span>{{ stat.suffix }}
+        <!-- Header de la section -->
+        <div class="text-center mb-16" ref="mobileAppText">
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <div class="bg-secondary h-0.5 w-10 rounded-full"></div>
+            <span class="text-secondary montserrat montserrat-400 uppercase tracking-wide text-sm">Application Mobile</span>
+            <div class="bg-secondary h-0.5 w-10 rounded-full"></div>
+          </div>
+          <h2 class="text-3xl md:text-5xl montserrat montserrat-700 text-secondary mb-6">
+            Votre banque dans votre poche
+            <span class="block mt-4">CRESAF Online</span>
+          </h2>
+          <p class="text-gray-600 max-w-4xl mx-auto text-lg leading-relaxed">
+            L'application mobile Cresaf vous offre une expérience bancaire complète, intuitive et sécurisée.
+            Accédez à vos comptes, effectuez des transactions et gérez vos finances où que vous soyez, à tout moment.
+          </p>
+        </div>
+
+        <!-- Contenu principal avec mise en page améliorée -->
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <!-- Colonne gauche : Features -->
+          <div class="order-2 lg:order-1">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10" ref="mobileFeatureItems">
+              <div
+                  v-for="mobileFeature in mobileFeatures"
+                  :key="mobileFeature.title"
+                  class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+              >
+                <h3 class="montserrat montserrat-700 text-lg text-primary mb-3">{{ mobileFeature.title }}</h3>
+                <p class="text-gray-600 montserrat text-sm leading-relaxed">{{ mobileFeature.description }}</p>
+              </div>
             </div>
-            <p class="text-sm md:text-base opacity-80">{{ stat.label }}</p>
+
+            <!-- Bouton de téléchargement repositionné -->
+            <div class="flex justify-center sm:justify-start">
+              <div
+                  class="flex items-center gap-3 bg-gradient-to-r from-primary to-secondary rounded-2xl px-6 py-4 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg"
+                  @click="openPlaystore"
+              >
+                <img
+                    :src="PlayStore"
+                    alt="Icône Google Play"
+                    class="h-8 w-8"
+                />
+                <div class="flex flex-col">
+              <span class="text-white text-xs font-medium opacity-90">
+                Téléchargez sur
+              </span>
+                  <span class="text-white text-lg font-bold">
+                Google Play
+              </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colonne droite : Image de l'app -->
+          <div class="order-1 lg:order-2 flex justify-center">
+            <div class="relative" ref="mobileAppImage">
+              <!-- Effet de fond décoratif -->
+              <div class="absolute -inset-8 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-full blur-3xl opacity-60 animate-pulse"></div>
+
+              <!-- Cercles décoratifs -->
+              <div class="absolute -top-4 -right-4 w-24 h-24 bg-secondary/10 rounded-full"></div>
+              <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/10 rounded-full"></div>
+
+              <!-- Image principale -->
+              <div class="relative z-10 group">
+                <img
+                    @click="openPlaystore"
+                    :src="App"
+                    alt="CRESAF Mobile App"
+                    class="w-80 max-w-sm rounded-3xl shadow-2xl cursor-pointer transition-all duration-500 group-hover:scale-105 group-hover:rotate-2"
+                />
+
+                <!-- Badge "Gratuit" -->
+                <div class="absolute -top-4 -left-4 bg-secondary text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                  Gratuit
+                </div>
+
+                <!-- Badge de rating -->
+                <div class="absolute -bottom-4 -right-4 bg-white rounded-lg p-3 shadow-lg">
+                  <div class="flex items-center gap-2">
+                    <div class="flex text-yellow-400">
+                      ★★★★★
+                    </div>
+                    <span class="text-gray-700 font-bold text-sm">4.9</span>
+                  </div>
+                  <p class="text-gray-500 text-xs">+10k téléchargements</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section bonus : Avantages supplémentaires -->
+        <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center p-6 bg-white/70 rounded-xl backdrop-blur-sm">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+            </div>
+            <h3 class="font-bold text-primary mb-2">100% Sécurisé</h3>
+            <p class="text-gray-600 text-sm">Chiffrement bancaire de haut niveau</p>
+          </div>
+
+          <div class="text-center p-6 bg-white/70 rounded-xl backdrop-blur-sm">
+            <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="font-bold text-primary mb-2">Ultra Rapide</h3>
+            <p class="text-gray-600 text-sm">Transactions en temps réel</p>
+          </div>
+
+          <div class="text-center p-6 bg-white/70 rounded-xl backdrop-blur-sm">
+            <div class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <h3 class="font-bold text-primary mb-2">Interface Intuitive</h3>
+            <p class="text-gray-600 text-sm">Conçue pour tous les utilisateurs</p>
           </div>
         </div>
       </div>
     </section>
-
     <!-- Footer basique -->
     <Footer />
   </div>
@@ -252,7 +317,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Footer from "@public/components/footer.vue";
 import Header from "@public/components/header.vue";
-import { IconArrowRight } from '@tabler/icons-vue';
+import {IconArrowRight} from '@tabler/icons-vue';
 import cresafApp from "@/assets/images/cresafApp.jpg"
 import App from "@/assets/images/logo-cref.webp"
 import PlayStore from "@/assets/images/svg/social/playstore.svg"
@@ -269,13 +334,7 @@ gsap.registerPlugin(ScrollTrigger);
     const mobileAppSection = ref(null);
     const mobileAppImage = ref(null);
     const mobileAppText = ref(null);
-    const featureCard1 = ref(null);
-    const featureCard2 = ref(null);
-    const featureCard3 = ref(null);
     const mobileFeatureItems = ref([]);
-
-    const statItems = ref([]);
-    const statCounters = ref([]);
 
     // Données des fonctionnalités
     const features = [
@@ -304,95 +363,29 @@ gsap.registerPlugin(ScrollTrigger);
         description: 'Bénéficiez d\'une assistance personnalisée à tout moment via chat ou appel vidéo sécurisé.'
       }
     ];
+// Données des fonctionnalités mobiles
+const mobileFeatures = [
+  {
+    title: 'Consultation de comptes simplifiée',
+    description: 'Accédez à tous vos comptes en un clin d\'œil avec notre interface intuitive.'
+  },
+  {
+    title: 'Authentification biométrique',
+    description: 'Connectez-vous rapidement et en toute sécurité avec la reconnaissance faciale ou digitale.'
+  },
+  {
+    title: 'Paiement mobile',
+    description: 'Réglez vos achats directement depuis votre téléphone avec notre solution de paiement sans contact.'
+  },
+  {
+    title: 'Gestion de budget intégrée',
+    description: 'Suivez vos dépenses par catégorie et fixez des objectifs d\'épargne personnalisés.'
+  }
+];
 
-    // Données des fonctionnalités mobiles
-    const mobileFeatures = [
-      {
-        title: 'Consultation de comptes simplifiée',
-        description: 'Accédez à tous vos comptes en un clin d\'œil avec notre interface intuitive.'
-      },
-      {
-        title: 'Authentification biométrique',
-        description: 'Connectez-vous rapidement et en toute sécurité avec la reconnaissance faciale ou digitale.'
-      },
-      {
-        title: 'Paiement mobile',
-        description: 'Réglez vos achats directement depuis votre téléphone avec notre solution de paiement sans contact.'
-      },
-      {
-        title: 'Gestion de budget intégrée',
-        description: 'Suivez vos dépenses par catégorie et fixez des objectifs d\'épargne personnalisés.'
-      }
-    ];
-
-    // Données des statistiques
-    const stats = [
-      { value: 50, suffix: 'k+', label: 'Utilisateurs actifs' },
-      { value: 98, suffix: '%', label: 'Taux de satisfaction' },
-      { value: 24, suffix: '/7', label: 'Support client' },
-      { value: 5, suffix: 'M+', label: 'Transactions par mois' }
-    ];
-
-    // // Composants d'icônes simples
-    // const IconChartBar = {
-    //   render() {
-    //     return (
-    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-    //         </svg>
-    //     );
-    //   }
-    // };
-    //
-    // const IconCreditCard = {
-    //   render() {
-    //     return (
-    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-    //         </svg>
-    //     );
-    //   }
-    // };
-    //
-    // const IconArrowsExpand = {
-    //   render() {
-    //     return (
-    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
-    //         </svg>
-    //     );
-    //   }
-    // };
-    //
-    // const IconDocumentReport = {
-    //   render() {
-    //     return (
-    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-    //         </svg>
-    //     );
-    //   }
-    // };
-    //
-    // const IconBell = {
-    //   render() {
-    //     return (
-    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-    //         </svg>
-    //     );
-    //   }
-    // };
-    //
-    // const IconSupport = {
-    //   render() {
-    //     return (
-    //         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    //           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-    //         </svg>
-    //     );
-    //   }
-    // };
+const openPlaystore = () => {
+  window.open('https://play.google.com/store/apps/details?id=net.betterplanning.mobileBanking.cresaf&hl=fr','_blank' )
+}
 
     onMounted(() => {
       // Animations pour la section Hero
@@ -462,30 +455,30 @@ gsap.registerPlugin(ScrollTrigger);
             ease: 'power2.out'
           }, "-=0.5");
 
-      // Animation des compteurs de statistiques
-      ScrollTrigger.create({
-        trigger: statItems.value,
-        start: 'top 80%',
-        onEnter: () => {
-          statCounters.value.forEach((counter, index) => {
-            const value = stats[index].value;
-            gsap.to(counter, {
-              innerHTML: value,
-              duration: 2,
-              ease: 'power2.out',
-              snap: { innerHTML: 1 }
-            });
-          });
-
-          gsap.from(statItems.value, {
-            y: 30,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.15,
-            ease: 'power3.out'
-          });
-        }
-      });
+      // // Animation des compteurs de statistiques
+      // ScrollTrigger.create({
+      //   trigger: statItems.value,
+      //   start: 'top 80%',
+      //   onEnter: () => {
+      //     statCounters.value.forEach((counter, index) => {
+      //       const value = stats[index].value;
+      //       gsap.to(counter, {
+      //         innerHTML: value,
+      //         duration: 2,
+      //         ease: 'power2.out',
+      //         snap: { innerHTML: 1 }
+      //       });
+      //     });
+      //
+      //     gsap.from(statItems.value, {
+      //       y: 30,
+      //       opacity: 0,
+      //       duration: 1,
+      //       stagger: 0.15,
+      //       ease: 'power3.out'
+      //     });
+      //   }
+      // });
     });
 
 </script>
