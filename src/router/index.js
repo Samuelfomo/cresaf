@@ -4,9 +4,10 @@ import Values from "@public/values.vue";
 import Products from "@public/products.vue";
 import Solutions from "@public/solutions.vue";
 import Image from "@public/components/image2.vue";
-import SCroll from "@public/components/scroll.vue";
+import Scroll from "@public/components/scroll.vue";
 import Login from "@public/login.vue";
 import Contact from "@public/contact.vue";
+import Conta from "@public/brouillon/contact.vue";
 import Mobile from "@public/mobile.vue";
 const routes = [
 
@@ -43,7 +44,7 @@ const routes = [
   {
     path: '/scroll',
     name: 'scroll',
-    component: SCroll
+    component: Scroll
   },
   {
     path: '/contact',
@@ -51,8 +52,13 @@ const routes = [
     component: Contact
   },
   {
+    path: '/conta',
+    name: 'conta',
+    component: Conta
+  },
+  {
     path: '/mobile',
-    name: 'Mobile App',
+    name: 'mobile',
     component: Mobile
   },
 ];

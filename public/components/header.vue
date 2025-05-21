@@ -324,7 +324,7 @@
         <div class="text-sm text-gray-700 flex relative">
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownBanking" @mouseleave="closeDropdown4">
             <h2 class="relative hover:text-secondary lg:text-lg text-xs flex group"
-                :class="[$route.name === 'solutions' ? activeClass : inactiveClass]"
+                :class="[$route.name === 'mobile' ? activeClass : inactiveClass]"
                 @click="router.push('/mobile')"
             >
               Cresaf sur mobile
@@ -480,6 +480,7 @@
                   </router-link>
                 </div>
               </div>
+
               <router-link to="#" class="w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3 border-b
             items-center"
                            :class="[$route.name === 'products' ? activeDrawerClass : 'text-white']"
@@ -676,6 +677,43 @@
                   </router-link>
                 </div>
               </div>
+              <router-link to="#" class="w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3 border-b
+            items-center"
+                           :class="[$route.name === 'mobile' ? activeDrawerClass : 'text-white']"
+                           @click="OpenMobile"
+              >
+                <span>Cresaf sur mobile</span>
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24" viewBox="0 0 24 24"  fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                  <path v-if="viewMobile" d="M3 16l10 -10l10 10" />
+                  <path v-if="viewMobile2" d="M2 9l10 11l10 -12" />
+                </svg>
+              </router-link>
+              <div v-if="mobile" class="w-full flex flex-col">
+                <div class="w-full flex items-center"
+                     @click="closeDrawerAndScrollMobile"
+                >
+                  <IconCalendarPin stroke={2} class="h-8 w-8 text-gray-400" />
+                  <router-link to="#" class="flex flex-col text-white font-bold text-base hover:text-green-500 p-2"
+                               :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                  >
+                    <h1>Fonctionnalités principales</h1>
+                    <span class="text-xs text-gray-400">Essentiel, efficace, adapté.</span>
+                  </router-link>
+                </div>
+                <div class="w-full flex items-center"
+                     @click="closeDrawerAndScrollMobile2"
+                >
+                  <IconHandFingerRight stroke={2} class="h-8 w-8 text-gray-400" />
+                  <router-link to="#" class="flex flex-col text-white justify-start font-bold text-base hover:text-green-500 p-2"
+                               :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                  >
+                    <h1>Accéder maintenant</h1>
+                    <span class="text-xs text-gray-400">Solution rapide pour vos besoins urgents.</span>
+                  </router-link>
+                </div>
+              </div>
             </nav>
             <button type="button"
                     class="flex justify-center items-center gap-2 text-lg bg-primary p-2 mt-2 font-semibold border border-white rounded-lg hover:text-secondary hover:border-green-500"
@@ -731,11 +769,14 @@ const isDropdownOpen4 = ref(false)
 const aboutUs = ref(false)
 const products = ref(false)
 const solutions = ref(false)
+const mobile = ref(false)
 const viewaboutUs = ref(false)
 const viewaboutUs2 = ref(true);
 const viewproducts = ref(false)
 const viewproducts2 = ref(true);
 const viewsolutions = ref(false)
+const viewMobile = ref(false)
+const viewMobile2 = ref(true)
 const viewsolutions2 = ref(true);
 const open = ref(true);
 const open2 = ref(true);
@@ -896,6 +937,25 @@ const closeDrawerAndScrollSolutions3 = () => {
   nextTick(() =>{
     setTimeout(() => {
       scrollTo({id : 'section3'})
+    }, 100)
+  })
+}
+
+const closeDrawerAndScrollMobile = () => {
+  router.push('/mobile')
+  isDrawerOpen.value = false
+  nextTick(() =>{
+    setTimeout(() => {
+      scrollTo({id : 'section1'})
+    }, 100)
+  })
+}
+const closeDrawerAndScrollMobile2 = () => {
+  router.push('/mobile')
+  isDrawerOpen.value = false
+  nextTick(() =>{
+    setTimeout(() => {
+      scrollTo({id : 'section2'})
     }, 100)
   })
 }
@@ -1143,6 +1203,14 @@ const OpenSolutions = () => {
   products.value = false
   viewsolutions.value = !viewsolutions.value
   viewsolutions2.value = !viewsolutions2.value
+}
+const OpenMobile = () => {
+  mobile.value = !mobile.value
+  solutions.value = false
+  aboutUs.value = false
+  products.value = false
+  viewMobile.value = !viewMobile.value
+  viewMobile2.value = !viewMobile2.value
 }
 
 const scrollTo = ({id}: { id: any })=> {
