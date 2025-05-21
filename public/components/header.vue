@@ -375,9 +375,9 @@
 <!--          m-banking-->
 <!--        </div>-->
       </div>
-      <div class=" hidden lg:flex justify-between gap-x-2">
+      <div class=" hidden lg:flex justify-between space-x-2">
         <button type="button"
-                class="flex justify-center items-center xl:text-lg  px-3 font-semibold border rounded-lg hover:border-blue-950"
+                class="flex justify-center items-center xl:text-lg  px-3 py-2 font-semibold border rounded-lg hover:border-blue-950"
                 :class="[$route.name === 'contact' ? activeContact : 'bg-gray-100']"
                 @click="router.push('/contact')">
           Contact
@@ -387,7 +387,7 @@
           </svg>
         </button>
         <button type="button"
-                class="xl:text-lg bg-secondary px-3 text-white font-semibold border border-white rounded-lg
+                class="xl:text-lg bg-secondary px-3 py-2 text-white font-semibold border border-white rounded-lg
                hover:bg-primary"
                 @click="contact"
         >

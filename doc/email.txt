@@ -1,0 +1,134 @@
+# Guide d'implémentation du formulaire de contact avec sélection personnalisée
+
+## Vue d'ensemble
+
+Ce guide vous explique comment implémenter un formulaire de contact élégant avec un composant de sélection personnalisé animé par GSAP. Ce formulaire permet aux visiteurs de votre site de sélectionner une agence spécifique et d'envoyer un message directement à cette agence par email.
+
+## Structure des fichiers
+
+1. `CustomSelect.vue` - Composant personnalisé pour remplacer les select natifs
+2. Page de contact avec formulaire mis à jour
+3. `server.js` - API backend Node.js pour l'envoi d'emails
+4. `.env` - Fichier de configuration pour les variables d'environnement
+
+## Installation des dépendances
+
+### Frontend (Vue.js)
+
+Si ce n'est pas déjà fait, installez GSAP:
+
+```bash
+npm install gsap
+# ou
+yarn add gsap
+```
+
+### Backend (Node.js)
+
+Installez les dépendances nécessaires pour le serveur Node.js:
+
+```bash
+npm install express body-parser nodemailer cors dotenv
+# ou
+yarn add express body-parser nodemailer cors dotenv
+```
+
+## Étapes d'implémentation
+
+### 1. Créer le composant CustomSelect
+
+1. Créez un nouveau fichier `CustomSelect.vue` dans le dossier `components` de votre projet Vue.
+2. Copiez le code du composant personnalisé dans ce fichier.
+3. Ce composant remplacera les balises `<select>` natives par une interface plus élégante et animée.
+
+### 2. Mettre à jour la page du formulaire de contact
+
+1. Importez le composant `CustomSelect` dans votre page de formulaire de contact.
+2. Remplacez les balises `<select>` existantes par le composant `<CustomSelect>`.
+3. Assurez-vous que les données des options sont correctement formatées pour le composant (tableau d'objets avec `value` et `label`).
+
+### 3. Configurer le serveur Node.js
+
+1. Créez un fichier `server.js` à la racine de votre projet backend.
+2. Copiez le code du serveur Node.js dans ce fichier.
+3. Créez un fichier `.env` et configurez les variables d'environnement selon vos besoins.
+
+### 4. Configurer le fichier .env
+
+1. Remplacez les valeurs par défaut dans le fichier `.env` par vos propres configurations SMTP.
+2. Assurez-vous que les informations de connexion au serveur SMTP sont correctes.
+
+## Configuration GSAP
+
+Les animations GSAP sont déjà intégrées dans le composant `CustomSelect` et dans la page du formulaire de contact. Assurez-vous que GSAP est correctement importé et enregistré:
+
+```javascript
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+```
+
+## Fonctionnement du formulaire
+
+1. L'utilisateur remplit le formulaire et sélectionne une agence dans la liste déroulante personnalisée.
+2. Lors de la soumission, les données du formulaire sont envoyées au serveur Node.js via une requête POST.
+3. Le serveur Node.js traite les données et envoie un email à l'adresse email de l'agence sélectionnée.
+4. Si configuré, un email de confirmation est également envoyé à l'utilisateur.
+
+## Personnalisation
+
+### Style du composant CustomSelect
+
+Vous pouvez personnaliser l'apparence du composant en modifiant les classes CSS dans le fichier `CustomSelect.vue`:
+
+- La classe `custom-select` contrôle l'apparence générale du composant.
+- La classe `select-field` contrôle l'apparence du champ de sélection.
+- La classe `dropdown` contrôle l'apparence de la liste déroulante.
+- La classe `option` contrôle l'apparence des options individuelles.
+
+### Animations GSAP
+
+Vous pouvez personnaliser les animations en modifiant les fonctions `animateOpen` et `animateClose` dans le fichier `CustomSelect.vue`:
+
+```javascript
+// Animation d'ouverture avec GSAP
+const animateOpen = () => {
+  gsap.fromTo(dropdownRef.value,
+    { opacity: 0, y: -10, scaleY: 0.9, transformOrigin: 'top' },
+    { opacity: 1, y: 0, scaleY: 1, duration: 0.3, ease: 'power2.out' }
+  );
+
+  // Animer chaque option avec un délai progressif
+  const options = dropdownRef.value.querySelectorAll('.option');
+  gsap.fromTo(options,
+    { opacity: 0, x: -10 },
+    { opacity: 1, x: 0, duration: 0.2, stagger: 0.05, ease: 'power2.out' }
+  );
+};
+```
+
+## Bonnes pratiques
+
+1. Validez les données du formulaire côté client et côté serveur pour assurer la sécurité.
+2. Utilisez HTTPS pour protéger les données envoyées par le formulaire.
+3. Mettez en place un système de limite de requêtes pour éviter les abus.
+4. Configurez correctement les services de messagerie pour éviter que vos emails soient marqués comme spam.
+
+## Dépannage
+
+### Les animations ne fonctionnent pas
+
+- Assurez-vous que GSAP est correctement installé et importé.
+- Vérifiez que les références aux éléments DOM sont correctes.
+
+### Les emails ne sont pas envoyés
+
+- Vérifiez que les informations SMTP dans le fichier `.env` sont correctes.
+- Vérifiez les logs du serveur pour identifier d'éventuelles erreurs.
+- Assurez-vous que le serveur SMTP autorise l'envoi d'emails depuis votre application.
+
+### Le composant CustomSelect ne s'affiche pas correctement
+
+- Vérifiez que le composant est correctement importé et utilisé.
+- Assurez-vous que les données des options sont correctement formatées.

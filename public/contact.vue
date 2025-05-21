@@ -151,10 +151,13 @@
                       type="text"
                       id="firstName"
                       v-model="form.firstName"
-                      required
+                      :class="{'border-red-500 focus:ring-red-500': formErrors.firstName}"
                       class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-secondary focus:border-transparent transition-all"
                       placeholder="Votre prénom"
                   />
+                  <p v-if="formErrors.firstName" class="text-red-500 text-sm mt-1 error-message">
+                    {{ formErrors.firstName }}
+                  </p>
                 </div>
                 <div class="form-group">
                   <label for="lastName" class="block text-sm font-semibold text-primary mb-3">
@@ -164,10 +167,13 @@
                       type="text"
                       id="lastName"
                       v-model="form.lastName"
-                      required
+                      :class="{'border-red-500 focus:ring-red-500': formErrors.lastName}"
                       class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-secondary focus:border-transparent transition-all"
                       placeholder="Votre nom"
                   />
+                  <p v-if="formErrors.lastName" class="text-red-500 text-sm mt-1 error-message">
+                    {{ formErrors.lastName }}
+                  </p>
                 </div>
               </div>
 
@@ -180,10 +186,13 @@
                       type="email"
                       id="email"
                       v-model="form.email"
-                      required
+                      :class="{'border-red-500 focus:ring-red-500': formErrors.email}"
                       class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-secondary focus:border-transparent transition-all"
                       placeholder="votre@email.com"
                   />
+                  <p v-if="formErrors.email" class="text-red-500 text-sm mt-1 error-message">
+                    {{ formErrors.email }}
+                  </p>
                 </div>
                 <div class="form-group">
                   <label for="phone" class="block text-sm font-semibold text-primary mb-3">
@@ -193,9 +202,13 @@
                       type="tel"
                       id="phone"
                       v-model="form.phone"
+                      :class="{'border-red-500 focus:ring-red-500': formErrors.phone}"
                       class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-secondary focus:border-transparent transition-all"
                       placeholder="+237 6 78 76 45 43"
                   />
+                  <p v-if="formErrors.phone" class="text-red-500 text-sm mt-1 error-message">
+                    {{ formErrors.phone }}
+                  </p>
                 </div>
               </div>
 
@@ -209,8 +222,11 @@
                       name="subject"
                       :options="subjectOptions"
                       placeholder="Sélectionnez un sujet"
-                      required
+                      :class="{'error-select': formErrors.subject}"
                   />
+                  <p v-if="formErrors.subject" class="text-red-500 text-sm mt-1 error-message">
+                    {{ formErrors.subject }}
+                  </p>
                 </div>
                 <div class="form-group">
                   <label for="agence" class="block text-sm font-semibold text-primary mb-3">
@@ -221,8 +237,11 @@
                       name="agence"
                       :options="agencyOptions"
                       placeholder="Sélectionnez une agence"
-                      required
+                      :class="{'error-select': formErrors.agence}"
                   />
+                  <p v-if="formErrors.agence" class="text-red-500 text-sm mt-1 error-message">
+                    {{ formErrors.agence }}
+                  </p>
                 </div>
               </div>
 
@@ -233,11 +252,14 @@
                 <textarea
                     id="message"
                     v-model="form.message"
-                    required
+                    :class="{'border-red-500 focus:ring-red-500': formErrors.message}"
                     rows="6"
                     class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-secondary focus:border-transparent transition-all resize-none"
                     placeholder="Décrivez votre demande..."
                 ></textarea>
+                <p v-if="formErrors.message" class="text-red-500 text-sm mt-1 error-message">
+                  {{ formErrors.message }}
+                </p>
               </div>
               <div class="mb-8">
                 <label for="source" class="block text-sm font-semibold text-primary mb-3">
@@ -292,7 +314,8 @@ import Personnel4 from "@/assets/images/personnel4.jpg"
 import Cresaf from "@/assets/images/cresafStructure.jpg"
 import Cresaf1 from "@/assets/images/cresafStructure1.jpg"
 import Cresaf2 from "@/assets/images/cresafStructure2.jpg"
-import CustomSelect from "@public/brouillon/CustomSelect.vue";
+import CustomSelect from "@public/components/CustomSelect.vue";
+import Email from "@/class/Email"
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -411,16 +434,107 @@ const form = ref({
   message: "",
   source: ""
 });
-// const form = ref({
-//   firstName: "",
-//   lastName: "",
-//   email: "",
-//   phone: "",
-//   subject: "",
-//   message: ""
-// });
+// État pour les erreurs de validation
+const formErrors = ref({
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  subject: '',
+  agence: '',
+  message: ''
+});
 
 const isSubmitting = ref(false);
+// État pour indiquer si le formulaire est valide
+const isFormValid = ref(true);
+// Fonction pour valider le formulaire avant soumission
+const validateForm = () => {
+  // Réinitialiser les erreurs et l'état de validation
+  formErrors.value = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    subject: '',
+    agence: '',
+    message: ''
+  };
+
+  isFormValid.value = true;
+
+  // Validation du prénom (obligatoire et au moins 2 caractères)
+  if (!form.value.firstName.trim()) {
+    formErrors.value.firstName = 'Le prénom est obligatoire';
+    isFormValid.value = false;
+  } else if (form.value.firstName.trim().length < 2) {
+    formErrors.value.firstName = 'Le prénom doit contenir au moins 2 caractères';
+    isFormValid.value = false;
+  }
+
+  // Validation du nom (obligatoire et au moins 2 caractères)
+  if (!form.value.lastName.trim()) {
+    formErrors.value.lastName = 'Le nom est obligatoire';
+    isFormValid.value = false;
+  } else if (form.value.lastName.trim().length < 2) {
+    formErrors.value.lastName = 'Le nom doit contenir au moins 2 caractères';
+    isFormValid.value = false;
+  }
+
+  // Validation de l'email (obligatoire et format valide)
+  if (!form.value.email.trim()) {
+    formErrors.value.email = 'L\'email est obligatoire';
+    isFormValid.value = false;
+  } else {
+    // Expression régulière pour valider le format d'email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.value.email.trim())) {
+      formErrors.value.email = 'Veuillez entrer un email valide';
+      isFormValid.value = false;
+    }
+  }
+
+  // Validation du téléphone (optionnel mais format valide si renseigné)
+  if (form.value.phone.trim()) {
+    // Expression régulière pour valider le format de téléphone
+    // Accepte les formats internationaux avec ou sans espaces et tirets
+    const phoneRegex = /^(\+\d{1,3})?[-\s]?\d{1,4}[-\s]?\d{1,4}[-\s]?\d{1,9}$/;
+    if (!phoneRegex.test(form.value.phone.trim())) {
+      formErrors.value.phone = 'Veuillez entrer un numéro de téléphone valide';
+      isFormValid.value = false;
+    }
+  }
+
+  // Validation du sujet (obligatoire)
+  if (!form.value.subject) {
+    formErrors.value.subject = 'Veuillez sélectionner un sujet';
+    isFormValid.value = false;
+  }
+
+  // Validation de l'agence (obligatoire)
+  if (!form.value.agence) {
+    formErrors.value.agence = 'Veuillez sélectionner une agence';
+    isFormValid.value = false;
+  }
+
+  // Validation du message (obligatoire et minimum 10 caractères)
+  if (!form.value.message.trim()) {
+    formErrors.value.message = 'Le message est obligatoire';
+    isFormValid.value = false;
+  } else if (form.value.message.trim().length < 10) {
+    formErrors.value.message = 'Le message doit contenir au moins 10 caractères';
+    isFormValid.value = false;
+  }
+
+  // if (form.value.source.trim()) {
+  //   if (form.value.source.length < 2) {
+  //     formErrors.value.source = 'La source doit contenir au moins 2 caractères';
+  //     isFormValid.value = false;
+  //   }
+  // }
+
+  return isFormValid.value;
+};
 
 // Carrousel
 const carouselRef = ref(null);
@@ -455,26 +569,36 @@ const stopCarousel = () => {
 
 // Formulaire
 const submitForm = async () => {
+  // Valider le formulaire avant soumission
+  if (!validateForm()) {
+    // Animation d'erreur sur le formulaire
+    gsap.fromTo(".contact-form",
+        { x: -5 },
+        { x: 5, duration: 0.1, repeat: 3, yoyo: true, ease: "power1.inOut",
+          onComplete: () => {
+            gsap.to(".contact-form", { x: 0 });
+          }
+        }
+    );
+
+    // Faire défiler jusqu'à la première erreur
+    const firstErrorElement = document.querySelector('.error-message');
+    if (firstErrorElement) {
+      firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    return;
+  }
+
   isSubmitting.value = true;
-
+  const date = new Date().toISOString().split('T')[0];
+  const time = new Date().toISOString().split('T')[1].split('.')[0];
+  const datetime = `${date} ${time}`;
   try {
-    // Construction des données à envoyer
-    const formData = {
-      ...form.value,
-      // Ajoutez des données supplémentaires si nécessaire
-      sentAt: new Date().toISOString(),
-    };
+    const emailData = new Email(form.value.firstName, form.value.lastName, form.value.email, form.value.phone, form.value.subject, form.value.agence, form.value.message, datetime, null, form.value.source);
+    const result = await emailData.sendEmail();
 
-    // Appel à votre API backend
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (!response.ok) {
+    if (!result) {
       throw new Error('Erreur lors de l\'envoi du message');
     }
 
@@ -497,32 +621,85 @@ const submitForm = async () => {
       source: ""
     };
 
-    alert("Message envoyé avec succès!");
+    // Message de succès
+    showSuccessMessage("Message envoyé avec succès!");
 
   } catch (error) {
     console.error('Erreur:', error);
-    alert("Erreur lors de l'envoi du message");
+    // Message d'erreur
+    showErrorMessage(error.message || "Erreur lors de l'envoi du message");
   } finally {
     isSubmitting.value = false;
   }
+};
+
+// Fonctions pour afficher des messages de succès/erreur
+const showSuccessMessage = (message) => {
+  const successEl = document.createElement('div');
+  successEl.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 success-message';
+  successEl.textContent = message;
+  document.body.appendChild(successEl);
+
+  gsap.fromTo(successEl,
+      { y: -50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, ease: "back.out" }
+  );
+
+  setTimeout(() => {
+    gsap.to(successEl, {
+      opacity: 0,
+      y: -20,
+      duration: 0.5,
+      onComplete: () => successEl.remove()
+    });
+  }, 5000);
+};
+
+const showErrorMessage = (message) => {
+  const errorEl = document.createElement('div');
+  errorEl.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 error-message';
+  errorEl.textContent = message;
+  document.body.appendChild(errorEl);
+
+  gsap.fromTo(errorEl,
+      { y: -50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, ease: "back.out" }
+  );
+
+  setTimeout(() => {
+    gsap.to(errorEl, {
+      opacity: 0,
+      y: -20,
+      duration: 0.5,
+      onComplete: () => errorEl.remove()
+    });
+  }, 5000);
 };
 // const submitForm = async () => {
 //   isSubmitting.value = true;
 //
 //   try {
-//     console.log('form datas are:', form.value);
-//     // Simulation d'envoi
-//     await new Promise(resolve => setTimeout(resolve, 2000));
-//
-//     // Reset formulaire
-//     form.value = {
-//       firstName: "",
-//       lastName: "",
-//       email: "",
-//       phone: "",
-//       subject: "",
-//       message: ""
+//     // Construction des données à envoyer
+//     const formData = {
+//       ...form.value,
+//       // Ajoutez des données supplémentaires si nécessaire
+//       sentAt: new Date().toISOString(),
 //     };
+//
+//     console.log('formData is:', formData);
+//
+//     // Appel à votre API backend
+//     // const response = await fetch('/api/contact', {
+//     //   method: 'POST',
+//     //   headers: {
+//     //     'Content-Type': 'application/json',
+//     //   },
+//     //   body: JSON.stringify(formData),
+//     // });
+//     //
+//     // if (!response.ok) {
+//     //   throw new Error('Erreur lors de l\'envoi du message');
+//     // }
 //
 //     // Animation de succès
 //     gsap.from(".contact-form", {
@@ -531,60 +708,27 @@ const submitForm = async () => {
 //       ease: "back.out"
 //     });
 //
+//     // Réinitialisation du formulaire
+//     form.value = {
+//       firstName: "",
+//       lastName: "",
+//       email: "",
+//       phone: "",
+//       subject: "",
+//       agence: "",
+//       message: "",
+//       source: ""
+//     };
+//
 //     alert("Message envoyé avec succès!");
 //
 //   } catch (error) {
+//     console.error('Erreur:', error);
 //     alert("Erreur lors de l'envoi du message");
 //   } finally {
 //     isSubmitting.value = false;
 //   }
 // };
-
-// onMounted(() => {
-//   // Animations GSAP
-//   const tl = gsap.timeline();
-//
-//   // Animation du hero
-//   tl.from(".hero-content", {
-//     y: 50,
-//     opacity: 0,
-//     duration: 1,
-//     ease: "power2.out"
-//   })
-//       .from(".image-carousel", {
-//         x: 100,
-//         opacity: 0,
-//         duration: 1,
-//         ease: "power2.out"
-//       }, "-=0.5");
-//   // Animation du formulaire
-//   gsap.from(".contact-form", {
-//     y: 50,
-//     opacity: 0,
-//     duration: 1,
-//     ease: "power2.out",
-//     scrollTrigger: {
-//       trigger: ".contact-form",
-//       start: "top 80%"
-//     }
-//   });
-//
-//   // Animation des champs de formulaire
-//   gsap.from(".form-group", {
-//     y: 30,
-//     opacity: 0,
-//     duration: 0.6,
-//     stagger: 0.1,
-//     ease: "power2.out",
-//     scrollTrigger: {
-//       trigger: ".contact-form",
-//       start: "top 70%"
-//     }
-//   });
-//
-//   // Démarrer le carrousel
-//   startCarousel();
-// });
 
 onMounted(() => {
   // Animations GSAP
@@ -640,4 +784,12 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+
+.error-select .select-field {
+  border-color: #f56565 !important;
+}
+.error-select .select-field:focus {
+  box-shadow: 0 0 0 1px #f56565 !important;
+}
+
 </style>

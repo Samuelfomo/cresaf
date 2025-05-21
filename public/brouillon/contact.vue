@@ -160,7 +160,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "@public/components/header.vue";
 import Footer from "@public/components/footer.vue";
-import CustomSelect from "./CustomSelect.vue";
+import CustomSelect from "../components/CustomSelect.vue";
 import Personnel1 from "@/assets/images/personnel1.jpg"
 import Personnel2 from "@/assets/images/personnel2.jpg"
 import Personnel3 from "@/assets/images/personnel3.jpg"
