@@ -81,10 +81,10 @@
         </svg>
       </button>
 
-      <div class="hidden lg:flex justify-between w-full max-w-4xl">
-        <div class="text-sm text-gray-700 flex relative">
+      <div class="hidden lg:flex justify-between w-full xl:max-w-4xl max-w-2xl lg:pr-5">
+        <div class="text-gray-700 flex relative">
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownAboutUs" @mouseleave="closeDropdown1">
-            <h2 class="relative hover:text-secondary lg:text-lg text-xs flex group"
+            <h2 class="relative hover:text-secondary xl:text-lg lg:text-base text-xs flex group"
                 :class="[$route.name === 'values' ? activeClass : inactiveClass]"
                 @click="router.push('/values')"
             >
@@ -161,9 +161,9 @@
             </div>
           </div>
         </div>
-        <div class="text-sm text-gray-700 flex relative">
+        <div class="text-gray-700 flex relative">
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover=toggleDropdownProducts @mouseleave="closeDropdown2">
-            <h2 class="relative hover:text-secondary lg:text-lg text-xs flex group"
+            <h2 class="relative hover:text-secondary xl:text-lg lg:text-base text-xs flex group"
                 :class="[$route.name === 'products' ? activeClass : inactiveClass]"
                 @click="router.push('/products')"
             >
@@ -259,9 +259,9 @@
             </div>
           </div>
         </div>
-        <div class="text-sm text-gray-700 flex relative">
+        <div class="text-gray-700 flex relative">
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownSolutions" @mouseleave="closeDropdown3">
-            <h2 class="relative hover:text-secondary lg:text-lg text-xs flex group"
+            <h2 class="relative hover:text-secondary xl:text-lg lg:text-base text-xs flex group"
                 :class="[$route.name === 'solutions' ? activeClass : inactiveClass]"
                 @click="router.push('/solutions')"
             >
@@ -321,9 +321,9 @@
             </div>
           </div>
         </div>
-        <div class="text-sm text-gray-700 flex relative">
+        <div class="text-gray-700 flex relative">
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownBanking" @mouseleave="closeDropdown4">
-            <h2 class="relative hover:text-secondary lg:text-lg text-xs flex group"
+            <h2 class="relative hover:text-secondary xl:text-lg lg:text-base text-xs flex group"
                 :class="[$route.name === 'mobile' ? activeClass : inactiveClass]"
                 @click="router.push('/mobile')"
             >
@@ -371,12 +371,13 @@
             </div>
           </div>
         </div>
-<!--        <div class="text-lg text-gray-700 hidden relative cursor-pointer" @click="router.push('/banking')">-->
+<!--        <div class="text-lg text-gray-700 relative cursor-pointer" @click="router.push('/banking')">-->
 <!--          m-banking-->
 <!--        </div>-->
       </div>
       <div class=" hidden lg:flex justify-between gap-x-2">
-        <button type="button" class="flex justify-center items-center text-lg  px-3 font-semibold border rounded-lg hover:border-blue-950"
+        <button type="button"
+                class="flex justify-center items-center xl:text-lg  px-3 font-semibold border rounded-lg hover:border-blue-950"
                 :class="[$route.name === 'contact' ? activeContact : 'bg-gray-100']"
                 @click="router.push('/contact')">
           Contact
@@ -386,7 +387,7 @@
           </svg>
         </button>
         <button type="button"
-                class="text-lg bg-secondary p-2 text-white font-semibold border border-white rounded-lg
+                class="xl:text-lg bg-secondary px-3 text-white font-semibold border border-white rounded-lg
                hover:bg-primary"
                 @click="contact"
         >
