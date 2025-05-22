@@ -129,7 +129,7 @@
       </section>
 
       <!-- Section Formulaire de Contact -->
-      <section class="py-20 bg-gradient-to-br from-primary to-white">
+      <section id="section3" class="py-20 bg-gradient-to-br from-primary to-white" ref="featuresSection">
         <div class="container mx-auto px-4">
           <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
@@ -143,9 +143,9 @@
 
             <form @submit.prevent="submitForm" class="contact-form bg-white rounded-3xl p-8 lg:p-12 shadow-xl">
               <div class="grid md:grid-cols-2 gap-6 mb-6">
-                <div class="form-group">
+                <div class="form-group order-2">
                   <label for="firstName" class="block text-sm font-semibold text-primary mb-3">
-                    Prénom *
+                    Prénom
                   </label>
                   <input
                       type="text"
@@ -229,19 +229,15 @@
                   </p>
                 </div>
                 <div class="form-group">
-                  <label for="agence" class="block text-sm font-semibold text-primary mb-3">
-                    Sélectionnez l'agence de réception *
+                  <label for="source" class="block text-sm font-semibold text-primary mb-3">
+                    Comment avez-vous entendu parler de nous ?
                   </label>
                   <CustomSelect
-                      v-model="form.agence"
-                      name="agence"
-                      :options="agencyOptions"
-                      placeholder="Sélectionnez une agence"
-                      :class="{'error-select': formErrors.agence}"
+                      v-model="form.source"
+                      name="source"
+                      :options="sourceOptions"
+                      placeholder="Sélectionnez une source"
                   />
-                  <p v-if="formErrors.agence" class="text-red-500 text-sm mt-1 error-message">
-                    {{ formErrors.agence }}
-                  </p>
                 </div>
               </div>
 
@@ -260,18 +256,6 @@
                 <p v-if="formErrors.message" class="text-red-500 text-sm mt-1 error-message">
                   {{ formErrors.message }}
                 </p>
-              </div>
-              <div class="mb-8">
-                <label for="source" class="block text-sm font-semibold text-primary mb-3">
-                  Comment avez-vous entendu parler de nous ?
-                </label>
-                <input
-                    type="text"
-                    id="source"
-                    v-model="form.source"
-                    class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-secondary focus:border-transparent transition-all"
-                    placeholder="Ex : partenaire, connaissance, collaborateur Cresaf, publicité, réseaux sociaux..."
-                />
               </div>
 
               <div class="text-center">
@@ -386,41 +370,25 @@ const agencies = ref([
     email: "cresaf@bafoussam.net"
   }
 ]);
-// const agencies = ref([
-//   {
-//     name: "Agence d'Akwa",
-//     address: "Bonakouamouang, Akwa, Face Prudential Beneficial Life",
-//     phone: "+237 658 794 995"
-//   },
-//   {
-//     name: "Agence Anatole",
-//     address: "Carrefour Anatole, face la station total",
-//     phone: "+237 *** *** ***"
-//   },
-//   {
-//     name: "Agence de Yaoundé",
-//     address: "Descente Mokolo Elobi, batiment Dubaï Market",
-//     phone: "+237 692 313 295"
-//   },
-//   {
-//     name: "Agence de Bafoussam",
-//     address: "Montée sens interdit, marché A, avant la direction régionale de la Total",
-//     phone: "+237 699 477 764"
-//   }
-// ]);
 
 // Options pour les selects personnalisés
 const subjectOptions = [
-  { value: "information", label: "Demande d'information" },
-  { value: "formation", label: "Formation" },
   { value: "consultation", label: "Consultation" },
   { value: "partenariat", label: "Partenariat" },
+  { value: "stage", label: "Demande de stage" },
   { value: "autre", label: "Autre" }
 ];
+const sources = ref([
+  { value:'Connaissance', label:'Connaissance'},
+  { value:'Collaborateur Cresaf', label:'Collaborateur Cresaf'},
+  { value:'Publicité', label:'Publicité'},
+  { value:'Réseaux Sociaux', label:'Réseaux Sociaux'},
+  { value:'Autres', label:'Autres'}
+])
 
-const agencyOptions = agencies.value.map(agency => ({
-  value: agency.email,
-  label: agency.name
+const sourceOptions = sources.value.map(source => ({
+  value: source.value,
+  label: source.label
 }));
 
 // État du formulaire
@@ -430,7 +398,6 @@ const form = ref({
   email: "",
   phone: "",
   subject: "",
-  agence: "",
   message: "",
   source: ""
 });
@@ -441,7 +408,6 @@ const formErrors = ref({
   email: '',
   phone: '',
   subject: '',
-  agence: '',
   message: ''
 });
 
@@ -457,19 +423,17 @@ const validateForm = () => {
     email: '',
     phone: '',
     subject: '',
-    agence: '',
     message: ''
   };
 
   isFormValid.value = true;
 
   // Validation du prénom (obligatoire et au moins 2 caractères)
-  if (!form.value.firstName.trim()) {
-    formErrors.value.firstName = 'Le prénom est obligatoire';
-    isFormValid.value = false;
-  } else if (form.value.firstName.trim().length < 2) {
-    formErrors.value.firstName = 'Le prénom doit contenir au moins 2 caractères';
-    isFormValid.value = false;
+  if (form.value.firstName.trim()) {
+    if (form.value.firstName.trim().length < 2) {
+      formErrors.value.firstName = 'Le prénom doit contenir au moins 2 caractères';
+      isFormValid.value = false;
+    }
   }
 
   // Validation du nom (obligatoire et au moins 2 caractères)
@@ -494,10 +458,11 @@ const validateForm = () => {
     }
   }
 
-  // Validation du téléphone (optionnel mais format valide si renseigné)
-  if (form.value.phone.trim()) {
-    // Expression régulière pour valider le format de téléphone
-    // Accepte les formats internationaux avec ou sans espaces et tirets
+  // Validation du téléphone
+  if (!form.value.phone.trim()) {
+    formErrors.value.phone = 'Le nom est obligatoire';
+    isFormValid.value = false;
+  } else {
     const phoneRegex = /^(\+\d{1,3})?[-\s]?\d{1,4}[-\s]?\d{1,4}[-\s]?\d{1,9}$/;
     if (!phoneRegex.test(form.value.phone.trim())) {
       formErrors.value.phone = 'Veuillez entrer un numéro de téléphone valide';
@@ -511,12 +476,6 @@ const validateForm = () => {
     isFormValid.value = false;
   }
 
-  // Validation de l'agence (obligatoire)
-  if (!form.value.agence) {
-    formErrors.value.agence = 'Veuillez sélectionner une agence';
-    isFormValid.value = false;
-  }
-
   // Validation du message (obligatoire et minimum 10 caractères)
   if (!form.value.message.trim()) {
     formErrors.value.message = 'Le message est obligatoire';
@@ -525,13 +484,6 @@ const validateForm = () => {
     formErrors.value.message = 'Le message doit contenir au moins 10 caractères';
     isFormValid.value = false;
   }
-
-  // if (form.value.source.trim()) {
-  //   if (form.value.source.length < 2) {
-  //     formErrors.value.source = 'La source doit contenir au moins 2 caractères';
-  //     isFormValid.value = false;
-  //   }
-  // }
 
   return isFormValid.value;
 };
@@ -595,7 +547,8 @@ const submitForm = async () => {
   const time = new Date().toISOString().split('T')[1].split('.')[0];
   const datetime = `${date} ${time}`;
   try {
-    const emailData = new Email(form.value.firstName, form.value.lastName, form.value.email, form.value.phone, form.value.subject, form.value.agence, form.value.message, datetime, null, form.value.source);
+    const emailData = new Email(form.value.firstName, form.value.lastName, form.value.email, form.value.phone, form.value.subject, form.value.message, datetime, null, form.value.source);
+    console.log('emailData', emailData);
     const result = await emailData.sendEmail();
 
     if (!result) {
@@ -616,7 +569,6 @@ const submitForm = async () => {
       email: "",
       phone: "",
       subject: "",
-      agence: "",
       message: "",
       source: ""
     };
@@ -730,6 +682,8 @@ const showErrorMessage = (message) => {
 //   }
 // };
 
+const featuresSection = ref(null);
+
 onMounted(() => {
   // Animations GSAP
   const tl = gsap.timeline();
@@ -772,6 +726,11 @@ onMounted(() => {
       start: "top 70%"
     }
   });
+  ScrollTrigger.create({
+    trigger: featuresSection.value,
+    start: 'top 70%'
+  });
+
 
   // Démarrer le carrousel
   startCarousel();
@@ -780,6 +739,8 @@ onMounted(() => {
 onUnmounted(() => {
   stopCarousel();
   ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+
 });
 </script>
 

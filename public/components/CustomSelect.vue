@@ -6,7 +6,6 @@
       @blur="closeDropdown"
       tabindex="0"
   >
-    <!-- Le champ visible avec l'option sélectionnée -->
     <div
         class="select-field flex items-center justify-between w-full p-4 border border-gray-200 rounded-xl bg-white cursor-pointer transition-all"
         :class="{'ring-1 ring-secondary border-transparent': isOpen}"
@@ -25,7 +24,6 @@
       </svg>
     </div>
 
-    <!-- La liste déroulante des options -->
     <div
         ref="dropdownRef"
         class="dropdown absolute left-0 right-0 z-10 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"

@@ -21,7 +21,7 @@
             <path d="M3 7l9 6l9 -6" />
           </svg>
         </div>
-        <a class="group-hover:text-green-500 text-white hover:underline hover:underline-offset-2 transition">Nous écrire</a>
+        <a class="group-hover:text-green-500 text-white hover:underline hover:underline-offset-2 transition" @click="goToForm">Nous écrire</a>
       </div>
       <div class="hidden space-x-1 cursor-pointer group">
         <div class="flex justify-center items-center h-6 w-6 cursor-pointer transition-transform duration-200
@@ -1080,6 +1080,15 @@ const closeAndScrollBanking2 = () => {
   nextTick(() => {
     setTimeout(() => {
       scrollTo({id : 'section2'})
+    }, 100)
+  })
+}
+
+const goToForm = () => {
+  router.push('/contact');
+  nextTick(() => {
+    setTimeout(() => {
+      scrollTo({id : 'section3'})
     }, 100)
   })
 }

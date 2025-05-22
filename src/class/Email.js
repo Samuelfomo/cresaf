@@ -1,5 +1,5 @@
 class Email {
-    constructor(firstName, lastName, email, mobile, subject, agence, message, createdAt, guid = null, source = null)
+    constructor(firstName, lastName, email, mobile, subject, message, createdAt, guid = null, source = null)
     {
         this.guid = guid;
         this.firstName = firstName;
@@ -7,22 +7,18 @@ class Email {
         this.email = email;
         this.mobile = mobile;
         this.subject = subject;
-        this.agence = agence;
         this.message = message;
         this.source = source;
         this.createdAt = createdAt;
     }
 
     static fromJson(json) {
-        return new Email(json.firstName, json.lastName, json.email, json.mobile, json.subject, json.agence, json.message, json.createdAt, json.guid, json.source);
-        // return new Email(json.guid, json.firstName, json.lastName, json.email, json.mobile, json.subject, json.agence, json.message, json.source, json.createdAt);
+        return new Email(json.firstName, json.lastName, json.email, json.mobile, json.subject, json.message, json.createdAt, json.guid, json.source);
     }
 
     async sendEmail() {
-        console.log('Sending email...',
-            this.firstName, this.lastName, this.email, this.subject, this.agence, this.message,this.createdAt, this.mobile, this.source);
         try {
-            const response = await fetch('/localhost:3000/contact', {
+            const response = await fetch('http://localhost:3000/email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,17 +30,17 @@ class Email {
                     email: this.email,
                     mobile: this.mobile,
                     subject: this.subject,
-                    agence: this.agence,
                     message: this.message,
                     source: this.source,
                     // createdAt: this.createdAt
                 })
             });
-            if (!response){
+            if (!response.ok){
                 throw new Error('Email could not be send.');
             }
-            const data = await response.json();
-            return Email.fromJson(data);
+            const result = await response.json();
+            console.log('Email sent', result.message);
+            return result;
         } catch (error){
             throw error;
         }

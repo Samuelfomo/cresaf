@@ -1,16 +1,22 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const routeEmail = require('./src/service/router');
+const bodyParser = require('body-parser');
+require('dotenv').config();
+
+const emailRoutes = require('./src/service/router');
 
 const app = express();
-const port = process.env.PORT || 3000;
-const host = process.env.HOST || 'http://localhost';
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || 'http://localhost';
+
+console.log("🚀 Démarrage du serveur CRESAF...");
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.json());
-app.use("/email", routeEmail);
+app.use('/', emailRoutes);
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
@@ -18,6 +24,9 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Server running at ${host}:${port}`);
+app.listen(PORT, () => {
+  console.log(`✅ Serveur CRESAF démarré avec succès !`);
+  console.log(`   URL: ${HOST}:${PORT}`);
+  console.log(`   Environnement: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`   Timestamp: ${new Date().toISOString()}`);
 });
