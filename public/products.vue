@@ -1,27 +1,20 @@
 <script setup>
 import {ref, onMounted, onUnmounted, nextTick} from 'vue';
 import {useRoute} from "vue-router";
+import { gsap } from 'gsap';
 import Header from "@public/components/header.vue";
 import Footer from "@public/components/footer.vue";
 
 import Cheque1 from "@/assets/images/cresaf/cheque_particulier.webp"
-// import Depot from "@/assets/images/account/depot.webp"
-// import Money from "@/assets/images/account/money.webp"
 import Argent from "@/assets/images/account/argent.webp"
 import Argent1 from "@/assets/images/account/argent1.webp"
 import Received from "@/assets/images/account/received.webp"
-// import Interred from "@/assets/images/account/interrest.webp"
 import Guichet from "@/assets/images/account/guichet.webp"
 import Electronic from "@/assets/images/account/terminaux.webp"
 import Order from "@/assets/images/account/autre.webp"
 import Refund from "@/assets/images/account/refund.webp"
 import Micro from "@/assets/images/account/micro.webp"
-// import Livret from "@/assets/images/account/epargne1.png"
-// import Courant from "@/assets/images/account/courant.webp"
-// import Courant1 from "@/assets/images/account/enterprise.png"
 import Islamique from "@/assets/images/account/account-islamique.webp"
-// import Virement from "@/assets/images/account/account-transfer.webp"
-// import Images from "@/assets/images/solution/cresafSolution.webp"
 import Image_compteAss from "@public/components/image_compteAss.vue";
 import Epargne1 from "@/assets/images/cresaf/compte_epargne.webp"
 import Epargne2 from "@/assets/images/cresaf/compte_epargne1.webp"
@@ -51,12 +44,10 @@ const products = ref([
   {
     id: 1,
     title: "Compte chèque",
-    // title: "🏦 Compte chèque",
     subtitle: "Particulier, entreprise & salaire",
     subtitle2: "✅ Gérez vos finances au quotidien avec facilité et rapidité ",
     description: "Description du compte chèque...",
     image: Cheque1
-    // image: Image4
   },
   {
     id: 2,
@@ -65,7 +56,6 @@ const products = ref([
     subtitle2: "💰 Investissez en toute sécurité avec un rendement garanti chez CRESAF !",
     description: "Description du Bon de caisse...",
     image: Caisse2
-    // image: Image
   },
   {
     id: 3,
@@ -73,9 +63,7 @@ const products = ref([
     description: "Description du dépôt à terme...",
     subtitle: "Fructifier votre argent",
     subtitle2: "🤑 Faites fructifier votre argent avec des taux avantageux et sans risque !",
-    // subtitle2: "💵 💸🤑 Faites fructifier votre argent avec des taux avantageux et sans risque !",
     image: Terme1
-    // image: Image1
   },
   {
     id: 4,
@@ -83,8 +71,7 @@ const products = ref([
     subtitle: "Livret & Association",
     subtitle2: "💳 Épargnez sereinement et faites grandir vos projets avec CRESAF !",
     description: "Description du compte d'épargne...",
-    image:Epargne1
-    // image: Image2
+    image: Epargne1
   },
   {
     id: 5,
@@ -93,47 +80,110 @@ const products = ref([
     subtitle2: "📥 Sécurisez vos revenus quotidiens sans vous déplacer",
     description: "Description de la collecte journalière...",
     image: Collecte1
-    // image: Image3
-  },
-  // {
-  //   id: 6,
-  //   title: "Carte VISA",
-  //   subtitle: "Vous ouvrir au monde",
-  //   subtitle2: "🌍 Payez et retirez de l’argent partout, en toute simplicité !",
-  //   description: "Description de la carte VISA...",
-  //   image: Images
-  //   // image: Compte
-  // },
-  // {
-  //   id: 7,
-  //   // title: "Carte VISA",
-  //   // subtitle: "Vous ouvrir au monde",
-  //   // subtitle2: "🌍 Payez et retirez de l’argent partout, en toute simplicité !",
-  //   // description: "Description de la carte VISA...",
-  //   // image: Images
-  //   // image: Compte
-  // }
+  }
 ]);
 
 const currentIndex = ref(0);
-// const Courants = ref([Courant, Courant1])
-const goToSlide = (index) => {
-  currentIndex.value = index;
-};
-let interval = null;
-// const nextSlideCourant = () => {
-//   currentIndex.value = (currentIndex.value + 1) % Courants.value.length;
-// };
-
 const currentSlide = ref(0);
 const autoPlayInterval = ref(null);
+const isTransitioning = ref(false);
+
+// Fonction pour animer la transition entre les slides
+const animateSlideTransition = (fromIndex, toIndex, direction = 'next') => {
+  if (isTransitioning.value) return;
+
+  isTransitioning.value = true;
+
+  const currentSlideEl = document.querySelector(`[data-slide="${fromIndex}"]`);
+  const nextSlideEl = document.querySelector(`[data-slide="${toIndex}"]`);
+  const currentContent = document.querySelector(`[data-content="${fromIndex}"]`);
+  const nextContent = document.querySelector(`[data-content="${toIndex}"]`);
+
+  if (!currentSlideEl || !nextSlideEl || !currentContent || !nextContent) {
+    isTransitioning.value = false;
+    return;
+  }
+
+  // Configuration de la direction
+  const moveDistance = direction === 'next' ? '100%' : '-100%';
+  const startDistance = direction === 'next' ? '-100%' : '100%';
+
+  // Timeline GSAP pour orchestrer l'animation
+  const tl = gsap.timeline({
+    onComplete: () => {
+      isTransitioning.value = false;
+    }
+  });
+
+  // Position initiale de la nouvelle slide (hors écran)
+  gsap.set(nextSlideEl, {
+    x: startDistance,
+    zIndex: 2
+  });
+  gsap.set(nextContent, {
+    x: startDistance,
+    opacity: 0
+  });
+
+  // Animation simultanée
+  tl.to(currentSlideEl, {
+    x: moveDistance,
+    duration: 1.2,
+    ease: "power2.inOut"
+  })
+      .to(currentContent, {
+        x: moveDistance,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power2.inOut"
+      }, 0) // Démarre en même temps que l'animation précédente
+      .to(nextSlideEl, {
+        x: 0,
+        duration: 1.2,
+        ease: "power2.inOut"
+      }, 0)
+      .to(nextContent, {
+        x: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power2.inOut"
+      }, 0.2); // Légèrement décalé pour un effet plus naturel
+
+  // Réinitialiser la position de l'ancienne slide après l'animation
+  tl.set(currentSlideEl, {
+    x: 0,
+    zIndex: 1
+  });
+};
 
 const nextSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % products.value.length;
+  if (isTransitioning.value) return;
+
+  const fromIndex = currentSlide.value;
+  const toIndex = (currentSlide.value + 1) % products.value.length;
+
+  currentSlide.value = toIndex;
+  animateSlideTransition(fromIndex, toIndex, 'next');
 };
 
 const prevSlide = () => {
-  currentSlide.value = currentSlide.value === 0 ? products.value.length - 1 : currentSlide.value - 1;
+  if (isTransitioning.value) return;
+
+  const fromIndex = currentSlide.value;
+  const toIndex = currentSlide.value === 0 ? products.value.length - 1 : currentSlide.value - 1;
+
+  currentSlide.value = toIndex;
+  animateSlideTransition(fromIndex, toIndex, 'prev');
+};
+
+const goToSlide = (index) => {
+  if (isTransitioning.value || index === currentSlide.value) return;
+
+  const fromIndex = currentSlide.value;
+  const direction = index > currentSlide.value ? 'next' : 'prev';
+
+  currentSlide.value = index;
+  animateSlideTransition(fromIndex, index, direction);
 };
 
 // Auto-play du slider
@@ -147,7 +197,6 @@ const stopAutoPlay = () => {
   }
 };
 
-
 const currentSection = ref(1);
 
 const scrollToSection = (sectionId) => {
@@ -160,8 +209,8 @@ const scrollToSection = (sectionId) => {
 
 // Démarrer l'auto-play au montage du composant
 onMounted(() => {
-
   startAutoPlay();
+
   const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -188,7 +237,6 @@ onMounted(() => {
   nextTick(() => {
     const sectionId = route.query.scrollTo
     if (sectionId) {
-      // Utilise scrollIntoView pour scroller jusqu'à la section
       setTimeout(() => {
         const sectionElement = document.getElementById(sectionId)
         if (sectionElement) {
@@ -197,540 +245,83 @@ onMounted(() => {
       }, 500);
     }
   })
-  // const observer = new IntersectionObserver(observerCallback, {
-  //   threshold: 0.5
-  // });
-  //
-  // document.querySelectorAll('section[id]').forEach(section => {
-  //   observer.observe(section);
-  // });
-
-  // interval = setInterval(nextSlideCourant, 3000);
 });
 
 // Nettoyer l'intervalle lors du démontage
 onUnmounted(() => {
   stopAutoPlay();
-  clearInterval(interval);
 });
-
 </script>
 
 <template>
   <div class="flex flex-col min-h-screen">
     <Header />
 
-    <!-- Hero Section avec slider -->
-    <section class="relative h-screen">
-      <div class="relative w-full h-full overflow-hidden">
-        <transition-group name="fade">
-          <div v-for="(product, index) in products"
-               :key="product.id"
-               v-show="currentSlide === index"
-               class="absolute inset-0 cursor-pointer">
-            <img :src="product.image"
-                 :alt="product.title"
-                 class="object-cover lg:mt-10 mt-20">
-            <div class="absolute inset-0 bg-blue-700 bg-opacity-30">
-              <div class="container mx-auto px-6 h-full flex items-center">
-                <div class="text-white max-w-lg">
-                  <h1 class="text-5xl font-accent mb-4">{{ product.title }}</h1>
-                  <p class="text-xl font-accent">{{ product.subtitle2 }}</p>
-                </div>
+    <!-- Hero Section avec slider GSAP -->
+    <section class="relative h-screen overflow-hidden">
+      <div class="relative w-full h-full">
+        <!-- Toutes les slides sont présentes dans le DOM -->
+        <div v-for="(product, index) in products"
+             :key="product.id"
+             :data-slide="index"
+             class="absolute inset-0 cursor-pointer"
+             :class="{ 'z-10': index === currentSlide, 'z-0': index !== currentSlide }"
+             @click="stopAutoPlay(); startAutoPlay()">
+          <img :src="product.image"
+               :alt="product.title"
+               class="w-full h-full object-cover lg:mt-10 mt-20">
+          <div class="absolute inset-0 bg-blue-700 bg-opacity-30">
+            <div class="container mx-auto px-6 h-full flex items-center">
+              <div :data-content="index"
+                   class="text-white max-w-lg"
+                   :class="{ 'opacity-100': index === currentSlide, 'opacity-0': index !== currentSlide }">
+                <h1 class="text-5xl montserrat montserrat-700 mb-4">{{ product.title }}</h1>
+                <p class="text-xl montserrat">{{ product.subtitle2 }}</p>
               </div>
             </div>
           </div>
-        </transition-group>
+        </div>
 
         <!-- Contrôles du slider -->
-<!--        <div class="absolute inset-y-0 left-0 flex items-center">-->
-<!--          <button @click="prevSlide"-->
-<!--                  class="bg-white bg-opacity-30 hover:bg-opacity-50 rounded-r p-2">-->
-<!--            <span class="sr-only">Précédent</span>-->
-<!--            &lt;!&ndash; Icône précédent &ndash;&gt;-->
-<!--          </button>-->
-<!--        </div>-->
-
-<!--        <div class="absolute inset-y-0 right-0 flex items-center">-->
-<!--          <button @click="nextSlide"-->
-<!--                  class="bg-white bg-opacity-30 hover:bg-opacity-50 rounded-l p-2">-->
-<!--            <span class="sr-only">Suivant</span>-->
-<!--            &lt;!&ndash; Icône suivant &ndash;&gt;-->
-<!--          </button>-->
-<!--        </div>-->
-
         <button
             @click="prevSlide"
-            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full hover:bg-white/75 transition-colors"
+            :disabled="isTransitioning"
+            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full hover:bg-white/75 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous slide"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24"
                stroke="currentColor">
-            <path stroke-Linecap="round" stroke-linejoin="round" stroke-width="{2}" d="M15 19l-8-8 8-8"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-8-8 8-8"/>
           </svg>
         </button>
+
         <button
             @click="nextSlide"
-            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full hover:bg-white/75 transition-colors"
+            :disabled="isTransitioning"
+            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full hover:bg-white/75 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Next slide"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24"
                stroke="currentColor">
-            <path stroke-Linecap="round" stroke-Linejoin="round" stroke-Width={2} d="M9 5l8 8-8 8"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l8 8-8 8"/>
           </svg>
         </button>
+
+        <!-- Indicateurs de slides -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <button v-for="(product, index) in products"
+                  :key="`indicator-${product.id}`"
+                  @click="goToSlide(index)"
+                  :disabled="isTransitioning"
+                  :class="[
+                    'w-3 h-3 rounded-full transition-all duration-300',
+                    currentSlide === index ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
+                  ]"
+                  :aria-label="`Aller à la slide ${index + 1}`">
+          </button>
+        </div>
       </div>
     </section>
-
-    <!-- Sections des produits -->
-    <!--Compte chèque particulier-->
-    <div class="bg-primary lg:px-16 px-8 py-12">
-      <div id="section1" class="flex flex-col justify-center container mx-auto">
-        <h2 class="text-white montserrat montserrat-700 2xl:text-5xl text-4xl w-full justify-center text-center pb-5">
-          Compte chèque particulier
-        </h2>
-
-        <div class="w-full container mx-auto pb-10">
-          <p class="text-gray-300 open-sans 2xl:text-xl text-lg w-full justify-center">
-            Le compte chèque à destination des entrepreneurs quel que soit le secteur d’activité,
-            permettra d’effectuer les transactions bancaires courantes lies à leurs activités.
-          </p>
-        </div>
-
-        <div class="lg:flex w-full gap-x-4 justify-center lg:px-10">
-          <!--        <div class="flex w-full max-w-xl h-full lg:max-h-[28rem]">-->
-          <!--          <img :src="Cheque" alt="image" class="object-cover rounded-lg transition-transform duration-500 hover:scale-105">-->
-          <!--        </div>-->
-          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">
-            <Image_compteAss :images="Cheque" />
-          </div>
-          <div class="w-full max-w-xl flex flex-col py-10">
-            <h2 class="text-xl w-full lg:text-center font-semibold text-gray-300">
-              Ce compte offre plusieurs avantages qui facilitent la gestion financière des entrepreneurs
-            </h2>
-            <div class="w-full flex justify-center lg:p-6 pt-6 gap-x-6 lg:gap-y-0 gap-y-4 lg:flex-nowrap flex-wrap">
-              <!--            <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
-              <!--              <h2 class="font-light text-white">Crédit après 03 mois de fonctionnement</h2>-->
-              <!--              <span class="text-lg font-bold text-white"> à la demande du client </span>-->
-              <!--            </div>-->
-              <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">
-                <h2 class="font-light text-white">Mise en place d’un découvert</h2>
-                <span class="text-lg font-bold text-white"> À la demande du client </span>
-              </div>
-              <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">
-                <h2 class="font-light text-white">Dépôt minimum </h2>
-                <span class="text-lg font-bold text-white my-auto"> 30.000 XAF</span>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!--Bon de caisse-->
-    <div id="section2" class="bg-blue-50 lg:px-16 px-8 py-12">
-        <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">
-          Bon de caisse
-        </h2>
-        <div class="pb-10 w-full container mx-auto">
-          <p class="text-gray-800 font-primary text-lg w-full justify-center">
-            Le bon de caisse permet aux entreprises et aux investisseurs d’effectuer des placements de fonds en toute sécurité
-            sur une période minimale d’un an. Le placement a pour vocation à terme de générer d’importants bénéfices grâce à des taux
-            d’intérêts négociables.
-          </p>
-        </div>
-        <div class="flex flex-wrap lg:flex-nowrap w-full gap-2 justify-center lg:px-10">
-          <div class="w-full lg:max-w-xl flex flex-col lg:py-16 pt-64 order-2 lg:order-1" >
-          <h2 class="text-xl w-full lg:text-center font-semibold text-gray-600">Les placements en bon de caisse offrent les conditions suivantes</h2>
-          <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">
-<!--            <div class="flex w-full lg:max-w-[12rem] flex-col bg-primary border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
-<!--              <h2 class="font-light text-white ">dépôt minimum à l’ouverture</h2>-->
-<!--              <span class="text-lg font-bold text-white">5.000.000 CFA</span>-->
-<!--            </div>-->
-            <div class="flex w-full lg:max-w-[12rem] flex-col bg-primary border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">
-              <h2 class="font-light text-white">Taux de rémunération</h2>
-              <span class="text-lg font-bold text-white my-auto"> Négociable</span>
-            </div>
-            <div class="flex w-full lg:max-w-[12rem] flex-col bg-primary border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">
-              <h2 class="font-light text-white">Intérêt  précompte ou post compte</h2>
-              <span class="text-lg font-bold text-white"> À la demande du client</span>
-            </div>
-          </div>
-        </div>
-          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">
-              <Image_compteAss :images="Caisse" />
-
-<!--            <img :src="cash" alt="image" class="object-cover transition-transform duration-500 hover:scale-105 rounded-lg">-->
-
-          </div>
-        </div>
-    </div>
-
-    <!--Dépôt à terme-->
-    <div id="section3" class="bg-primary lg:px-16 px-8 py-12">
-      <h2 class="text-white montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">
-        Dépôt à terme
-      </h2>
-      <div class="w-full container mx-auto">
-        <p class="text-gray-300 font-primary text-lg w-full justify-start pb-10">
-          Le dépôt à terme permet au souscripteur de déposer des fonds sur un compte bloqué afin de
-          bénéficier d’intérêts supérieurs au taux applicable sur un compte d’épargne classique. Le souscripteur
-          pouvant à tout moment disposer des intérêts générés par le compte.
-        </p>
-      </div>
-      <div class="lg:flex w-full gap-2 justify-center lg:px-10">
-        <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">
-          <Image_compteAss :images="Terme" />
-
-        </div>
-        <div class="w-full max-w-xl flex flex-col lg:pt-0 pt-64">
-          <h2 class="text-xl w-full lg:text-center font-semibold text-gray-300 lg:p-0 pt-5">
-            Ce compte propose de nombreux avantages visant à simplifier et optimiser la gestion financière des souscripteurs.
-          </h2>
-          <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">
-            <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-2 gap-5">
-              <h2 class="font-light text-white">Taux de rémunération</h2>
-              <span class="text-lg font-bold text-white"> Négociable </span>
-            </div>
-            <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">
-              <h2 class="font-light text-white">Taux d’intérêts </h2>
-              <span class="text-lg font-bold text-white"> Allant jusqu’à 5%</span>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!--Compte d’épargne association-->
-    <div id="section4" class="pb-6 bg-blue-50 py-12 lg:px-8 px-5">
-      <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-8">
-        Compte d’épargne association
-      </h2>
-      <div class="w-full container mx-auto">
-        <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">
-          Le compte d’épargne association a été mis sur pied afin de permettre aux associations
-          de protéger leurs finances grâce à des comptes d’épargne fiables et sécurisés.
-        </p>
-      </div>
-      <div class="lg:flex w-full gap-2 justify-center lg:px-10 px-4 lg:pb-20">
-<!--        <div class="flex w-full max-w-xl h-full lg:min-h-[28rem] order-1 lg:order-2 relative bg-black">-->
-<!--&lt;!&ndash;        <div class="flex w-full lg:max-w-sm h-full lg:min-h-[24rem] relative">&ndash;&gt;-->
-<!--&lt;!&ndash;          <img :src="Epargne" alt="image" class="object-cover transition-transform duration-500 hover:scale-105 rounded-lg">&ndash;&gt;-->
-<!--        <Image_compteAss :images="imagesList" />-->
-<!--        </div>-->
-        <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">
-          <Image_compteAss :images="Association" />
-
-        </div>
-        <div class="w-full max-w-xl flex flex-col lg:pt-0 pt-64">
-          <h2 class="text-xl w-full lg:text-center font-semibold text-gray-500">
-            Les associations bénéficient des avantages et conditions suivantes pour leur compte d’épargne
-          </h2>
-          <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">
-            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-2 gap-5">
-              <h2 class="font-light text-lg text-white">Dépôt minimum à l’ouverture</h2>
-              <span class="text-lg font-bold text-white my-auto"> 50.000 XAF </span>
-            </div>
-            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
-              <h2 class="font-light text-lg text-white">Taux d’intérêt</h2>
-              <span class="text-lg font-bold text-white my-auto">4% sur l’année</span>
-            </div>
-          </div>
-        </div>
-      </div>
-<!--    </div>-->
-<!--    <div id="section4" class="lg:px-8 px-5 py-12 bg-blue-50">-->
-      <div class="py-12 lg:px-8 px-5 bg-white">
-      <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-8">
-        Compte d’épargne sur livret
-      </h2>
-      <div class="w-full container mx-auto">
-        <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">
-          Le compte d’épargne sur livret est destiné à sécuriser les économies de nos clients.
-          Le client pourra ainsi faire fructifier l’argent déposé grâce à des taux d’intérêts les plus intéressants du marché.
-        </p>
-      </div>
-      <div class="flex flex-wrap lg:flex-nowrap w-full gap-2 justify-center lg:px-10 px-4">
-        <div class="w-full max-w-xl flex flex-col lg:pt-0 pt-64 order-2 lg:order-1">
-          <h2 class="text-xl w-full lg:text-center font-semibold text-gray-500">
-<!--            Les règles applicables à l'ouverture d'un compte d'épargne sur livret sont les suivantes :-->
-            Les conditions d'ouverture d'un compte d'épargne sur livret sont les suivantes :
-          </h2>
-          <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">
-            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
-              <h2 class="font-light text-lg text-white">Dépôt minimum à l’ouverture</h2>
-<!--              <span class="text-lg font-bold text-white"> 15.000 XAF<span> Hors Taxes </span></span>-->
-              <span class="text-lg font-bold text-white my-auto"> 16.000 XAF<span> TTC</span></span>
-            </div>
-            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
-              <h2 class="font-light text-lg text-white">Solde minimum permanent en compte</h2>
-              <span class="text-lg font-bold text-white my-auto">10.000 XAF</span>
-            </div>
-          </div>
-        </div>
-<!--        <div class="flex w-full lg:max-w-sm h-full lg:min-h-[24rem] order-1 lg:order-2">-->
-<!--          <img :src="Livret" alt="image" class="object-contain transition-transform duration-500 hover:scale-105 rounded-lg">-->
-<!--        </div>-->
-        <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">
-          <Image_compteAss :images="Epargne" />
-
-        </div>
-      </div>
-      </div>
-      <div class="py-12 bg-blue-50 lg:px-8 px-5">
-        <h2 class="text-secondary montserrat montserrat-700 text-3xl md:text-4xl text-center mb-10">
-          Compte courant entreprise
-        </h2>
-        <div class="w-full container mx-auto">
-          <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">
-            Le compte courant entreprise permet aux entrepreneurs ou aux entreprises clientes
-            d’avoir leurs fonds à disposition et de bénéficier à tout moment des avantages liés à celui-ci.
-            Les entreprises clientes pourront effectuer toutes les transactions financières courantes liées à leur fonctionnement
-            grâce à un service simplifié.
-          </p>
-        </div>
-        <div class="lg:flex w-full gap-2 justify-center lg:px-10">
-          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">
-            <Image_compteAss :images="Entreprise" />
-
-          </div>
-<!--          <div class=" w-full lg:max-w-sm h-full lg:min-h-[24rem] relative hidden">-->
-<!--            <img :src="Courant" alt="image" class="object-cover transition-transform duration-500 hover:scale-105 rounded-lg">-->
-<!--            <div-->
-<!--                v-for="(Courant, index) in Courants"-->
-<!--                :key="index"-->
-<!--                class="transition-opacity duration-700"-->
-<!--                :class="{'opacity-100': currentIndex === index, 'opacity-0': currentIndex !== index}"-->
-<!--            >-->
-<!--              <img-->
-<!--                  :src="Courant"-->
-<!--                  class="rounded-lg absolute inset-0 ease-in-out flex items-center justify-center object-cover transition-transform duration-500 hover:scale-105"-->
-<!--                  alt="Image Compte Courant"-->
-<!--              />-->
-<!--            </div>-->
-
-<!--            &lt;!&ndash; Slider indicators &ndash;&gt;-->
-<!--            <div class="absolute lg:top-[22rem] top-[18rem] left-1/2 transform -translate-x-1/2 flex space-x-3">-->
-<!--              <button-->
-<!--                  v-for="(Courant, index) in Courants"-->
-<!--                  :key="index"-->
-<!--                  class="w-3 h-3 rounded-full transition-colors duration-300"-->
-<!--                  :class="currentIndex === index ? 'bg-white' : 'bg-gray-400'"-->
-<!--                  @click="goToSlide(index)"-->
-<!--                  :aria-label="`Go to slide ${index + 1}`"-->
-<!--              ></button>-->
-<!--            </div>-->
-<!--          </div>-->
-          <div class="w-full max-w-xl flex flex-col lg:pt-0 pt-[17rem]">
-            <h2 class="text-xl w-full lg:text-center font-semibold text-gray-500">
-              Les entreprises bénéficient des avantages et conditions suivantes pour leur compte courant entreprise
-            </h2>
-            <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">
-              <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
-                <h2 class="font-light text-lg text-white">Dépôt minimum à l’ouverture</h2>
-                <span class="text-lg font-bold text-white my-auto"> 30.000 XAF </span>
-              </div>
-              <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
-                <h2 class="font-light text-lg text-white">Facilité de compensation chèque</h2>
-              </div>
-              <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">
-                <h2 class="font-light text-lg text-white">Possibilité de préfinancer les salaires</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="px-4 md:px-0 lg:px-0 bg-white bg-opacity-90 hidden">
-<!--      <div class="container mx-auto py-12 px-4 md:px-0 lg:px-0 bg-white">-->
-        <div class="min-w-6xl mx-auto shadow-sm overflow-hidden p-6 md:py-12 md:px-16">
-            <!-- Titre -->
-            <h2 class="text-secondary font-accent text-3xl md:text-4xl text-center mb-10">
-              Épargne islamique
-            </h2>
-
-            <!-- Contenu principal -->
-            <div class="flex flex-col lg:flex-row items-start gap-8 lg:gap-5">
-              <!-- Texte descriptif -->
-              <div class="w-full lg:w-3/5 order-2 lg:order-1 my-auto">
-                <p class="text-gray-500 lg:text-xl lg:font-accent text-lg leading-relaxed lg:py-10">
-                  Notre service d'épargne islamique qui ne produit pas d'intérêts, s'adresse à nos clients
-                  qui souhaitent constituer une épargne tout en respectant les
-                  préceptes de la religion islamique.
-                </p>
-              </div>
-
-              <!-- Image -->
-              <div class="w-full lg:w-2/4 order-1 lg:order-2">
-                <div class="relative overflow-hidden rounded-lg shadow-md">
-                  <img
-                      :src="Islamique"
-                      alt="Épargne islamique"
-                      class="w-full h-auto max-h-96 object-cover transition-transform duration-500 hover:scale-105"
-                  >
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-
-      <div class="py-12 bg-white lg:px-8 px-5">
-        <h2 class="text-secondary montserrat montserrat-700 text-3xl md:text-4xl text-center mb-10">
-          Compte virement salaire
-        </h2>
-<!--        <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">-->
-<!--          Le compte virement salaire permet de recevoir son salaire mensuel mais aussi d’effectuer ses transactions-->
-<!--          banquières courantes. Il donne droit à un découvert permanent, ainsi qu’à des crédits de plusieurs sortes.-->
-<!--        </p>-->
-
-        <div class="lg:flex w-full gap-2 justify-between lg:px-10 px-4 container mx-auto">
-<!--          <div class="w-full lg:max-w-xl h-full lg:min-h-[24rem] hidden" >-->
-<!--            <img :src="Virement" alt="image" class="w-full h-auto object-cover transition-transform duration-500 hover:scale-105 rounded-xl border">-->
-<!--          </div>-->
-          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">
-            <Image_compteAss :images="Salaire" />
-
-          </div>
-          <div class="w-full flex pt-64 lg:pl-5 lg:py-16">
-              <h2 class="lg:text-xl text-lg w-full font-serif text-gray-700 leading-relaxed">
-                Le compte virement salaire permet de recevoir son salaire mensuel, mais aussi d’effectuer ses transactions
-                banquières courantes. Il donne droit à un découvert permanent, ainsi qu’à des crédits de plusieurs sortes.
-              </h2>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--Collecte journalière-->
-    <div id="section5" class="bg-primary lg:px-16 px-8 py-12">
-      <div class="container mx-auto">
-        <h1 class="text-white w-full text-center montserrat montserrat-700 lg:text-4xl text-3xl lg:pb-4">Collecte journalière</h1>
-        <p class="w-full py-6 text-lg text-gray-200">
-          La collecte journalière destinée principalement aux travailleurs indépendants (commerçants ou autre)
-          permet de sécuriser l’argent sans avoir à se déplacer.
-          Nos agents déployés sur le terrain collectent les fonds et les déposent directement
-          sur les comptes de chaque souscripteur.
-        </p>
-        <h1 class="text-white w-full montserrat montserrat-600 lg:text-3xl text-2xl text-center lg:text-left pb-4">Collecte journalière mensuelle </h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
-              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img :src="Argent"
-                 alt="Argent"
-                 class="w-full object-cover">
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">Minimum d’épargne</h3>
-              <p class="text-gray-600 mb-4">500 XAF/jour</p>
-            </div>
-          </div>
-          <div
-              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img :src="Refund"
-                 alt="Refund"
-                 class="w-full object-cover">
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">Disponible au décaissement</h3>
-              <p class="text-gray-600 mb-4">fin du mois</p>
-            </div>
-          </div>
-          <div
-              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img :src="Micro"
-                 alt="Micro"
-                 class="w-full object-cover">
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">Possibilité de micro-crédit </h3>
-            </div>
-          </div>
-        </div>
-        <br>
-        <h1 class="text-white w-full montserrat montserrat-600 lg:text-3xl text-2xl text-center lg:text-left pb-4">Collecte journalière annuelle </h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
-              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img :src="Argent1"
-                 alt="Argent"
-                 class="w-full object-cover">
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">Minimum d’épargne</h3>
-              <p class="text-gray-600 mb-4">200 XAF/jour</p>
-            </div>
-          </div>
-          <div
-              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img :src="Received"
-                 alt="Refund"
-                 class="w-full object-cover">
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">Disponible au décaissement</h3>
-              <p class="text-gray-600 mb-4"> fin d’année</p>
-            </div>
-          </div>
-          <div
-              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img :src="Micro"
-                 alt="Micro"
-                 class="w-full object-cover">
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">Possibilité de micro-crédit </h3>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!--Carte visa-->
-    <div id="section6" class="bg-blue-50 lg:px-16 px-8 py-12">
-      <div class="container mx-auto">
-        <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">
-          Carte visa
-        </h2>
-        <p class="text-gray-800 font-primary text-lg w-full justify-center leading-relaxed pb-10">
-          Les cartes VISA du CRESAF offrent une solution sécurisée pour effectuer des retraits aux guichets automatiques
-          et régler des achats de biens ou services, que ce soit via des terminaux de paiement électronique (TPE) ou en ligne.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white opacity-90 hover:opacity-100 rounded-lg shadow-lg
-          overflow-hidden transition-transform duration-300 hover:scale-105 p-2">
-            <img :src="Guichet"
-                 alt="Guichet"
-                 class="w-full object-cover">
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">Guichet automatique de banque</h3>
-            </div>
-          </div>
-          <div
-              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-            <img :src="Electronic"
-                 alt="Electronic"
-                 class="w-full object-cover">
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">Terminaux de paiement électronique </h3>
-            </div>
-
-          </div>
-          <div
-              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-
-            <img :src="Order"
-                 alt="Order"
-                 class="w-full object-cover">
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">Autres moyens de payement en ligne</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-
-<!--      <div class="absolute inset-0 bg-blue-700 bg-opacity-30">-->
-<!--      </div>-->
-    </div>
 
     <!-- Navigation latérale -->
     <div class="fixed right-8 top-1/2 transform -translate-y-1/2 space-y-4 z-50">
@@ -741,25 +332,765 @@ onUnmounted(() => {
            currentSection === product.id ? 'bg-green-600 scale-125' : 'bg-gray-400 hover:bg-white'
          ]"
          @click.prevent="scrollToSection(product.id)">
-<!--        currentSection === product.id ? 'bg-white scale-125' : 'bg-white bg-opacity-50 hover:bg-opacity-75'-->
         <span class="sr-only">{{ product.title }}</span>
       </a>
     </div>
 
     <Footer />
   </div>
-
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+/* Assurer que les images couvrent bien tout l'espace */
+.absolute.inset-0 img {
+  transform: translateZ(0); /* Force hardware acceleration */
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+/* Optimisation des performances pour les animations */
+.absolute.inset-0 {
+  will-change: transform;
 }
 </style>
+
+<!--<script setup>-->
+<!--import {ref, onMounted, onUnmounted, nextTick} from 'vue';-->
+<!--import {useRoute} from "vue-router";-->
+<!--import { gsap } from 'gsap';-->
+<!--import Header from "@public/components/header.vue";-->
+<!--import Footer from "@public/components/footer.vue";-->
+
+<!--import Cheque1 from "@/assets/images/cresaf/cheque_particulier.webp"-->
+<!--import Argent from "@/assets/images/account/argent.webp"-->
+<!--import Argent1 from "@/assets/images/account/argent1.webp"-->
+<!--import Received from "@/assets/images/account/received.webp"-->
+<!--import Guichet from "@/assets/images/account/guichet.webp"-->
+<!--import Electronic from "@/assets/images/account/terminaux.webp"-->
+<!--import Order from "@/assets/images/account/autre.webp"-->
+<!--import Refund from "@/assets/images/account/refund.webp"-->
+<!--import Micro from "@/assets/images/account/micro.webp"-->
+<!--import Islamique from "@/assets/images/account/account-islamique.webp"-->
+<!--import Image_compteAss from "@public/components/image_compteAss.vue";-->
+<!--import Epargne1 from "@/assets/images/cresaf/compte_epargne.webp"-->
+<!--import Epargne2 from "@/assets/images/cresaf/compte_epargne1.webp"-->
+<!--import Caisse1 from "@/assets/images/cresaf/bon_caisse.webp"-->
+<!--import Caisse2 from "@/assets/images/cresaf/bon_caisse2.webp"-->
+<!--import Terme1 from "@/assets/images/cresaf/depot_terme.webp"-->
+<!--import Terme2 from "@/assets/images/cresaf/depot_terme2.webp"-->
+<!--import Collecte1 from "@/assets/images/cresaf/collecte3.webp"-->
+<!--import Entreprise1 from "@/assets/images/cresaf/compte_entreprise.webp"-->
+<!--import Entreprise2 from "@/assets/images/cresaf/compte_entreprise2.webp"-->
+<!--import Salaire1 from "@/assets/images/cresaf/compte_salaire1.webp"-->
+<!--import Salaire2 from "@/assets/images/cresaf/compte_salaire2.webp"-->
+<!--import Association1 from "@/assets/images/cresaf/association1.webp"-->
+<!--import Association2 from "@/assets/images/cresaf/association2.webp"-->
+
+<!--const Caisse = [Caisse1, Caisse2]-->
+<!--const Terme = [Terme1, Terme2]-->
+<!--const Cheque = [Cheque1]-->
+<!--const Epargne = [Epargne1, Epargne2];-->
+<!--const Entreprise = [Entreprise1, Entreprise2];-->
+<!--const Salaire = [Salaire1, Salaire2];-->
+<!--const Association = [Association1, Association2];-->
+
+<!--const route = useRoute();-->
+
+<!--const products = ref([-->
+<!--  {-->
+<!--    id: 1,-->
+<!--    title: "Compte chèque",-->
+<!--    // title: "🏦 Compte chèque",-->
+<!--    subtitle: "Particulier, entreprise & salaire",-->
+<!--    subtitle2: "✅ Gérez vos finances au quotidien avec facilité et rapidité ",-->
+<!--    description: "Description du compte chèque...",-->
+<!--    image: Cheque1-->
+<!--    // image: Image4-->
+<!--  },-->
+<!--  {-->
+<!--    id: 2,-->
+<!--    title: "Bon de caisse",-->
+<!--    subtitle: "Bon plan pour votre épargne",-->
+<!--    subtitle2: "💰 Investissez en toute sécurité avec un rendement garanti chez CRESAF !",-->
+<!--    description: "Description du Bon de caisse...",-->
+<!--    image: Caisse2-->
+<!--    // image: Image-->
+<!--  },-->
+<!--  {-->
+<!--    id: 3,-->
+<!--    title: "Dépôt à terme",-->
+<!--    description: "Description du dépôt à terme...",-->
+<!--    subtitle: "Fructifier votre argent",-->
+<!--    subtitle2: "🤑 Faites fructifier votre argent avec des taux avantageux et sans risque !",-->
+<!--    // subtitle2: "💵 💸🤑 Faites fructifier votre argent avec des taux avantageux et sans risque !",-->
+<!--    image: Terme1-->
+<!--    // image: Image1-->
+<!--  },-->
+<!--  {-->
+<!--    id: 4,-->
+<!--    title: "Compte d'épargne",-->
+<!--    subtitle: "Livret & Association",-->
+<!--    subtitle2: "💳 Épargnez sereinement et faites grandir vos projets avec CRESAF !",-->
+<!--    description: "Description du compte d'épargne...",-->
+<!--    image:Epargne1-->
+<!--    // image: Image2-->
+<!--  },-->
+<!--  {-->
+<!--    id: 5,-->
+<!--    title: "Collecte journalière",-->
+<!--    subtitle: "Vous suivre au quotidien",-->
+<!--    subtitle2: "📥 Sécurisez vos revenus quotidiens sans vous déplacer",-->
+<!--    description: "Description de la collecte journalière...",-->
+<!--    image: Collecte1-->
+<!--    // image: Image3-->
+<!--  },-->
+<!--  // {-->
+<!--  //   id: 6,-->
+<!--  //   title: "Carte VISA",-->
+<!--  //   subtitle: "Vous ouvrir au monde",-->
+<!--  //   subtitle2: "🌍 Payez et retirez de l’argent partout, en toute simplicité !",-->
+<!--  //   description: "Description de la carte VISA...",-->
+<!--  //   image: Images-->
+<!--  //   // image: Compte-->
+<!--  // },-->
+<!--  // {-->
+<!--  //   id: 7,-->
+<!--  //   // title: "Carte VISA",-->
+<!--  //   // subtitle: "Vous ouvrir au monde",-->
+<!--  //   // subtitle2: "🌍 Payez et retirez de l’argent partout, en toute simplicité !",-->
+<!--  //   // description: "Description de la carte VISA...",-->
+<!--  //   // image: Images-->
+<!--  //   // image: Compte-->
+<!--  // }-->
+<!--]);-->
+
+<!--const currentIndex = ref(0);-->
+<!--// const Courants = ref([Courant, Courant1])-->
+<!--const goToSlide = (index) => {-->
+<!--  currentIndex.value = index;-->
+<!--};-->
+<!--let interval = null;-->
+<!--// const nextSlideCourant = () => {-->
+<!--//   currentIndex.value = (currentIndex.value + 1) % Courants.value.length;-->
+<!--// };-->
+
+<!--const currentSlide = ref(0);-->
+<!--const autoPlayInterval = ref(null);-->
+
+<!--const nextSlide = () => {-->
+<!--  currentSlide.value = (currentSlide.value + 1) % products.value.length;-->
+<!--};-->
+
+<!--const prevSlide = () => {-->
+<!--  currentSlide.value = currentSlide.value === 0 ? products.value.length - 1 : currentSlide.value - 1;-->
+<!--};-->
+
+<!--// Auto-play du slider-->
+<!--const startAutoPlay = () => {-->
+<!--  autoPlayInterval.value = setInterval(nextSlide, 5000);-->
+<!--};-->
+
+<!--const stopAutoPlay = () => {-->
+<!--  if (autoPlayInterval.value) {-->
+<!--    clearInterval(autoPlayInterval.value);-->
+<!--  }-->
+<!--};-->
+
+
+<!--const currentSection = ref(1);-->
+
+<!--const scrollToSection = (sectionId) => {-->
+<!--  const section = document.getElementById(`section${sectionId}`);-->
+<!--  if (section) {-->
+<!--    section.scrollIntoView({ behavior: 'smooth' });-->
+<!--    currentSection.value = sectionId;-->
+<!--  }-->
+<!--};-->
+
+<!--// Démarrer l'auto-play au montage du composant-->
+<!--onMounted(() => {-->
+
+<!--  startAutoPlay();-->
+<!--  const observer = new IntersectionObserver(-->
+<!--      (entries) => {-->
+<!--        entries.forEach(entry => {-->
+<!--          if (entry.isIntersecting) {-->
+<!--            const sectionId = parseInt(entry.target.id.replace('section', ''));-->
+<!--            if (!isNaN(sectionId)) {-->
+<!--              currentSection.value = sectionId;-->
+<!--            }-->
+<!--          }-->
+<!--        });-->
+<!--      },-->
+<!--      {-->
+<!--        threshold: 0.5,-->
+<!--        root: null,-->
+<!--        rootMargin: '0px'-->
+<!--      }-->
+<!--  );-->
+
+<!--  // Observer toutes les sections-->
+<!--  document.querySelectorAll('main[id^="section"]').forEach(section => {-->
+<!--    observer.observe(section);-->
+<!--  });-->
+
+<!--  nextTick(() => {-->
+<!--    const sectionId = route.query.scrollTo-->
+<!--    if (sectionId) {-->
+<!--      // Utilise scrollIntoView pour scroller jusqu'à la section-->
+<!--      setTimeout(() => {-->
+<!--        const sectionElement = document.getElementById(sectionId)-->
+<!--        if (sectionElement) {-->
+<!--          sectionElement.scrollIntoView({behavior: 'smooth'})-->
+<!--        }-->
+<!--      }, 500);-->
+<!--    }-->
+<!--  })-->
+<!--  // const observer = new IntersectionObserver(observerCallback, {-->
+<!--  //   threshold: 0.5-->
+<!--  // });-->
+<!--  //-->
+<!--  // document.querySelectorAll('section[id]').forEach(section => {-->
+<!--  //   observer.observe(section);-->
+<!--  // });-->
+
+<!--  // interval = setInterval(nextSlideCourant, 3000);-->
+<!--});-->
+
+<!--// Nettoyer l'intervalle lors du démontage-->
+<!--onUnmounted(() => {-->
+<!--  stopAutoPlay();-->
+<!--  clearInterval(interval);-->
+<!--});-->
+
+<!--</script>-->
+
+<!--<template>-->
+<!--  <div class="flex flex-col min-h-screen">-->
+<!--    <Header />-->
+
+<!--    &lt;!&ndash; Hero Section avec slider &ndash;&gt;-->
+<!--    <section class="relative h-screen">-->
+<!--      <div class="relative w-full h-full overflow-hidden">-->
+<!--        <transition-group name="fade">-->
+<!--          <div v-for="(product, index) in products"-->
+<!--               :key="product.id"-->
+<!--               v-show="currentSlide === index"-->
+<!--               class="absolute inset-0 cursor-pointer">-->
+<!--            <img :src="product.image"-->
+<!--                 :alt="product.title"-->
+<!--                 class="object-cover lg:mt-10 mt-20">-->
+<!--            <div class="absolute inset-0 bg-blue-700 bg-opacity-30">-->
+<!--              <div class="container mx-auto px-6 h-full flex items-center">-->
+<!--                <div class="text-white max-w-lg">-->
+<!--                  <h1 class="text-5xl montserrat montserrat-700 mb-4">{{ product.title }}</h1>-->
+<!--                  <p class="text-xl montserrat">{{ product.subtitle2 }}</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </transition-group>-->
+
+<!--        &lt;!&ndash; Contrôles du slider &ndash;&gt;-->
+<!--        <button-->
+<!--            @click="prevSlide"-->
+<!--            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full hover:bg-white/75 transition-colors"-->
+<!--            aria-label="Previous slide"-->
+<!--        >-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24"-->
+<!--               stroke="currentColor">-->
+<!--            <path stroke-Linecap="round" stroke-linejoin="round" stroke-width="{2}" d="M15 19l-8-8 8-8"/>-->
+<!--          </svg>-->
+<!--        </button>-->
+<!--        <button-->
+<!--            @click="nextSlide"-->
+<!--            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full hover:bg-white/75 transition-colors"-->
+<!--            aria-label="Next slide"-->
+<!--        >-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24"-->
+<!--               stroke="currentColor">-->
+<!--            <path stroke-Linecap="round" stroke-Linejoin="round" stroke-Width={2} d="M9 5l8 8-8 8"/>-->
+<!--          </svg>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Sections des produits &ndash;&gt;-->
+<!--    &lt;!&ndash;Compte chèque particulier&ndash;&gt;-->
+<!--    <div class="bg-primary lg:px-16 px-8 py-12">-->
+<!--      <div id="section1" class="flex flex-col justify-center container mx-auto">-->
+<!--        <h2 class="text-white montserrat montserrat-700 2xl:text-5xl text-4xl w-full justify-center text-center pb-5">-->
+<!--          Compte chèque particulier-->
+<!--        </h2>-->
+
+<!--        <div class="w-full container mx-auto pb-10">-->
+<!--          <p class="text-gray-300 open-sans 2xl:text-xl text-lg w-full justify-center">-->
+<!--            Le compte chèque à destination des entrepreneurs quel que soit le secteur d’activité,-->
+<!--            permettra d’effectuer les transactions bancaires courantes lies à leurs activités.-->
+<!--          </p>-->
+<!--        </div>-->
+
+<!--        <div class="lg:flex w-full gap-x-4 justify-center lg:px-10">-->
+<!--          &lt;!&ndash;        <div class="flex w-full max-w-xl h-full lg:max-h-[28rem]">&ndash;&gt;-->
+<!--          &lt;!&ndash;          <img :src="Cheque" alt="image" class="object-cover rounded-lg transition-transform duration-500 hover:scale-105">&ndash;&gt;-->
+<!--          &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">-->
+<!--            <Image_compteAss :images="Cheque" />-->
+<!--          </div>-->
+<!--          <div class="w-full max-w-xl flex flex-col py-10">-->
+<!--            <h2 class="text-xl w-full lg:text-center font-semibold text-gray-300">-->
+<!--              Ce compte offre plusieurs avantages qui facilitent la gestion financière des entrepreneurs-->
+<!--            </h2>-->
+<!--            <div class="w-full flex justify-center lg:p-6 pt-6 gap-x-6 lg:gap-y-0 gap-y-4 lg:flex-nowrap flex-wrap">-->
+<!--              &lt;!&ndash;            <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">&ndash;&gt;-->
+<!--              &lt;!&ndash;              <h2 class="font-light text-white">Crédit après 03 mois de fonctionnement</h2>&ndash;&gt;-->
+<!--              &lt;!&ndash;              <span class="text-lg font-bold text-white"> à la demande du client </span>&ndash;&gt;-->
+<!--              &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--              <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--                <h2 class="font-light text-white">Mise en place d’un découvert</h2>-->
+<!--                <span class="text-lg font-bold text-white"> À la demande du client </span>-->
+<!--              </div>-->
+<!--              <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--                <h2 class="font-light text-white">Dépôt minimum </h2>-->
+<!--                <span class="text-lg font-bold text-white my-auto"> 30.000 XAF</span>-->
+<!--              </div>-->
+
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;Bon de caisse&ndash;&gt;-->
+<!--    <div id="section2" class="bg-blue-50 lg:px-16 px-8 py-12">-->
+<!--        <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">-->
+<!--          Bon de caisse-->
+<!--        </h2>-->
+<!--        <div class="pb-10 w-full container mx-auto">-->
+<!--          <p class="text-gray-800 font-primary text-lg w-full justify-center">-->
+<!--            Le bon de caisse permet aux entreprises et aux investisseurs d’effectuer des placements de fonds en toute sécurité-->
+<!--            sur une période minimale d’un an. Le placement a pour vocation à terme de générer d’importants bénéfices grâce à des taux-->
+<!--            d’intérêts négociables.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--        <div class="flex flex-wrap lg:flex-nowrap w-full gap-2 justify-center lg:px-10">-->
+<!--          <div class="w-full lg:max-w-xl flex flex-col lg:py-16 pt-64 order-2 lg:order-1" >-->
+<!--          <h2 class="text-xl w-full lg:text-center font-semibold text-gray-600">Les placements en bon de caisse offrent les conditions suivantes</h2>-->
+<!--          <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">-->
+<!--&lt;!&ndash;            <div class="flex w-full lg:max-w-[12rem] flex-col bg-primary border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">&ndash;&gt;-->
+<!--&lt;!&ndash;              <h2 class="font-light text-white ">dépôt minimum à l’ouverture</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;              <span class="text-lg font-bold text-white">5.000.000 CFA</span>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            <div class="flex w-full lg:max-w-[12rem] flex-col bg-primary border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--              <h2 class="font-light text-white">Taux de rémunération</h2>-->
+<!--              <span class="text-lg font-bold text-white my-auto"> Négociable</span>-->
+<!--            </div>-->
+<!--            <div class="flex w-full lg:max-w-[12rem] flex-col bg-primary border opacity-90 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--              <h2 class="font-light text-white">Intérêt  précompte ou post compte</h2>-->
+<!--              <span class="text-lg font-bold text-white"> À la demande du client</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">-->
+<!--              <Image_compteAss :images="Caisse" />-->
+
+<!--&lt;!&ndash;            <img :src="cash" alt="image" class="object-cover transition-transform duration-500 hover:scale-105 rounded-lg">&ndash;&gt;-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;Dépôt à terme&ndash;&gt;-->
+<!--    <div id="section3" class="bg-primary lg:px-16 px-8 py-12">-->
+<!--      <h2 class="text-white montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">-->
+<!--        Dépôt à terme-->
+<!--      </h2>-->
+<!--      <div class="w-full container mx-auto">-->
+<!--        <p class="text-gray-300 font-primary text-lg w-full justify-start pb-10">-->
+<!--          Le dépôt à terme permet au souscripteur de déposer des fonds sur un compte bloqué afin de-->
+<!--          bénéficier d’intérêts supérieurs au taux applicable sur un compte d’épargne classique. Le souscripteur-->
+<!--          pouvant à tout moment disposer des intérêts générés par le compte.-->
+<!--        </p>-->
+<!--      </div>-->
+<!--      <div class="lg:flex w-full gap-2 justify-center lg:px-10">-->
+<!--        <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">-->
+<!--          <Image_compteAss :images="Terme" />-->
+
+<!--        </div>-->
+<!--        <div class="w-full max-w-xl flex flex-col lg:pt-0 pt-64">-->
+<!--          <h2 class="text-xl w-full lg:text-center font-semibold text-gray-300 lg:p-0 pt-5">-->
+<!--            Ce compte propose de nombreux avantages visant à simplifier et optimiser la gestion financière des souscripteurs.-->
+<!--          </h2>-->
+<!--          <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">-->
+<!--            <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-2 gap-5">-->
+<!--              <h2 class="font-light text-white">Taux de rémunération</h2>-->
+<!--              <span class="text-lg font-bold text-white"> Négociable </span>-->
+<!--            </div>-->
+<!--            <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--              <h2 class="font-light text-white">Taux d’intérêts </h2>-->
+<!--              <span class="text-lg font-bold text-white"> Allant jusqu’à 5%</span>-->
+<!--            </div>-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    &lt;!&ndash;Compte d’épargne association&ndash;&gt;-->
+<!--    <div id="section4" class="pb-6 bg-blue-50 py-12 lg:px-8 px-5">-->
+<!--      <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-8">-->
+<!--        Compte d’épargne association-->
+<!--      </h2>-->
+<!--      <div class="w-full container mx-auto">-->
+<!--        <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">-->
+<!--          Le compte d’épargne association a été mis sur pied afin de permettre aux associations-->
+<!--          de protéger leurs finances grâce à des comptes d’épargne fiables et sécurisés.-->
+<!--        </p>-->
+<!--      </div>-->
+<!--      <div class="lg:flex w-full gap-2 justify-center lg:px-10 px-4 lg:pb-20">-->
+<!--&lt;!&ndash;        <div class="flex w-full max-w-xl h-full lg:min-h-[28rem] order-1 lg:order-2 relative bg-black">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <div class="flex w-full lg:max-w-sm h-full lg:min-h-[24rem] relative">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;          <img :src="Epargne" alt="image" class="object-cover transition-transform duration-500 hover:scale-105 rounded-lg">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <Image_compteAss :images="imagesList" />&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">-->
+<!--          <Image_compteAss :images="Association" />-->
+
+<!--        </div>-->
+<!--        <div class="w-full max-w-xl flex flex-col lg:pt-0 pt-64">-->
+<!--          <h2 class="text-xl w-full lg:text-center font-semibold text-gray-500">-->
+<!--            Les associations bénéficient des avantages et conditions suivantes pour leur compte d’épargne-->
+<!--          </h2>-->
+<!--          <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">-->
+<!--            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-2 gap-5">-->
+<!--              <h2 class="font-light text-lg text-white">Dépôt minimum à l’ouverture</h2>-->
+<!--              <span class="text-lg font-bold text-white my-auto"> 50.000 XAF </span>-->
+<!--            </div>-->
+<!--            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--              <h2 class="font-light text-lg text-white">Taux d’intérêt</h2>-->
+<!--              <span class="text-lg font-bold text-white my-auto">4% sur l’année</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div id="section4" class="lg:px-8 px-5 py-12 bg-blue-50">&ndash;&gt;-->
+<!--      <div class="py-12 lg:px-8 px-5 bg-white">-->
+<!--      <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-8">-->
+<!--        Compte d’épargne sur livret-->
+<!--      </h2>-->
+<!--      <div class="w-full container mx-auto">-->
+<!--        <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">-->
+<!--          Le compte d’épargne sur livret est destiné à sécuriser les économies de nos clients.-->
+<!--          Le client pourra ainsi faire fructifier l’argent déposé grâce à des taux d’intérêts les plus intéressants du marché.-->
+<!--        </p>-->
+<!--      </div>-->
+<!--      <div class="flex flex-wrap lg:flex-nowrap w-full gap-2 justify-center lg:px-10 px-4">-->
+<!--        <div class="w-full max-w-xl flex flex-col lg:pt-0 pt-64 order-2 lg:order-1">-->
+<!--          <h2 class="text-xl w-full lg:text-center font-semibold text-gray-500">-->
+<!--&lt;!&ndash;            Les règles applicables à l'ouverture d'un compte d'épargne sur livret sont les suivantes :&ndash;&gt;-->
+<!--            Les conditions d'ouverture d'un compte d'épargne sur livret sont les suivantes :-->
+<!--          </h2>-->
+<!--          <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">-->
+<!--            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--              <h2 class="font-light text-lg text-white">Dépôt minimum à l’ouverture</h2>-->
+<!--&lt;!&ndash;              <span class="text-lg font-bold text-white"> 15.000 XAF<span> Hors Taxes </span></span>&ndash;&gt;-->
+<!--              <span class="text-lg font-bold text-white my-auto"> 16.000 XAF<span> TTC</span></span>-->
+<!--            </div>-->
+<!--            <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--              <h2 class="font-light text-lg text-white">Solde minimum permanent en compte</h2>-->
+<!--              <span class="text-lg font-bold text-white my-auto">10.000 XAF</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--&lt;!&ndash;        <div class="flex w-full lg:max-w-sm h-full lg:min-h-[24rem] order-1 lg:order-2">&ndash;&gt;-->
+<!--&lt;!&ndash;          <img :src="Livret" alt="image" class="object-contain transition-transform duration-500 hover:scale-105 rounded-lg">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">-->
+<!--          <Image_compteAss :images="Epargne" />-->
+
+<!--        </div>-->
+<!--      </div>-->
+<!--      </div>-->
+<!--      <div class="py-12 bg-blue-50 lg:px-8 px-5">-->
+<!--        <h2 class="text-secondary montserrat montserrat-700 text-3xl md:text-4xl text-center mb-10">-->
+<!--          Compte courant entreprise-->
+<!--        </h2>-->
+<!--        <div class="w-full container mx-auto">-->
+<!--          <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">-->
+<!--            Le compte courant entreprise permet aux entrepreneurs ou aux entreprises clientes-->
+<!--            d’avoir leurs fonds à disposition et de bénéficier à tout moment des avantages liés à celui-ci.-->
+<!--            Les entreprises clientes pourront effectuer toutes les transactions financières courantes liées à leur fonctionnement-->
+<!--            grâce à un service simplifié.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--        <div class="lg:flex w-full gap-2 justify-center lg:px-10">-->
+<!--          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] order-1 lg:order-2 relative">-->
+<!--            <Image_compteAss :images="Entreprise" />-->
+
+<!--          </div>-->
+<!--&lt;!&ndash;          <div class=" w-full lg:max-w-sm h-full lg:min-h-[24rem] relative hidden">&ndash;&gt;-->
+<!--&lt;!&ndash;            <img :src="Courant" alt="image" class="object-cover transition-transform duration-500 hover:scale-105 rounded-lg">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div&ndash;&gt;-->
+<!--&lt;!&ndash;                v-for="(Courant, index) in Courants"&ndash;&gt;-->
+<!--&lt;!&ndash;                :key="index"&ndash;&gt;-->
+<!--&lt;!&ndash;                class="transition-opacity duration-700"&ndash;&gt;-->
+<!--&lt;!&ndash;                :class="{'opacity-100': currentIndex === index, 'opacity-0': currentIndex !== index}"&ndash;&gt;-->
+<!--&lt;!&ndash;            >&ndash;&gt;-->
+<!--&lt;!&ndash;              <img&ndash;&gt;-->
+<!--&lt;!&ndash;                  :src="Courant"&ndash;&gt;-->
+<!--&lt;!&ndash;                  class="rounded-lg absolute inset-0 ease-in-out flex items-center justify-center object-cover transition-transform duration-500 hover:scale-105"&ndash;&gt;-->
+<!--&lt;!&ndash;                  alt="Image Compte Courant"&ndash;&gt;-->
+<!--&lt;!&ndash;              />&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            &lt;!&ndash; Slider indicators &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="absolute lg:top-[22rem] top-[18rem] left-1/2 transform -translate-x-1/2 flex space-x-3">&ndash;&gt;-->
+<!--&lt;!&ndash;              <button&ndash;&gt;-->
+<!--&lt;!&ndash;                  v-for="(Courant, index) in Courants"&ndash;&gt;-->
+<!--&lt;!&ndash;                  :key="index"&ndash;&gt;-->
+<!--&lt;!&ndash;                  class="w-3 h-3 rounded-full transition-colors duration-300"&ndash;&gt;-->
+<!--&lt;!&ndash;                  :class="currentIndex === index ? 'bg-white' : 'bg-gray-400'"&ndash;&gt;-->
+<!--&lt;!&ndash;                  @click="goToSlide(index)"&ndash;&gt;-->
+<!--&lt;!&ndash;                  :aria-label="`Go to slide ${index + 1}`"&ndash;&gt;-->
+<!--&lt;!&ndash;              ></button>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--          <div class="w-full max-w-xl flex flex-col lg:pt-0 pt-[17rem]">-->
+<!--            <h2 class="text-xl w-full lg:text-center font-semibold text-gray-500">-->
+<!--              Les entreprises bénéficient des avantages et conditions suivantes pour leur compte courant entreprise-->
+<!--            </h2>-->
+<!--            <div class="w-full flex justify-center lg:p-6 py-6 gap-2 lg:flex-nowrap flex-wrap">-->
+<!--              <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--                <h2 class="font-light text-lg text-white">Dépôt minimum à l’ouverture</h2>-->
+<!--                <span class="text-lg font-bold text-white my-auto"> 30.000 XAF </span>-->
+<!--              </div>-->
+<!--              <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--                <h2 class="font-light text-lg text-white">Facilité de compensation chèque</h2>-->
+<!--              </div>-->
+<!--              <div class="bg-primary bg-opacity-90 flex w-full lg:max-w-[12rem] flex-col shadow border justify-between p-4 rounded-lg lg:gap-0 gap-5">-->
+<!--                <h2 class="font-light text-lg text-white">Possibilité de préfinancer les salaires</h2>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="px-4 md:px-0 lg:px-0 bg-white bg-opacity-90 hidden">-->
+<!--&lt;!&ndash;      <div class="container mx-auto py-12 px-4 md:px-0 lg:px-0 bg-white">&ndash;&gt;-->
+<!--        <div class="min-w-6xl mx-auto shadow-sm overflow-hidden p-6 md:py-12 md:px-16">-->
+<!--            &lt;!&ndash; Titre &ndash;&gt;-->
+<!--            <h2 class="text-secondary font-accent text-3xl md:text-4xl text-center mb-10">-->
+<!--              Épargne islamique-->
+<!--            </h2>-->
+
+<!--            &lt;!&ndash; Contenu principal &ndash;&gt;-->
+<!--            <div class="flex flex-col lg:flex-row items-start gap-8 lg:gap-5">-->
+<!--              &lt;!&ndash; Texte descriptif &ndash;&gt;-->
+<!--              <div class="w-full lg:w-3/5 order-2 lg:order-1 my-auto">-->
+<!--                <p class="text-gray-500 lg:text-xl lg:font-accent text-lg leading-relaxed lg:py-10">-->
+<!--                  Notre service d'épargne islamique qui ne produit pas d'intérêts, s'adresse à nos clients-->
+<!--                  qui souhaitent constituer une épargne tout en respectant les-->
+<!--                  préceptes de la religion islamique.-->
+<!--                </p>-->
+<!--              </div>-->
+
+<!--              &lt;!&ndash; Image &ndash;&gt;-->
+<!--              <div class="w-full lg:w-2/4 order-1 lg:order-2">-->
+<!--                <div class="relative overflow-hidden rounded-lg shadow-md">-->
+<!--                  <img-->
+<!--                      :src="Islamique"-->
+<!--                      alt="Épargne islamique"-->
+<!--                      class="w-full h-auto max-h-96 object-cover transition-transform duration-500 hover:scale-105"-->
+<!--                  >-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="py-12 bg-white lg:px-8 px-5">-->
+<!--        <h2 class="text-secondary montserrat montserrat-700 text-3xl md:text-4xl text-center mb-10">-->
+<!--          Compte virement salaire-->
+<!--        </h2>-->
+<!--&lt;!&ndash;        <p class="text-gray-800 font-primary text-lg w-full lg:px-8 px-4 pb-10">&ndash;&gt;-->
+<!--&lt;!&ndash;          Le compte virement salaire permet de recevoir son salaire mensuel mais aussi d’effectuer ses transactions&ndash;&gt;-->
+<!--&lt;!&ndash;          banquières courantes. Il donne droit à un découvert permanent, ainsi qu’à des crédits de plusieurs sortes.&ndash;&gt;-->
+<!--&lt;!&ndash;        </p>&ndash;&gt;-->
+
+<!--        <div class="lg:flex w-full gap-2 justify-between lg:px-10 px-4 container mx-auto">-->
+<!--&lt;!&ndash;          <div class="w-full lg:max-w-xl h-full lg:min-h-[24rem] hidden" >&ndash;&gt;-->
+<!--&lt;!&ndash;            <img :src="Virement" alt="image" class="w-full h-auto object-cover transition-transform duration-500 hover:scale-105 rounded-xl border">&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">-->
+<!--            <Image_compteAss :images="Salaire" />-->
+
+<!--          </div>-->
+<!--          <div class="w-full flex pt-64 lg:pl-5 lg:py-16">-->
+<!--              <h2 class="lg:text-xl text-lg w-full font-serif text-gray-700 leading-relaxed">-->
+<!--                Le compte virement salaire permet de recevoir son salaire mensuel, mais aussi d’effectuer ses transactions-->
+<!--                banquières courantes. Il donne droit à un découvert permanent, ainsi qu’à des crédits de plusieurs sortes.-->
+<!--              </h2>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;Collecte journalière&ndash;&gt;-->
+<!--    <div id="section5" class="bg-primary lg:px-16 px-8 py-12">-->
+<!--      <div class="container mx-auto">-->
+<!--        <h1 class="text-white w-full text-center montserrat montserrat-700 lg:text-4xl text-3xl lg:pb-4">Collecte journalière</h1>-->
+<!--        <p class="w-full py-6 text-lg text-gray-200">-->
+<!--          La collecte journalière destinée principalement aux travailleurs indépendants (commerçants ou autre)-->
+<!--          permet de sécuriser l’argent sans avoir à se déplacer.-->
+<!--          Nos agents déployés sur le terrain collectent les fonds et les déposent directement-->
+<!--          sur les comptes de chaque souscripteur.-->
+<!--        </p>-->
+<!--        <h1 class="text-white w-full montserrat montserrat-600 lg:text-3xl text-2xl text-center lg:text-left pb-4">Collecte journalière mensuelle </h1>-->
+<!--        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">-->
+<!--          <div-->
+<!--              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">-->
+<!--            <img :src="Argent"-->
+<!--                 alt="Argent"-->
+<!--                 class="w-full object-cover">-->
+<!--            <div class="p-6">-->
+<!--              <h3 class="text-xl font-bold mb-2">Minimum d’épargne</h3>-->
+<!--              <p class="text-gray-600 mb-4">500 XAF/jour</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">-->
+<!--            <img :src="Refund"-->
+<!--                 alt="Refund"-->
+<!--                 class="w-full object-cover">-->
+<!--            <div class="p-6">-->
+<!--              <h3 class="text-xl font-bold mb-2">Disponible au décaissement</h3>-->
+<!--              <p class="text-gray-600 mb-4">fin du mois</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">-->
+<!--            <img :src="Micro"-->
+<!--                 alt="Micro"-->
+<!--                 class="w-full object-cover">-->
+<!--            <div class="p-6">-->
+<!--              <h3 class="text-xl font-bold mb-2">Possibilité de micro-crédit </h3>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <h1 class="text-white w-full montserrat montserrat-600 lg:text-3xl text-2xl text-center lg:text-left pb-4">Collecte journalière annuelle </h1>-->
+<!--        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">-->
+<!--          <div-->
+<!--              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">-->
+<!--            <img :src="Argent1"-->
+<!--                 alt="Argent"-->
+<!--                 class="w-full object-cover">-->
+<!--            <div class="p-6">-->
+<!--              <h3 class="text-xl font-bold mb-2">Minimum d’épargne</h3>-->
+<!--              <p class="text-gray-600 mb-4">200 XAF/jour</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">-->
+<!--            <img :src="Received"-->
+<!--                 alt="Refund"-->
+<!--                 class="w-full object-cover">-->
+<!--            <div class="p-6">-->
+<!--              <h3 class="text-xl font-bold mb-2">Disponible au décaissement</h3>-->
+<!--              <p class="text-gray-600 mb-4"> fin d’année</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">-->
+<!--            <img :src="Micro"-->
+<!--                 alt="Micro"-->
+<!--                 class="w-full object-cover">-->
+<!--            <div class="p-6">-->
+<!--              <h3 class="text-xl font-bold mb-2">Possibilité de micro-crédit </h3>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    &lt;!&ndash;Carte visa&ndash;&gt;-->
+<!--    <div id="section6" class="bg-blue-50 lg:px-16 px-8 py-12">-->
+<!--      <div class="container mx-auto">-->
+<!--        <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">-->
+<!--          Carte visa-->
+<!--        </h2>-->
+<!--        <p class="text-gray-800 font-primary text-lg w-full justify-center leading-relaxed pb-10">-->
+<!--          Les cartes VISA du CRESAF offrent une solution sécurisée pour effectuer des retraits aux guichets automatiques-->
+<!--          et régler des achats de biens ou services, que ce soit via des terminaux de paiement électronique (TPE) ou en ligne.-->
+<!--        </p>-->
+
+<!--        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">-->
+<!--          <div class="bg-white opacity-90 hover:opacity-100 rounded-lg shadow-lg-->
+<!--          overflow-hidden transition-transform duration-300 hover:scale-105 p-2">-->
+<!--            <img :src="Guichet"-->
+<!--                 alt="Guichet"-->
+<!--                 class="w-full object-cover">-->
+<!--            <div class="p-6">-->
+<!--              <h3 class="text-xl font-bold mb-2">Guichet automatique de banque</h3>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div-->
+<!--              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">-->
+<!--            <img :src="Electronic"-->
+<!--                 alt="Electronic"-->
+<!--                 class="w-full object-cover">-->
+<!--            <div class="p-6">-->
+<!--              <h3 class="text-xl font-bold mb-2">Terminaux de paiement électronique </h3>-->
+<!--            </div>-->
+
+<!--          </div>-->
+<!--          <div-->
+<!--              class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">-->
+
+<!--            <img :src="Order"-->
+<!--                 alt="Order"-->
+<!--                 class="w-full object-cover">-->
+<!--            <div class="p-6">-->
+<!--              <h3 class="text-xl font-bold mb-2">Autres moyens de payement en ligne</h3>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--&lt;!&ndash;      <div class="absolute inset-0 bg-blue-700 bg-opacity-30">&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Navigation latérale &ndash;&gt;-->
+<!--    <div class="fixed right-8 top-1/2 transform -translate-y-1/2 space-y-4 z-50">-->
+<!--      <a v-for="product in products" :key="product.id"-->
+<!--         :href="`#section${product.id}`"-->
+<!--         :class="[-->
+<!--           'block w-3 h-3 rounded-full transition-all duration-300',-->
+<!--           currentSection === product.id ? 'bg-green-600 scale-125' : 'bg-gray-400 hover:bg-white'-->
+<!--         ]"-->
+<!--         @click.prevent="scrollToSection(product.id)">-->
+<!--&lt;!&ndash;        currentSection === product.id ? 'bg-white scale-125' : 'bg-white bg-opacity-50 hover:bg-opacity-75'&ndash;&gt;-->
+<!--        <span class="sr-only">{{ product.title }}</span>-->
+<!--      </a>-->
+<!--    </div>-->
+
+<!--    <Footer />-->
+<!--  </div>-->
+
+<!--</template>-->
+
+<!--<style scoped>-->
+<!--.fade-enter-active,-->
+<!--.fade-leave-active {-->
+<!--  transition: opacity 0.5s ease;-->
+<!--}-->
+
+<!--.fade-enter-from,-->
+<!--.fade-leave-to {-->
+<!--  opacity: 0;-->
+<!--}-->
+<!--</style>-->
 

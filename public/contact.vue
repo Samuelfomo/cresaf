@@ -29,6 +29,15 @@
 <!--                  </div>-->
 <!--                </div>-->
 <!--              </div>-->
+              <button
+                  type="button"
+                  @click="openWhatsApp"
+                  class="btn btn-primary-accent m-0"
+              >
+                <IconBrandWhatsapp class="mr-2" :stroke="2" />
+                Parlez à un conseiller
+              </button>
+
             </div>
 
             <!-- Carrousel d'images -->
@@ -300,6 +309,7 @@ import Cresaf1 from "@/assets/images/cresafStructure1.jpg"
 import Cresaf2 from "@/assets/images/cresafStructure2.jpg"
 import CustomSelect from "@public/components/CustomSelect.vue";
 import Email from "@/class/Email"
+import {IconBrandWhatsapp} from "@tabler/icons-vue";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -627,6 +637,10 @@ const showErrorMessage = (message) => {
     });
   }, 5000);
 };
+
+const openWhatsApp = () => {
+  window.open("https://api.whatsapp.com/send/?phone=23799623303&text&type=phone_number&app_absent=0", "_blank");
+}
 // const submitForm = async () => {
 //   isSubmitting.value = true;
 //
