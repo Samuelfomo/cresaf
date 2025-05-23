@@ -153,9 +153,20 @@ const animateSlideTransition = (fromIndex, toIndex, direction = 'next') => {
       }, 0.2); // Légèrement décalé pour un effet plus naturel
 
   // Réinitialiser la position de l'ancienne slide après l'animation
+//   tl.set(currentSlideEl, {
+//   x: 0,
+//   zIndex: 1
+// });
   tl.set(currentSlideEl, {
     x: 0,
     zIndex: 1
+  });
+  tl.set(currentContent, {
+    x: 0,
+    opacity: 0
+  });
+  tl.set(nextContent, {
+    opacity: 1
   });
 };
 
