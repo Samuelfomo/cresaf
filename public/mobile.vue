@@ -25,6 +25,7 @@
             <button
                 type="button"
                 class="btn btn-primary-accent m-0 montserrat montserrat-600"
+                @click="openPlaystore"
             >
               Commencer maintenant
               <IconArrowRight stroke={2} class="ml-2" />

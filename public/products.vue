@@ -92,6 +92,73 @@ const autoPlayInterval = ref(null);
 const isTransitioning = ref(false);
 
 // Fonction pour animer la transition entre les slides
+// const animateSlideTransition = (fromIndex, toIndex, direction = 'next') => {
+//   if (isTransitioning.value) return;
+//
+//   isTransitioning.value = true;
+//
+//   const currentSlideEl = document.querySelector(`[data-slide="${fromIndex}"]`);
+//   const nextSlideEl = document.querySelector(`[data-slide="${toIndex}"]`);
+//   const currentContent = document.querySelector(`[data-content="${fromIndex}"]`);
+//   const nextContent = document.querySelector(`[data-content="${toIndex}"]`);
+//
+//   if (!currentSlideEl || !nextSlideEl || !currentContent || !nextContent) {
+//     isTransitioning.value = false;
+//     return;
+//   }
+//
+//   // Configuration de la direction
+//   const moveDistance = direction === 'next' ? '100%' : '-100%';
+//   const startDistance = direction === 'next' ? '-100%' : '100%';
+//
+//   // Timeline GSAP pour orchestrer l'animation
+//   const tl = gsap.timeline({
+//     onComplete: () => {
+//       isTransitioning.value = false;
+//     }
+//   });
+//
+//   // Position initiale de la nouvelle slide (hors écran)
+//   gsap.set(nextSlideEl, {
+//     x: startDistance,
+//     zIndex: 2
+//   });
+//   gsap.set(nextContent, {
+//     x: startDistance,
+//     opacity: 0
+//   });
+//
+//   // Animation simultanée
+//   tl.to(currentSlideEl, {
+//     x: moveDistance,
+//     duration: 1.2,
+//     ease: "power2.inOut"
+//   })
+//       .to(currentContent, {
+//         x: moveDistance,
+//         opacity: 0,
+//         duration: 1.2,
+//         ease: "power2.inOut"
+//       }, 0) // Démarre en même temps que l'animation précédente
+//       .to(nextSlideEl, {
+//         x: 0,
+//         duration: 1.2,
+//         ease: "power2.inOut"
+//       }, 0)
+//       .to(nextContent, {
+//         x: 0,
+//         opacity: 1,
+//         duration: 1.2,
+//         ease: "power2.inOut"
+//       }, 0.2); // Légèrement décalé pour un effet plus naturel
+//
+//   // Réinitialiser la position de l'ancienne slide après l'animation
+// //   tl.set(currentSlideEl, {
+//   x: 0,
+//   zIndex: 1
+// });
+
+// Dans la fonction animateSlideTransition, modifiez la configuration de zIndex et assurez-vous que les éléments restent visibles.
 const animateSlideTransition = (fromIndex, toIndex, direction = 'next') => {
   if (isTransitioning.value) return;
 
@@ -139,7 +206,7 @@ const animateSlideTransition = (fromIndex, toIndex, direction = 'next') => {
         opacity: 0,
         duration: 1.2,
         ease: "power2.inOut"
-      }, 0) // Démarre en même temps que l'animation précédente
+      }, 0)
       .to(nextSlideEl, {
         x: 0,
         duration: 1.2,
@@ -150,25 +217,33 @@ const animateSlideTransition = (fromIndex, toIndex, direction = 'next') => {
         opacity: 1,
         duration: 1.2,
         ease: "power2.inOut"
-      }, 0.2); // Légèrement décalé pour un effet plus naturel
+      }, 0.2);
 
   // Réinitialiser la position de l'ancienne slide après l'animation
-//   tl.set(currentSlideEl, {
-//   x: 0,
-//   zIndex: 1
-// });
   tl.set(currentSlideEl, {
     x: 0,
     zIndex: 1
   });
   tl.set(currentContent, {
     x: 0,
-    opacity: 0
+    opacity: 1 // Assurez-vous que l'opacité soit 1 pour éviter la disparition
   });
   tl.set(nextContent, {
     opacity: 1
   });
 };
+//   tl.set(currentSlideEl, {
+//     x: 0,
+//     zIndex: 1
+//   });
+//   tl.set(currentContent, {
+//     x: 0,
+//     opacity: 0
+//   });
+//   tl.set(nextContent, {
+//     opacity: 1
+//   });
+// };
 
 const nextSlide = () => {
   if (isTransitioning.value) return;
@@ -475,43 +550,6 @@ onUnmounted(() => {
 
     <!-- Sections des produits -->
     <!--Compte chèque particulier-->
-    <div class="bg-primary lg:px-16 px-8 py-12 hidden">
-      <div id="section1" class="flex flex-col justify-center container mx-auto">
-        <h2 class="text-white montserrat montserrat-700 2xl:text-5xl text-4xl w-full justify-center text-center pb-5">
-          Compte chèque particulier
-        </h2>
-
-        <div class="w-full mx-auto pb-10 flex justify-center">
-          <p class="text-gray-300 montserrat montserrat-400 text-lg max-w-6xl">
-            Le compte chèque à destination des entrepreneurs quel que soit le secteur d’activité,
-            permettra d’effectuer les transactions bancaires courantes lies à leurs activités.
-          </p>
-        </div>
-
-        <div class="lg:flex w-full gap-x-4 justify-center lg:px-10">
-          <div class="flex w-full max-w-xl h-full items-center justify-center lg:min-h-[28rem] relative">
-            <Image_compteAss :images="Cheque" />
-          </div>
-          <div class="w-full max-w-xl flex flex-col py-10">
-            <h2 class="text-xl w-full lg:text-center font-semibold text-gray-300">
-              Ce compte offre plusieurs avantages qui facilitent la gestion financière des entrepreneurs
-            </h2>
-            <div class="w-full flex justify-center lg:p-6 pt-6 gap-x-6 lg:gap-y-0 gap-y-4 lg:flex-nowrap flex-wrap">
-              <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">
-                <h2 class="font-light text-white">Mise en place d’un découvert</h2>
-                <span class="text-lg font-bold text-white"> À la demande du client </span>
-              </div>
-              <div class="flex w-full lg:max-w-[12rem] flex-col bg-white border bg-opacity-10 justify-between p-4 rounded-lg lg:gap-0 gap-5">
-                <h2 class="font-light text-white">Dépôt minimum </h2>
-                <span class="text-lg font-bold text-white my-auto"> 30.000 XAF</span>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
     <div class="relative overflow-hidden bg-primary">
       <!-- Animated background elements -->
       <div class="absolute inset-0">
