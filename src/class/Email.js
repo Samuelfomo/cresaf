@@ -17,8 +17,10 @@ class Email {
     }
 
     async sendEmail() {
+        const siteUrl = "https://cresaf.com";
+        // const siteUrl = "http://localhost:3000";
         try {
-            const response = await fetch('http://localhost:3000/email', {
+            const response = await fetch(`${siteUrl}/email`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,6 +44,7 @@ class Email {
             console.log('Email sent', result.message);
             return result;
         } catch (error){
+            console.error(error);
             throw error;
         }
     }

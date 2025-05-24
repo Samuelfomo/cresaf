@@ -1,11 +1,3 @@
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
-</IfModule>
 #<IfModule mod_rewrite.c>
 #  RewriteEngine On
 #  RewriteBase /
@@ -14,3 +6,18 @@
 #  RewriteCond %{REQUEST_FILENAME} !-d
 #  RewriteRule . /index.html [L]
 #</IfModule>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Ne pas rediriger les requêtes vers /api/*
+  RewriteCond %{REQUEST_URI} ^/email/ [NC]
+  RewriteRule ^ - [L]
+
+  # Redirection SPA Vue.js
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+

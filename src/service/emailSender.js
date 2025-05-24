@@ -34,7 +34,7 @@ function createContenuHTML(data) {
                 <h3 style="color: #2c3e50; margin-top: 0;">👤 Informations du contact</h3>
                 <p><strong>Nom complet:</strong> ${data.firstName} ${data.lastName}</p>
                 <p><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></p>
-                <p><strong>Téléphone:</strong> ${data.phone}</p>
+                <p><strong>Téléphone:</strong> ${data.mobile}</p>
                 <p><strong>Sujet:</strong> ${sujetFormate}</p>
             </div>
             
