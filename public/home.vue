@@ -60,7 +60,7 @@
             <p class="open-sans open-sans-400 text-primary text-base mb-4 group-hover:text-white ">{{ location.description }}</p>
             <a
                 @click="openPdf(location.pdfContent)"
-                class="gap-x-2 flex justify-end items-center montserrat montserrat-600 text-lg text-secondary group-hover:text-white">
+                class="gap-x-2 flex justify-end items-center montserrat montserrat-600 text-lg text-secondary group-hover:text-primary-accent">
               {{ location.suite }}
               <IconArrowRight stroke={2} class="transition-transform"/>
             </a>

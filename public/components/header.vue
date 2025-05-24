@@ -81,7 +81,7 @@
         </svg>
       </button>
 
-      <div class="hidden lg:flex justify-between w-full xl:max-w-4xl max-w-2xl lg:pr-5">
+      <div class="hidden lg:flex justify-between w-full max-w-3xl lg:pr-5">
         <div class="text-gray-700 flex relative">
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownAboutUs" @mouseleave="closeDropdown1">
             <h2 class="relative hover:text-secondary xl:text-lg lg:text-base text-xs flex group"
@@ -259,7 +259,7 @@
             </div>
           </div>
         </div>
-        <div class="text-gray-700 flex relative">
+        <div class="text-gray-700 flex relative hidden">
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownSolutions" @mouseleave="closeDropdown3">
             <h2 class="relative hover:text-secondary xl:text-lg lg:text-base text-xs flex group"
                 :class="[$route.name === 'solutions' ? activeClass : inactiveClass]"
@@ -604,7 +604,7 @@
                   </router-link>
                 </div>
               </div>
-              <router-link to="#" class="w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3 border-b
+              <router-link to="#" class="hidden w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3 border-b
             items-center"
                            :class="[$route.name === 'solutions' ? activeDrawerClass : 'text-white']"
                            @click="OpenSolutions"

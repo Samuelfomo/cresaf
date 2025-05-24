@@ -201,7 +201,7 @@ const openWhatsApp = (phone) => {
   }
 }
 onMounted(()=>{
-  // Animations pour la section des fonctionnalités
+  // Animations
   ScrollTrigger.create({
     trigger: featuresSection.value,
     start: 'top 80%',
