@@ -9,7 +9,7 @@
           <h1 class="text-4xl lg:text-6xl text-left montserrat montserrat-700 text-white pb-0">
             Vous ambitionnez, <span class="text-primary-accent block">nous finan&ccedil;ons<em class="montserrat montserrat-800 text-italic ms-3">!</em></span>
           </h1>
-          <p class="text-white text-left montserrat montserrat-200 text-2xl my-10 lg:mr-20">
+          <p class="text-white text-left montserrat montserrat-200 text-2xl lg:my-10 my-6 lg:mr-20">
             Favoriser le développement économique par l'épargne, l'octroi de crédits et la facilitation des services financiers
           </p>
           <button
@@ -47,7 +47,7 @@
           d'un livret d'épargne rémunéré, d'un crédit à la consommation et bien plus encore !
         </p>
       </div>
-      <div class="lg:grid xl:gap-0 lg:gap-3 grid-cols-3 flex flex-col justify-center items-center py-5 container mx-auto lg:gap-y-10 gap-y-5 max-w-7xl">
+      <div class="grid xl:gap-0 lg:gap-3 lg:grid-cols-3 md:grid-cols-2 py-5 container mx-auto lg:gap-y-10 gap-y-5 max-w-7xl">
 
         <div v-for="(location, index) in locations" :key="index" class="group h-full w-full max-w-sm
    border rounded-lg bg-blue-50 hover:bg-primary  cursor-pointer">
@@ -75,7 +75,7 @@
       <p class="flex w-full justify-center items-center montserrat lg:text-xl text-base px-5 lg:my-6 my-4">
         Nos produits sont conc&ccedil;us pour les entreprises de toutes les tailles
       </p>
-      <div class="grid lg:grid-cols-3 lg:gap-3 xl:gap-x-0 grid-cols-1 py-5 container mx-auto lg:gap-y-10 gap-y-5 lg:px-0 px-5 max-w-7xl">
+      <div class="grid lg:grid-cols-3 md:grid-cols-2 lg:gap-3 xl:gap-x-0 grid-cols-1 py-5 container mx-auto lg:gap-y-10 gap-y-5 lg:px-0 px-5 max-w-7xl">
 
         <div v-for="(location1, index) in locations1" :key="index" class="group h-full w-full max-w-sm
    border rounded-lg bg-white cursor-pointer transition hover:scale-105 duration-500">

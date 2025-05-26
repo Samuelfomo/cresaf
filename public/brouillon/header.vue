@@ -179,98 +179,113 @@
           </div>
 
           <!-- Menu déroulant -->
-          <div v-if="isDropdownOpen2" class="absolute right-0 mt-12 min-w-[22rem] bg-white rounded-md shadow-lg border p-5 z-50"
+          <div v-if="isDropdownOpen2" class="absolute left-[50%] right-0 mt-12 min-w-[40rem] bg-white rounded-md shadow-lg border p-5 z-50"
                @mouseenter="toggleDropdownProducts"
                @mouseleave="closeDropdown2"
           >
-            <div class="py-1">
-              <div class="flex items-center hover:text-secondary">
-                <img :src="personCircle" alt="personCircle" class="h-5 w-5">
-                <router-link to="products" class="flex flex-col font-semibold text-lg px-5 pb-2"
-                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                             @click="closeAndScrollProducts1"
-                >
-                  <h2 class="group relative">Compte chèque
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-                  </h2>
-                  <span class="text-xs text-gray-500">Particulier, entreprise & salaire</span>
-                </router-link>
+            <div class="flex flex-col gap-4">
+              <div class="py-1">
+                <div class="flex items-start justify-normal">
+                  <IconBoxMultiple1 stroke={1} class="h-5 w-5 text-white" />
+                  <h2 class="montserrat montserrat-700 text-xl text-primary mx-5">Nos Produits</h2>
+                </div>
+
+                <div class="grid grid-rows-3 grid-cols-2">
+                  <div class="flex items-center group">
+                    <!--                  <img :src="personCircle" alt="personCircle" class="h-5 w-5">-->
+                    <IconUserCircle stroke={2} class="text-black"/>
+                    <router-link to="products" class="flex flex-col montserrat text-primary text-lg px-5 pb-2"
+                                 :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                                 @click="closeAndScrollProducts1"
+                    >
+                      <h2 class="group relative group-hover:text-secondary">Compte chèque
+                        <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+                      </h2>
+                      <span class="text-xs text-gray-500 montserrat montserrat-300">Particulier, entreprise & salaire</span>
+                    </router-link>
+                  </div>
+                  <div class="flex items-center group">
+                    <img :src="wallet2" alt="wallet2" class="h-5 w-5">
+                    <router-link to="products" class="flex flex-col montserrat text-primary text-lg px-5 py-2"
+                                 :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                                 @click="closeAndScrollProducts2"
+                    >
+                      <h2 class="relative group group-hover:text-secondary">Bons de caisse
+                        <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+                      </h2>
+                      <span class="text-xs text-gray-500 montserrat montserrat-300">Bon plan pour votre épargne</span>
+                    </router-link>
+                  </div>
+                  <div class="flex items-center group">
+                    <img :src="database" alt="database-up" class="h-5 w-5">
+                    <router-link to="products" class="flex flex-col justify-start montserrat text-primary  text-lg px-5 py-2"
+                                 :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                                 @click="closeAndScrollProducts3"
+                    >
+                      <h2 class="group relative group-hover:text-secondary">Dépôt à terme
+                        <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+                      </h2>
+                      <span class="text-xs text-gray-500 montserrat montserrat-300">Fructifier votre argent</span>
+                    </router-link>
+                  </div>
+                  <div class="flex items-center group">
+                    <img :src="collection" alt="collection" class="h-5 w-5">
+                    <router-link to="products" class="flex flex-col justify-start montserrat text-primary text-lg px-5 py-2"
+                                 :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                                 @click="closeAndScrollProducts4"
+                    >
+                      <h2 class="relative group group-hover:text-secondary">Compte d'épargne
+                        <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+                      </h2>
+                      <span class="text-xs text-gray-500 montserrat montserrat-300">Livret & Association</span>
+                    </router-link>
+                  </div>
+                  <div class="flex items-center group">
+                    <img :src="piggy" alt="piggy" class="h-5 w-5">
+                    <router-link to="products" class="flex flex-col justify-start montserrat text-primary text-lg px-5 py-2"
+                                 :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                                 @click="closeAndScrollProducts5"
+                    >
+                      <h2 class="group relative group-hover:text-secondary">Collecte journalière
+                        <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+                      </h2>
+                      <span class="text-xs text-gray-500 montserrat montserrat-300">Nous suivre au quotidien</span>
+                    </router-link>
+                  </div>
+                  <div class="flex items-center group">
+                    <img :src="personCard" alt="personCard" class="h-5 w-5">
+                    <router-link to="products" class="flex flex-col justify-start montserrat text-primary text-lg px-5 py-2"
+                                 :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                                 @click="closeAndScrollProducts6"
+                    >
+                      <h2 class="relative group group-hover:text-secondary">Carte VISA
+                        <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+                      </h2>
+                      <span class="text-xs text-gray-500 montserrat montserrat-300">Vous ouvrir au monde</span>
+                    </router-link>
+                  </div>
+                </div>
               </div>
-              <div class="flex items-center hover:text-secondary">
-                <img :src="wallet2" alt="wallet2" class="h-5 w-5">
-                <router-link to="products" class="flex flex-col font-semibold text-lg px-5 py-2"
-                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                             @click="closeAndScrollProducts2"
-                >
-                  <h2 class="relative group">Bons de caisse
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-                  </h2>
-                  <span class="text-xs text-gray-500">Bon plan pour votre épargne</span>
-                </router-link>
-              </div>
-              <div class="flex items-center hover:text-secondary">
-                <img :src="database" alt="database-up" class="h-5 w-5">
-                <router-link to="products" class="flex flex-col justify-start font-semibold text-lg px-5 py-2"
-                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                             @click="closeAndScrollProducts3"
-                >
-                  <h2 class="group relative">Dépôt à terme
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-                  </h2>
-                  <span class="text-xs text-gray-500">Fructifier votre argent</span>
-                </router-link>
-              </div>
-              <div class="flex items-center hover:text-secondary">
-                <img :src="collection" alt="collection" class="h-5 w-5">
-                <router-link to="products" class="flex flex-col justify-start font-semibold text-lg px-5 py-2"
-                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                             @click="closeAndScrollProducts4"
-                >
-                  <h2 class="relative group">Compte d'épargne
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-                  </h2>
-                  <span class="text-xs text-gray-500">Livret & Association</span>
-                </router-link>
-              </div>
-              <div class="flex items-center hover:text-secondary">
-                <img :src="piggy" alt="piggy" class="h-5 w-5">
-                <router-link to="products" class="flex flex-col justify-start font-semibold text-lg px-5 py-2"
-                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                             @click="closeAndScrollProducts5"
-                >
-                  <h2 class="group relative">Collecte journalière
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-                  </h2>
-                  <span class="text-xs text-gray-500">Nous suivre au quotidien</span>
-                </router-link>
-              </div>
-              <div class="flex items-center hover:text-secondary">
-                <img :src="personCard" alt="personCard" class="h-5 w-5">
-                <router-link to="products" class="flex flex-col justify-start font-semibold text-lg px-5 py-2"
-                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                             @click="closeAndScrollProducts6"
-                >
-                  <h2 class="relative group">Carte VISA
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-                  </h2>
-                  <span class="text-xs text-gray-500">Vous ouvrir au monde</span>
-                </router-link>
+              <div class="py-1">
+                <div class="flex items-start justify-normal">
+                  <IconBoxMultiple1 stroke={1} class="h-5 w-5 text-white" />
+                  <h2 class="montserrat montserrat-700 text-xl text-primary mx-5">Nos solutions</h2>
+                </div>
+                <div class="flex items-center group">
+                  <img :src="sunglasses" alt="sunglasses emoji" class="h-5 w-5">
+                  <router-link to="products" class="flex flex-col justify-start montserrat text-primary text-lg px-5 py-2"
+                               :class="[$route.name === '#' ? activeClass : inactiveClass]"
+                               @click="closeAndScrollSolutions3"
+                  >
+                    <h2 class="relative group group-hover:text-secondary">Financement Import/Export
+                      <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
+                    </h2>
+                    <span class="text-xs text-gray-500 montserrat montserrat-300">Financer votre développement international</span>
+                  </router-link>
+                </div>
               </div>
             </div>
-            <div class="py-1">
-              <div class="flex items-center hover:text-secondary">
-                <img :src="sunglasses" alt="sunglasses emoji" class="h-5 w-5">
-                <router-link to="products" class="flex flex-col font-semibold text-lg px-5 pb-2"
-                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                             @click="closeAndScrollSolutions3"
-                >
-                  <h2 class="group relative">Financement Import/Export
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-                  </h2>
-                  <span class="text-xs text-gray-500">Financer votre développement international</span>
-                </router-link>
-              </div>
-            </div>
+
           </div>
         </div>
         <div class="text-gray-700 flex relative hidden">
@@ -501,7 +516,7 @@
                            :class="[$route.name === 'products' ? activeDrawerClass : 'text-white']"
                            @click="OpenProducts"
               >
-                <span>Nos offres financières</span>
+                <span>Nos produits</span>
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24" viewBox="0 0 24 24"  fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round"
                       stroke-linejoin="round">
@@ -615,27 +630,6 @@
                   >
                     <h2>Carte VISA</h2>
                     <span class="text-xs text-gray-400">Vous ouvrir au monde</span>
-                  </router-link>
-                </div>
-              </div>
-              <div v-if="products" class="w-full flex flex-col">
-                <div class="w-full flex items-center"
-                     @click="closeDrawerAndScrollSolutions3"
-                >
-                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"
-                        stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
-                        class="text-gray-400">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                    <path d="M11.8 16.817l-2.172 1.138a.392 .392 0 0 1 -.568 -.41l.415 -2.411l-1.757 -1.707a.389 .389 0 0 1
-               .217 -.665l2.428 -.352l1.086 -2.193a.392 .392 0 0 1 .702 0l1.086 2.193l2.428
-             .352a.39 .39 0 0 1 .217 .665l-1.757 1.707l.414 2.41a.39 .39 0 0 1 -.567 .411l-2.172 -1.138z" />
-                  </svg>
-                  <router-link to="#" class="flex flex-col font-semibold hover:text-green-500 text-sm text-white px-5 pb-2"
-                               :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                  >
-                    <h2>Financement Import/Export</h2>
-                    <span class="text-xs text-gray-400">Financer votre développement international</span>
                   </router-link>
                 </div>
               </div>
@@ -797,6 +791,8 @@ import FaceBook from "@/assets/images/svg/social/facebook.svg"
 import Youtube from "@/assets/images/svg/social/youtube.svg"
 import Twitter from "@/assets/images/svg/social/twitter.svg"
 import Linkedin from "@/assets/images/svg/social/linkedin.svg"
+import { IconBoxMultiple1, IconUserCircle, IconDatabaseImport, IconPigMoney } from '@tabler/icons-vue';
+// <IconUserCircle stroke={2} />
 
 const isDropdownOpen1 = ref(false)
 const isDropdownOpen2 = ref(false)
@@ -968,11 +964,11 @@ const closeDrawerAndScrollSolutions2 = () => {
   })
 }
 const closeDrawerAndScrollSolutions3 = () => {
-  router.push('/products')
+  router.push('/solutions')
   isDrawerOpen.value = false
   nextTick(() =>{
     setTimeout(() => {
-      scrollTo({id : 'section7'})
+      scrollTo({id : 'section3'})
     }, 100)
   })
 }
@@ -1095,10 +1091,10 @@ const closeAndScrollSolutions2 = () => {
   })
 }
 const closeAndScrollSolutions3 = () => {
-  closeDropdown2()
+  closeDropdown3()
   nextTick(() => {
     setTimeout(() => {
-      scrollTo({id : 'section7'})
+      scrollTo({id : 'section3'})
     }, 100)
   })
 }

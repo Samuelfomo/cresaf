@@ -4,7 +4,7 @@
     <Header />
 
     <!-- Hero Section -->
-    <section class="pt-44 pb-20 bg-primary" ref="heroSection">
+    <section class="lg:pt-44 pt-36 pb-20 bg-primary" ref="heroSection">
       <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
         <div class="md:w-1/2 mb-10 md:mb-0 lg:px-10" ref="heroText">
           <h1 class="text-4xl lg:text-6xl text-left montserrat montserrat-700 text-white pb-0">

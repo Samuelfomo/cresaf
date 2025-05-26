@@ -174,7 +174,7 @@
     <div class="lg:px-8 flex flex-col py-12 justify-center">
       <div id="section4" class="container mx-auto">
           <h1 class="text-secondary lg:text-5xl text-3xl montserrat-700 montserrat text-center">Créons des opportunités pour tous !</h1>
-        <p class="text-gray-600 montserrat lg:text-xl text-lg py-8 w-full lg:px-10 px-6 lg:text-center">
+        <p class="text-gray-600 montserrat text-xl py-8 w-full lg:px-10 px-6 lg:text-center">
           Notre mission, « développer des produits financiers capables de changer l’avenir des entrepreneurs », s’inscrit dans la vision d’entreprise telle qu’énoncée plus haut. À ce titre, les missions de Cresaf S.A peuvent aisément se deviner :
         </p>
         <div class="md:grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:space-x-6 lg:px-0 px-2  container mx-auto">

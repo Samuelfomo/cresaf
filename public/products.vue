@@ -31,6 +31,9 @@ import Entreprise1 from "@/assets/images/entreprise1.jpg"
 import Entreprise2 from "@/assets/images/entreprise2.jpg"
 import Salaire1 from "@/assets/images/salaire1.jpg"
 import Salaire2 from "@/assets/images/salaire2.jpg"
+import Import1 from "@/assets/images/import1.jpg"
+import Import2 from "@/assets/images/import2.jpg"
+import Import3 from "@/assets/images/import3.jpg"
 import Association1 from "@/assets/images/association.jpg"
 import Association2 from "@/assets/images/association1.jpg"
 import Association3 from "@/assets/images/association2.jpg"
@@ -41,6 +44,7 @@ const Cheque = [Cheque1]
 const Epargne = [Epargne1, Epargne2];
 const Entreprise = [Entreprise1, Entreprise2];
 const Salaire = [Salaire1, Salaire2];
+const Import = [Import1, Import2, Import3];
 const Association = [Association1, Association2, Association3];
 const Products = [Association1, Salaire1, Entreprise1, Epargne1, Terme1, Caisse1];
 
@@ -93,7 +97,23 @@ const products = ref([
     subtitle2: "📥 Sécurisez vos revenus quotidiens sans vous déplacer",
     description: "Description de la collecte journalière...",
     image: Collecte1
-  }
+  },
+  {
+    id: 6,
+    title: "Carte visa",
+    subtitle: "Les cartes VISA du CRESAF",
+    subtitle2: "📥 Les cartes VISA du CRESAF offrent une solution sécuriséer",
+    description: "Description de la cartes VISA...",
+    image: Collecte1
+  },
+  {
+    id: 7,
+    title: "Carte visa",
+    subtitle: "Les cartes VISA du CRESAF",
+    subtitle2: "📥 Les cartes VISA du CRESAF offrent une solution sécuriséer",
+    description: "Description de la cartes VISA...",
+    image: Collecte1
+  },
 ]);
 const collectes = ref([
   {
@@ -494,7 +514,7 @@ onUnmounted(() => {
 
     <!-- Hero Section avec slider GSAP -->
     <section class="w-full mx-auto px-4 pt-40 pb-12 lg:pt-40 bg-white" ref="heroSection">
-      <div class="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between">
+      <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between">
         <div class="w-full lg:w-6/12 text-center lg:text-left px-4 lg:px-10" ref="heroText">
           <h1 class="text-4xl lg:text-6xl text-left montserrat montserrat-700 text-primary pb-0">
             Vos projets prennent vie, <span class="text-secondary">nous les accompagnons<em class="montserrat montserrat-800 text-italic ms-3">!</em></span>
@@ -867,8 +887,8 @@ onUnmounted(() => {
 
             <!-- Content Section -->
             <div class="content-section mt-16">
-              <div class="mb-12">
-                <h3 class="text-2xl montserrat montserrat-600 text-gray-50 mb-6 benefits-title text-center">
+              <div class="max-w-xl mx-auto">
+                <h3 class="text-xl montserrat montserrat-600 text-gray-50 text-center mb-6 benefits-title">
                   Ce compte propose de nombreux avantages visant à simplifier et optimiser la gestion financière des souscripteurs.
                 </h3>
               </div>
@@ -937,7 +957,7 @@ onUnmounted(() => {
     </div>
 
     <!--Compte d’épargne association-->
-    <div id="section4" class="pb-6 bg-blue-50 py-12 lg:px-8 px-5">
+    <div id="section4" class="pb-6 bg-blue-50 py-12 lg:px-8">
 
       <div class="relative overflow-hidden">
         <!-- Animated background elements -->
@@ -947,13 +967,13 @@ onUnmounted(() => {
           <div class="floating-circle absolute w-40 h-40 rounded-full opacity-5 bg-primary bottom-[20%] left-[70%]"></div>
         </div>
 
-        <div class="relative z-10 lg:px-16 px-8 py-12">
+        <div class="relative z-10 lg:px-16 px-8 pb-12">
           <div id="section2" class="container mx-auto">
 
             <!-- Header Section with staggered animation -->
             <div class="text-center mb-10">
               <div class="inline-block">
-                <h2 class="text-secondary montserrat montserrat-700 text-4xl mb-6 title-main">
+                <h2 class="text-secondary montserrat montserrat-700 text-4xl mb-6 title-main md:-mx-0 -mx-10">
                   Compte d’épargne association
                 </h2>
                 <div class="w-24 h-1 mx-auto mb-8 accent-bar bg-primary"></div>
@@ -1065,7 +1085,7 @@ onUnmounted(() => {
             <!-- Header Section with staggered animation -->
             <div class="text-center mb-10">
               <div class="inline-block">
-                <h2 class="text-secondary montserrat montserrat-700 text-4xl mb-6 title-main">
+                <h2 class="text-secondary montserrat montserrat-700 text-4xl mb-6 title-main md:-mx-0 -mx-10">
                   Compte d’épargne sur livret
                 </h2>
                 <div class="w-24 h-1 mx-auto mb-8 accent-bar bg-primary"></div>
@@ -1080,7 +1100,7 @@ onUnmounted(() => {
             <div class="lg:grid lg:grid-cols-2 lg:gap-x-16 justify-center">
 
               <!-- Image Section -->
-              <div class="relative mb-12 lg:mb-0 image-container">
+              <div class="relative mb-12 lg:mb-0 image-container place-items-end">
                 <div class="relative overflow-hidden rounded-2xl shadow-2xl transform w-full max-w-xl lg:min-h-[32rem]">
                   <Image_compteAss :images="Epargne" />
 
@@ -1338,7 +1358,7 @@ onUnmounted(() => {
             <div class="lg:grid lg:grid-cols-2 lg:gap-x-16 justify-center">
 
               <!-- Image Section -->
-              <div class="relative mb-12 lg:mb-0 image-container">
+              <div class="relative mb-12 lg:mb-0 image-container place-items-end">
                 <div class="relative overflow-hidden rounded-2xl shadow-2xl transform w-full max-w-xl lg:min-h-[32rem]">
                   <Image_compteAss :images="Salaire" />
 
@@ -1477,9 +1497,9 @@ onUnmounted(() => {
 
     <!--Collecte journalière-->
     <div id="section5" class="bg-primary lg:px-16 px-8 py-12">
-      <div class="container mx-auto description-text">
-        <h1 class="text-white w-full text-center montserrat montserrat-700 lg:text-5xl text-4xl lg:mb-4">Collecte journalière</h1>
-        <p class="w-full my-6 text-xl montserrat montserrat-400 text-gray-200 leading-relaxed">
+      <div class="container mx-auto">
+        <h1 class="text-white w-full text-center montserrat montserrat-700 lg:text-4xl text-3xl lg:mb-4 title-main">Collecte journalière</h1>
+        <p class="w-full my-6 text-xl montserrat montserrat-400 text-gray-200 leading-relaxed description-text lg:text-start text-center">
           La collecte journalière destinée principalement aux travailleurs indépendants (commerçants ou autre)
           permet de sécuriser l’argent sans avoir à se déplacer.
           Nos agents déployés sur le terrain collectent les fonds et les déposent directement
@@ -1514,7 +1534,7 @@ onUnmounted(() => {
         <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">
           Carte visa
         </h2>
-        <p class="text-gray-800 font-primary text-lg w-full justify-center leading-relaxed pb-10">
+        <p class="text-gray-800 font-primary text-lg lg:text-start text-center w-full justify-center leading-relaxed pb-10">
           Les cartes VISA du CRESAF offrent une solution sécurisée pour effectuer des retraits aux guichets automatiques
           et régler des achats de biens ou services, que ce soit via des terminaux de paiement électronique (TPE) ou en ligne.
         </p>
@@ -1534,6 +1554,151 @@ onUnmounted(() => {
         </div>
       </div>
 
+    </div>
+    <div class="relative overflow-hidden bg-white">
+      <!-- Animated background elements -->
+      <div class="absolute inset-0">
+        <div class="floating-circle absolute w-32 h-32 rounded-full opacity-10 bg-primary top-[10%] left-[10%]"></div>
+        <div class="floating-circle absolute w-20 h-20 rounded-full opacity-5 bg-primary top-[60%] right-[15%]"></div>
+        <div class="floating-circle absolute w-40 h-40 rounded-full opacity-5 bg-primary bottom-[20%] left-[70%]"></div>
+      </div>
+
+      <div class="relative z-10 lg:px-16 px-8 py-12">
+        <div id="section7" class="container mx-auto">
+
+          <!-- Header Section with staggered animation -->
+          <div class="text-center mb-10">
+            <div class="inline-block">
+              <h2 class="text-secondary montserrat montserrat-700 text-4xl mb-6 title-main">
+                Financement Import
+              </h2>
+              <div class="w-24 h-1 mx-auto mb-8 accent-bar bg-primary"></div>
+            </div>
+
+            <p class="text-gray-800 text-xl montserrat montserrat-400 max-w-6xl mx-auto leading-relaxed description-text">
+              Nous accompagnons les entrepreneurs dans leurs différentes opérations de vente ou d’achat à l’international
+            </p>
+          </div>
+
+          <!-- Main Content Grid -->
+          <div class="lg:grid lg:grid-cols-2 lg:gap-x-16 justify-center">
+
+            <!-- Image Section -->
+            <div class="relative mb-12 lg:mb-0 image-container place-items-end">
+              <div class="relative overflow-hidden rounded-2xl shadow-2xl transform w-full max-w-xl lg:min-h-[32rem]">
+                <Image_compteAss :images="Import" />
+
+                <!-- Decorative overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+
+                <!-- Floating badge -->
+                <div class="absolute top-0 -right-4 floating-badge">
+                  <div class="px-6 py-3 rounded-full text-white font-bold shadow-lg transform rotate-12 bg-primary">
+                    ✨ Nouveau
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Content Section -->
+            <div class="content-section mt-16">
+              <div class="max-w-xl mx-auto">
+                <h3 class="text-xl montserrat montserrat-600 text-gray-600 text-center mb-6 benefits-title">
+                  Concrétisez vos ambitions
+                </h3>
+              </div>
+
+              <!-- Advantages Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 advantages-grid">
+
+                <!-- Advantage Card 1 -->
+                <div class="advantage-card group cursor-pointer">
+                  <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
+
+                    <div class="relative z-10">
+                      <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                        <h4 class="font-semibold text-white">Expertise internationale</h4>
+                      </div>
+
+                      <p class="text-gray-300 text-sm mb-3">Maîtrise des opérations d'importations ou de dédouanements</p>
+
+<!--                      <div class="flex items-center">-->
+<!--                        <span class="text-lg font-bold text-white">Chaque fin de mois</span>-->
+<!--                      </div>-->
+                    </div>
+
+                    <!-- Hover effect border -->
+                    <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-green-400/30 transition-colors duration-300"></div>
+                  </div>
+                </div>
+                <div class="advantage-card group cursor-pointer">
+                  <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
+
+                    <div class="relative z-10">
+                      <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                        <h4 class="font-semibold text-white">Réseau global</h4>
+                      </div>
+
+                      <p class="text-gray-300 text-sm mb-3">Partenaires dans le monde entier</p>
+
+<!--                      <div class="flex items-center">-->
+<!--                        <span class="text-lg font-bold text-white">Sans contraintes</span>-->
+<!--                      </div>-->
+                    </div>
+
+                    <!-- Hover effect border -->
+                    <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-green-400/30 transition-colors duration-300"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="advantage-card group cursor-pointer py-10">
+                <div class="relative p-6 pb-10 rounded-xl bg-primary backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-2">
+<!--                  <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>-->
+
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-4">
+<!--                      <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">-->
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />-->
+<!--                        </svg>-->
+<!--                      </div>-->
+                      <h4 class="montserrat montserrat-600 text-xl text-white">Services proposés</h4>
+                    </div>
+                    <ul class="space-y-4">
+
+                      <li class="flex items-center text-gray-200 montserrat montserrat-400">
+                        <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+                        Garantie régionale
+                      </li>
+                      <li class="flex items-center text-gray-200 montserrat montserrat-400">
+                        <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
+                        Préfinancement import
+                      </li>
+                    </ul>
+
+                  </div>
+
+                  <!-- Hover effect border -->
+                  <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-green-400/30 transition-colors duration-300"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Navigation latérale -->

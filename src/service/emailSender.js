@@ -16,7 +16,7 @@ const SMTP_CONFIG = {
 
 const EMAIL_CONFIG = {
     from: process.env.MAIL_FROM || `"CRESAF" <${SMTP_CONFIG.auth.user}>`,
-    cc: process.env.MAIL_CC || "manfred@fredcode.net",
+    cc: process.env.MAIL_CC || 'samuel@imediatis.net',
     replyTo: null, // Sera défini dynamiquement
     sendConfirmation: process.env.SEND_CONFIRMATION === 'true'
 };

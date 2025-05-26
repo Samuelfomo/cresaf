@@ -55,6 +55,21 @@
             <img :src="phone" alt="phone icon" class="w-4 h-4" />
             <span class="cursor-pointer text-sm montserrat montserrat-600 text-white" @click="openWhatsApp(location.phone) ">{{ location.textPhone }}</span>
           </div>
+
+          <div class="flex md:justify-normal justify-center items-center space-x-2 hidden">
+            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+            </svg>
+            <div>
+              <span class="montserrat montserrat-600 text-sm text-primary">
+                  +237
+            </span>
+              <span class="cursor-pointer text-sm montserrat montserrat-600 text-white/70" @click="openWhatsApp(location.phone) ">
+                {{ location.textPhone.replace('+237', '') }}
+              </span>
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -124,16 +139,16 @@ const locations = [
   {
     title: 'Siège social (Douala)',
     address: 'Bonakouamouang, Akwa, Face Prudential Beneficial Life',
-    phone: '+237 658 794 995',
-    textPhone: '+237 658 794 995',
+    phone: '+237 658 79 49 95',
+    textPhone: '+237 658 79 49 95',
     mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1048.3107933470685!2d9.70440172672647!3d4.05273483122112!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1061136521bddd85%3A0x4dc0381643068eab!2sCRESAF%20-%20Cr%C3%A9dit%20Solidaire%20d%27Afrique!5e0!3m2!1sfr!2scm!4v1747233173429!5m2!1sfr!2scm",
     gpsCoords: '4.052734831221122,9.70440172672647'
   },
   {
     title: 'Agence d\'Akwa',
     address: 'Bonakouamouang, Akwa, Face Prudential Beneficial Life',
-    phone: '+237 658 794 995',
-    textPhone: '+237 658 794 995',
+    phone: '+237 658 79 49 95',
+    textPhone: '+237 658 79 49 95',
     mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1048.3107933470685!2d9.70440172672647!3d4.05273483122112!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1061136521bddd85%3A0x4dc0381643068eab!2sCRESAF%20-%20Cr%C3%A9dit%20Solidaire%20d%27Afrique!5e0!3m2!1sfr!2scm!4v1747233173429!5m2!1sfr!2scm",
     gpsCoords: '4.056295596917937,9.703365511685044'
   },
@@ -141,7 +156,7 @@ const locations = [
     title: 'Agence Anatole',
     address: 'Carrefour Anatole, face la station total',
     phone: null,
-    textPhone: '+237 *** *** ***',
+    textPhone: '+237 *** ** ** **',
     mapEmbedUrl: null,
     // mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.88246563407!2d9.700099511684809!3d4.041553896920996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x106112337c5fc7f7%3A0x89a8836a257e4ab2!2sCarrefour%20Anatole%2C%20Douala!5e0!3m2!1sfr!2scm!4v1715971461095!5m2!1sfr!2scm",
     gpsCoords: '4.041553896920996,9.700099511684809'
@@ -149,8 +164,8 @@ const locations = [
   {
     title: 'Agence de Yaoundé',
     address: 'Descente Mokolo Elobi, batiment Dubaï Market',
-    phone: '+237 692 313 295',
-    textPhone: '+237 692 313 295',
+    phone: '+237 692 31 32 95',
+    textPhone: '+237 692 31 32 95',
     mapEmbedUrl: null,
     // mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3980.8289708097245!2d11.511476911682971!3d3.862953097127033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bcfd9dba9c739%3A0xeb9f84583978b64c!2sMarch%C3%A9%20Mokolo!5e0!3m2!1sfr!2scm!4v1715971524686!5m2!1sfr!2scm",
     gpsCoords: '3.862953097127033,11.511476911682971'
@@ -158,8 +173,8 @@ const locations = [
   {
     title: 'Agence de Bafoussam',
     address: 'Montée sens interdit, marché A, avant la direction régionale de la Total',
-    phone: '+237 699 477 764',
-    textPhone: '+237 699 477 764',
+    phone: '+237 699 47 77 64',
+    textPhone: '+237 699 47 77 64',
     mapEmbedUrl: null,
     // mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3968.4129265629776!2d10.41624259171053!3d5.77758409582046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105f131f2ac9da29%3A0xe98a1d38f7321015!2sTotal%20Energies%20March%C3%A9%20A!5e0!3m2!1sfr!2scm!4v1715971588638!5m2!1sfr!2scm",
     gpsCoords: '5.77758409582046,10.41624259171053'

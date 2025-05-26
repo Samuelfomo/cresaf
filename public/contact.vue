@@ -9,7 +9,7 @@
           <div class="grid lg:grid-cols-2 gap-12">
             <!-- Contenu textuel -->
             <div class="hero-content place-items-start lg:pt-[20%]">
-              <h1 class="text-4xl lg:text-6xl montserrat montserrat-700 text-white mb-6 leading-tight">
+              <h1 class="lg:text-6xl montserrat montserrat-700 text-4xl text-white mb-6 leading-tight">
                 Contactez-nous
               </h1>
               <p class="text-gray-00 mb-8 montserrat montserrat-300 text-2xl text-gray-300">
@@ -358,25 +358,25 @@ const agencies = ref([
   {
     name: "Agence d'Akwa",
     address: "Bonakouamouang, Akwa, Face Prudential Beneficial Life",
-    phone: "+237 658 794 995",
+    phone: "+237 658 79 49 95",
     email: "cresaf@douala.net"
   },
   {
     name: "Agence Anatole",
     address: "Carrefour Anatole, face la station total",
-    phone: "+237 *** *** ***",
+    phone: "+237 *** ** ** **",
     email: "cresaf@doualana.net"
   },
   {
     name: "Agence de Yaoundé",
     address: "Descente Mokolo Elobi, batiment Dubaï Market",
-    phone: "+237 692 313 295",
+    phone: "+237 692 31 32 95",
     email: "cresaf@yaoundé.net"
   },
   {
     name: "Agence de Bafoussam",
     address: "Montée sens interdit, marché A, avant la direction régionale de la Total",
-    phone: "+237 699 477 764",
+    phone: "+237 699 47 77 64",
     email: "cresaf@bafoussam.net"
   }
 ]);
@@ -470,15 +470,43 @@ const validateForm = () => {
 
   // Validation du téléphone
   if (!form.value.phone.trim()) {
-    formErrors.value.phone = 'Le nom est obligatoire';
+    formErrors.value.phone = 'Le numéro de téléphone est obligatoire';
     isFormValid.value = false;
   } else {
-    const phoneRegex = /^(\+\d{1,3})?[-\s]?\d{1,4}[-\s]?\d{1,4}[-\s]?\d{1,9}$/;
-    if (!phoneRegex.test(form.value.phone.trim())) {
+    const regexNumberCam = /^(\+237|237)?6(2[0]\d{6}|[5-9]\d{7})$/;
+    const cleanedPhoneNumber = form.value.phone.toString().replace(/\s+/g, '');
+    // const phoneRegex = /^(\+\d{1,3})?[-\s]?\d{1,4}[-\s]?\d{1,4}[-\s]?\d{1,9}$/;
+    if (!regexNumberCam.test(cleanedPhoneNumber)) {
       formErrors.value.phone = 'Veuillez entrer un numéro de téléphone valide';
       isFormValid.value = false;
     }
   }
+
+  // detectMobileOperator() {
+  //   const regexNumberCam = /^(\+237|237)?6(2[0]\d{6}|[5-9]\d{7})$/;
+  //   // const orangeRegex = /^(\+237|237)?6(5[5-9]|8[5-9]|9[0-9])\d{6}$/;
+  //   // const mtnRegex = /^(\+237|237)?6(5[0-4]|7[0-9]|8[0-4])\d{6}$/;
+  //   const orangeRegex = /^(00237|237)?6(([9]\d{7}$)|([5|8][5-9]\d{6}))$/;
+  //   const mtnRegex = /^(00237|237)?6(([7]\d{7}$)|([5|8][0-4]\d{6}))$/;
+  //
+  //   const cleanedPhoneNumber = this.phoneNumber.replace(/\s+/g, '');
+  //   // Vérifie si le numéro est camerounais
+  //   if (regexNumberCam.test(cleanedPhoneNumber)) {
+  //     // Vérifie si c'est un numéro MTN
+  //     if (mtnRegex.test(cleanedPhoneNumber)) {
+  //       this.mobileOperator = 'MTN';
+  //     }
+  //     else if (orangeRegex.test(cleanedPhoneNumber)) {
+  //       this.mobileOperator = 'Orange';
+  //     }
+  //     else {
+  //       this.mobileOperator = null
+  //     }
+  //   }
+  //   else {
+  //     this.mobileOperator = null;
+  //   }
+  // },
 
   // Validation du sujet (obligatoire)
   if (!form.value.subject) {
@@ -562,7 +590,7 @@ const submitForm = async () => {
     const result = await emailData.sendEmail();
 
     if (!result) {
-      throw new Error('Erreur lors de l\'envoi du message');
+      showMessage('Erreur lors de l\'envoi du message', `error`);
     }
 
     // Animation de succès
@@ -584,35 +612,42 @@ const submitForm = async () => {
     };
 
     // Message de succès
-    showSuccessMessage("Message envoyé avec succès!");
+    showMessage(`Success : ${result.message}`, `success`);
+    // showSuccessMessage(`Success : Message envoyé avec succès!`, `success`);
 
   } catch (error) {
     console.error('Erreur:', error);
     // Message d'erreur
-    showErrorMessage(error.message || "Erreur lors de l'envoi du message");
+    showMessage(`Error : ${error.message}` || "Erreur lors de l'envoi du message", `error`);
   } finally {
     isSubmitting.value = false;
   }
 };
 
 // Fonctions pour afficher des messages de succès/erreur
-const showSuccessMessage = (message) => {
-  const successEl = document.createElement('div');
-  successEl.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 success-message';
-  successEl.textContent = message;
-  document.body.appendChild(successEl);
+const showMessage = (message, type) => {
+  const messageEl = document.createElement('div');
+  if (type === 'success') {
+    messageEl.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 success-message';
+  }
+  else if (type === 'error') {
+    messageEl.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 error-message';
+  }
 
-  gsap.fromTo(successEl,
+  messageEl.textContent = message;
+  document.body.appendChild(messageEl);
+
+  gsap.fromTo(messageEl,
       { y: -50, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.5, ease: "back.out" }
   );
 
   setTimeout(() => {
-    gsap.to(successEl, {
+    gsap.to(messageEl, {
       opacity: 0,
       y: -20,
       duration: 0.5,
-      onComplete: () => successEl.remove()
+      onComplete: () => messageEl.remove()
     });
   }, 5000);
 };
@@ -641,60 +676,6 @@ const showErrorMessage = (message) => {
 const openWhatsApp = () => {
   window.open("https://api.whatsapp.com/send/?phone=23799623303&text&type=phone_number&app_absent=0", "_blank");
 }
-// const submitForm = async () => {
-//   isSubmitting.value = true;
-//
-//   try {
-//     // Construction des données à envoyer
-//     const formData = {
-//       ...form.value,
-//       // Ajoutez des données supplémentaires si nécessaire
-//       sentAt: new Date().toISOString(),
-//     };
-//
-//     console.log('formData is:', formData);
-//
-//     // Appel à votre API backend
-//     // const response = await fetch('/api/contact', {
-//     //   method: 'POST',
-//     //   headers: {
-//     //     'Content-Type': 'application/json',
-//     //   },
-//     //   body: JSON.stringify(formData),
-//     // });
-//     //
-//     // if (!response.ok) {
-//     //   throw new Error('Erreur lors de l\'envoi du message');
-//     // }
-//
-//     // Animation de succès
-//     gsap.from(".contact-form", {
-//       scale: 0.98,
-//       duration: 0.3,
-//       ease: "back.out"
-//     });
-//
-//     // Réinitialisation du formulaire
-//     form.value = {
-//       firstName: "",
-//       lastName: "",
-//       email: "",
-//       phone: "",
-//       subject: "",
-//       agence: "",
-//       message: "",
-//       source: ""
-//     };
-//
-//     alert("Message envoyé avec succès!");
-//
-//   } catch (error) {
-//     console.error('Erreur:', error);
-//     alert("Erreur lors de l'envoi du message");
-//   } finally {
-//     isSubmitting.value = false;
-//   }
-// };
 
 const featuresSection = ref(null);
 
