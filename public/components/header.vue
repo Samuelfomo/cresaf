@@ -50,10 +50,6 @@
       </div>
     </div>
     <div class="bg-white px-5 py-10 lg:px-14 flex justify-between items-center w-full flex-row border-b h-16">
-      <!-- Logo avec position relative pour ne pas perturber le flux -->
-      <!--      <div class="relative text-xl font-bold text-blue-600 cursor-pointer h-40 flex z-50 mt-auto shadow-lg" @click="router.push('/')">-->
-      <!--        <img :src="logo" alt="Logo" class="object-scale-down">-->
-      <!--      </div>-->
       <div class="relative lg:flex hidden">
         <div class="absolute left-0 cursor-pointer z-50" @click="router.push('/')">
           <div class="bg-white py-2 px-4 rounded-b-lg">
@@ -273,68 +269,6 @@
             </div>
           </div>
         </div>
-        <div class="text-gray-700 flex relative hidden">
-          <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownSolutions" @mouseleave="closeDropdown3">
-            <h2 class="relative hover:text-secondary xl:text-lg lg:text-base text-xs flex group"
-                :class="[$route.name === 'solutions' ? activeClass : inactiveClass]"
-                @click="router.push('/solutions')"
-            >
-              Nos solutions
-              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24" viewBox="0 0 24 24"  fill="none"
-                    stroke="currentColor" stroke-width="1" stroke-linecap="round"
-                    stroke-linejoin="round">
-                <path v-if="open3" d="M9 9l6 8l7 -8" />
-                <path v-if="close3" d="M9 18l6 -8l7 8" />
-              </svg>
-              <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-            </h2>
-          </div>
-
-          <!-- Menu déroulant -->
-          <div v-if="isDropdownOpen3" class="absolute right-0 mt-12 min-w-[385px] bg-white rounded-md shadow-lg border p-5 z-50"
-               @mouseenter="toggleDropdownSolutions"
-               @mouseleave="closeDropdown3"
-          >
-            <div class="py-1">
-              <div class="flex items-center hover:text-secondary">
-                <img :src="smile" alt="smile emoji" class="h-5 w-5">
-                <router-link to="solutions" class="flex flex-col font-medium text-lg px-5 py-2"
-                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                             @click="closeAndScrollSolutions1"
-                >
-                  <h1 class="relative group">Financement de projets
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-                  </h1>
-                  <span class="text-xs text-gray-500">Sur mésure pour vos projets</span>
-                </router-link>
-              </div>
-              <div class="flex items-center hover:text-secondary">
-                <img :src="heart" alt="heart emoji" class="h-5 w-5">
-                <router-link to="solutions" class="flex flex-col justify-start font-medium text-lg px-5 py-2"
-                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                             @click="closeAndScrollSolutions2"
-                >
-                  <h2 class="group relative">Financement de la trésorerie
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-                  </h2>
-                  <span class="text-xs text-gray-500">Financement des besoins de trésorerie ponctuels</span>
-                </router-link>
-              </div>
-              <div class="flex items-center hover:text-secondary">
-                <img :src="sunglasses" alt="sunglasses emoji" class="h-5 w-5">
-                <router-link to="solutions" class="flex flex-col justify-start font-medium text-lg px-5 py-2"
-                             :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                             @click="closeAndScrollSolutions3"
-                >
-                  <h2 class="relative group">Financement Import/Export
-                    <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
-                  </h2>
-                  <span class="text-xs text-gray-500">Financer votre développement international</span>
-                </router-link>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="text-gray-700 flex relative">
           <div class="flex items-center space-x-2 cursor-pointer" @mouseover="toggleDropdownBanking" @mouseleave="closeDropdown4">
             <h2 class="relative hover:text-secondary xl:text-lg lg:text-base text-xs flex group"
@@ -385,9 +319,6 @@
             </div>
           </div>
         </div>
-        <!--        <div class="text-lg text-gray-700 relative cursor-pointer" @click="router.push('/banking')">-->
-        <!--          m-banking-->
-        <!--        </div>-->
       </div>
       <div class=" hidden lg:flex justify-between space-x-2">
         <button type="button"
@@ -424,7 +355,7 @@
               </svg>
             </button>
             <nav class="flex flex-col space-y-4 py-5">
-              <router-link to="#" class="w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3
+              <router-link to="values" class="w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3
             border-b items-center"
                            :class="[$route.name === 'values' ? activeDrawerClass : 'text-white']"
                            @click="OpenAboutUs"
@@ -433,8 +364,8 @@
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24" viewBox="0 0 24 24"  fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round"
                       stroke-linejoin="round">
-                  <path v-if="viewaboutUs" d="M3 16l10 -10l10 10" />
-                  <path v-if="viewaboutUs2" d="M2 9l10 11l10 -12" />
+                  <path v-if="viewAboutUs" d="M3 16l10 -10l10 10" />
+                  <path v-if="viewAboutUs2" d="M2 9l10 11l10 -12" />
                 </svg>
               </router-link>
               <div v-if="aboutUs" class="w-full flex flex-col">
@@ -496,7 +427,7 @@
                 </div>
               </div>
 
-              <router-link to="#" class="w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3 border-b
+              <router-link to="products" class="w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3 border-b
             items-center"
                            :class="[$route.name === 'products' ? activeDrawerClass : 'text-white']"
                            @click="OpenProducts"
@@ -505,8 +436,8 @@
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24" viewBox="0 0 24 24"  fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round"
                       stroke-linejoin="round">
-                  <path v-if="viewproducts" d="M3 16l10 -10l10 10" />
-                  <path v-if="viewproducts2" d="M2 9l10 11l10 -12" />
+                  <path v-if="viewProducts" d="M3 16l10 -10l10 10" />
+                  <path v-if="viewProducts2" d="M2 9l10 11l10 -12" />
                 </svg>
               </router-link>
               <div v-if="products" class="w-full flex flex-col">
@@ -639,81 +570,7 @@
                   </router-link>
                 </div>
               </div>
-              <router-link to="#" class="hidden w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3 border-b
-            items-center"
-                           :class="[$route.name === 'solutions' ? activeDrawerClass : 'text-white']"
-                           @click="OpenSolutions"
-              >
-                <span>Nos solutions</span>
-                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24" viewBox="0 0 24 24"  fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round">
-                  <path v-if="viewsolutions" d="M3 16l10 -10l10 10" />
-                  <path v-if="viewsolutions2" d="M2 9l10 11l10 -12" />
-                </svg>
-              </router-link>
-              <div v-if="solutions" class="w-full flex flex-col">
-                <div class="w-full flex items-center"
-                     @click="closeDrawerAndScrollSolutions1"
-                >
-                  <svg viewBox="-0.5 -0.5 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="Emoji--Streamline-Iconoir" height="24" width="24">
-                    <path d="M7.5 14.337187499999999C3.7239375000000003 14.337187499999999 0.6628125 11.276062499999998 0.6628125 7.5 0.6628125
-              3.7239375000000003 3.7239375000000003 0.6628125 7.5 0.6628125c3.7760624999999997 0 6.837187500000001 3.061125 6.837187500000001
-              6.837187500000001 0 3.7760624999999997 -3.061125 6.837187500000001 -6.837187500000001 6.837187500000001Z" stroke="#d9d9d9"
-                          stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path><path d="M10.576749999999999 9.2093125S9.551187500000001
-                    10.576749999999999 7.5 10.576749999999999s-3.0767499999999997 -1.3674374999999999 -3.0767499999999997
-                     -1.3674374999999999" stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
-                    <path d="M9.892999999999999 5.4488125c-0.18875 0 -0.3418125 -0.1530625 -0.3418125 -0.3418125s0.1530625 -0.34187500000000004
-              0.3418125 -0.34187500000000004 0.34187500000000004 0.1530625 0.34187500000000004 0.34187500000000004 -0.1530625 0.3418125
-              -0.34187500000000004 0.3418125Z" fill="#d9d9d9" stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
-                    <path d="M5.107 5.4488125c-0.1888125 0 -0.34187500000000004 -0.1530625 -0.34187500000000004 -0.3418125s0.1530625 -0.34187500000000004
-              0.34187500000000004 -0.34187500000000004 0.3418125 0.1530625 0.3418125 0.34187500000000004 -0.1530625 0.3418125 -0.3418125 0.3418125Z"
-                          fill="#d9d9d9" stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
-                  </svg>
-                  <router-link to="#" class="flex flex-col text-white font-bold text-base hover:text-green-500 px-5 py-2"
-                               :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                  >
-                    <h1>Financement de projets</h1>
-                    <span class="text-xs text-gray-400">Sur mésure pour vos projets</span>
-                  </router-link>
-                </div>
-                <div class="w-full flex items-center"
-                     @click="closeDrawerAndScrollSolutions2"
-                >
-                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"
-                        stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
-                        class="text-gray-400">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M3 21l17 -17" /><path d="M3 3v18h18" />
-                  </svg>
-                  <router-link to="#" class="flex flex-col text-white justify-start font-bold text-base hover:text-green-500 px-5 py-2"
-                               :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                  >
-                    <h1>Financement de la trésorerie</h1>
-                    <span class="text-xs text-gray-400">Financement des besoins de trésorerie ponctuels</span>
-                  </router-link>
-                </div>
-                <div class="w-full flex items-center"
-                     @click="closeDrawerAndScrollSolutions3"
-                >
-                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"
-                        stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
-                        class="text-gray-400">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                    <path d="M11.8 16.817l-2.172 1.138a.392 .392 0 0 1 -.568 -.41l.415 -2.411l-1.757 -1.707a.389 .389 0 0 1
-               .217 -.665l2.428 -.352l1.086 -2.193a.392 .392 0 0 1 .702 0l1.086 2.193l2.428
-             .352a.39 .39 0 0 1 .217 .665l-1.757 1.707l.414 2.41a.39 .39 0 0 1 -.567 .411l-2.172 -1.138z" />
-                  </svg>
-                  <router-link to="#" class="flex flex-col text-white justify-start font-bold text-base hover:text-green-500 px-5 py-2"
-                               :class="[$route.name === '#' ? activeClass : inactiveClass]"
-                  >
-                    <h1>Financement Import / Export</h1>
-                    <span class="text-xs text-gray-400">Financer votre développement international</span>
-                  </router-link>
-                </div>
-              </div>
-              <router-link to="#" class="w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3 border-b
+              <router-link to="mobile" class="w-full h-full text-lg font-bold hover:text-secondary flex justify-between py-3 border-b
             items-center"
                            :class="[$route.name === 'mobile' ? activeDrawerClass : 'text-white']"
                            @click="OpenMobile"
@@ -768,7 +625,6 @@
       </transition>
     </div>
   </header>
-
 </template>
 
 <script setup lang="ts">
@@ -777,8 +633,6 @@ import {useRouter} from "vue-router"
 import { IconCalendarPin, IconHandFingerRight } from '@tabler/icons-vue';
 const router = useRouter()
 import Logo from "@/assets/images/cresaf.png"
-// import Logo from "@/assets/images/logo.png"
-// import LogoDrewa from "@/assets/images/cresaf-white.png";
 import LogoDrewa from "@/assets/images/logo-cresaf.png";
 
 import database from "@/assets/images/svg/database-up.svg"
@@ -789,10 +643,7 @@ import wallet2 from "@/assets/images/svg/wallet2.svg"
 import collection from "@/assets/images/svg/collection.svg"
 import piggy from "@/assets/images/svg/piggy-bank.svg"
 import personCard from "@/assets/images/svg/person-vcard.svg"
-import smile from "@/assets/images/svg/emoji-smile.svg"
-import heart from "@/assets/images/svg/emoji-heart-eyes.svg"
 import sunglasses from "@/assets/images/svg/emoji-sunglasses.svg"
-// import Logo from "@/assets/images/svg/logo.svg"
 import FaceBook from "@/assets/images/svg/social/facebook.svg"
 import Youtube from "@/assets/images/svg/social/youtube.svg"
 import Twitter from "@/assets/images/svg/social/twitter.svg"
@@ -806,14 +657,12 @@ const aboutUs = ref(false)
 const products = ref(false)
 const solutions = ref(false)
 const mobile = ref(false)
-const viewaboutUs = ref(false)
-const viewaboutUs2 = ref(true);
-const viewproducts = ref(false)
-const viewproducts2 = ref(true);
-const viewsolutions = ref(false)
+const viewAboutUs = ref(false)
+const viewAboutUs2 = ref(true);
+const viewProducts = ref(false)
+const viewProducts2 = ref(true);
 const viewMobile = ref(false)
 const viewMobile2 = ref(true)
-const viewsolutions2 = ref(true);
 const open = ref(true);
 const open2 = ref(true);
 const open3 = ref(true);
@@ -949,24 +798,6 @@ const closeDrawerAndScrollProducts6 = () => {
   })
 }
 
-const closeDrawerAndScrollSolutions1 = () => {
-  router.push('/solutions')
-  isDrawerOpen.value = false
-  nextTick(() =>{
-    setTimeout(() => {
-      scrollTo({id : 'section1'})
-    }, 100)
-  })
-}
-const closeDrawerAndScrollSolutions2 = () => {
-  router.push('/solutions')
-  isDrawerOpen.value = false
-  nextTick(() =>{
-    setTimeout(() => {
-      scrollTo({id : 'section2'})
-    }, 100)
-  })
-}
 const closeDrawerAndScrollSolutions3 = () => {
   router.push('/products')
   isDrawerOpen.value = false
@@ -1078,22 +909,6 @@ const closeAndScrollProducts6 = () =>{
   })
 }
 
-const closeAndScrollSolutions1 = () => {
-  closeDropdown3()
-  nextTick(() => {
-    setTimeout(() => {
-      scrollTo({id : 'section1'})
-    }, 100)
-  })
-}
-const closeAndScrollSolutions2 = () => {
-  closeDropdown3()
-  nextTick(() => {
-    setTimeout(() => {
-      scrollTo({id : 'section2'})
-    }, 100)
-  })
-}
 const closeAndScrollSolutions3 = () => {
   closeDropdown2()
   nextTick(() => {
@@ -1158,21 +973,6 @@ const toggleDropdownProducts = () => {
   close3.value = false
   close4.value = false
 }
-const toggleDropdownSolutions = () => {
-  clearTimeout(timeout)
-  isDropdownOpen3.value = true
-  isDropdownOpen1.value = false
-  isDropdownOpen2.value = false
-  isDropdownOpen4.value = false
-  open3.value = false
-  open.value = true
-  open2.value = true
-  open4.value = true
-  close3.value = true
-  close.value = false
-  close2.value = false
-  close4.value = false
-}
 const toggleDropdownBanking = () => {
   clearTimeout(timeout)
   isDropdownOpen4.value = true
@@ -1204,14 +1004,6 @@ const closeDropdown2 = () =>{
   }, 100);
 
 }
-const closeDropdown3 = () =>{
-  timeout = setTimeout(() => {
-    isDropdownOpen3.value = false
-    open3.value = true
-    close3.value = false
-  }, 100);
-
-}
 const closeDropdown4 = () =>{
   timeout = setTimeout(() => {
     isDropdownOpen4.value = false
@@ -1232,22 +1024,15 @@ const OpenAboutUs = () => {
   aboutUs.value = !aboutUs.value
   products.value = false
   solutions.value = false
-  viewaboutUs.value = !viewaboutUs.value
-  viewaboutUs2.value = !viewaboutUs2.value
+  viewAboutUs.value = !viewAboutUs.value
+  viewAboutUs2.value = !viewAboutUs2.value
 }
 const OpenProducts = () => {
   products.value = !products.value
   aboutUs.value = false
   solutions.value = false
-  viewproducts.value = !viewproducts.value
-  viewproducts2.value = !viewproducts2.value
-}
-const OpenSolutions = () => {
-  solutions.value = !solutions.value
-  aboutUs.value = false
-  products.value = false
-  viewsolutions.value = !viewsolutions.value
-  viewsolutions2.value = !viewsolutions2.value
+  viewProducts.value = !viewProducts.value
+  viewProducts2.value = !viewProducts2.value
 }
 const OpenMobile = () => {
   mobile.value = !mobile.value
@@ -1269,27 +1054,5 @@ const contact = () => {
 onMounted(() =>{
   selectedLanguage.value = languages.value[0];
 })
-
-// const handleLogout =  () => {
-//   try {
-//     // Appel API pour la déconnexion
-//     console.log('Déconnexion');
-//   } catch (error) {
-//     console.error('Erreur lors de la déconnexion :', error) ;
-//   }
-// };
-
-// const closeIsDrawerOpen = () =>{
-//   isDrawerOpen.value = true
-// }
-
-// onMounted(() => {
-//   document.addEventListener('click', closeIsDrawerOpen)
-// })
-
-// Nettoyer l'écouteur d'événement lors de la destruction du composant
-// onUnmounted(() => {
-//   document.removeEventListener('click', closeIsDrawerOpen)
-// })
 
 </script>

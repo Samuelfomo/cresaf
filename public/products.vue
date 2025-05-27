@@ -5,10 +5,9 @@ import { gsap } from 'gsap';
 import Header from "@public/components/header.vue";
 import Footer from "@public/components/footer.vue";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import {IconMoneybagPlus, IconScriptPlus, IconCurrencyDollar} from '@tabler/icons-vue';
+import {IconMoneybagPlus, IconScriptPlus, IconCurrencyDollar, IconCircleCheck, IconPigMoney, IconCalendarDollar, IconReportMoney, IconCreditCardPay, IconTrendingUp, IconFileLike, IconDeviceMobileCheck, IconNetwork, IconWorldCheck } from '@tabler/icons-vue';
 
 gsap.registerPlugin(ScrollTrigger);
-
 
 import Cheque1 from "@/assets/images/chequeAccount.jpg"
 import Argent from "@/assets/images/argent.jpg"
@@ -22,11 +21,11 @@ import Micro from "@/assets/images/microCredit.jpg"
 import Image_compteAss from "@public/components/image_compteAss.vue";
 import Epargne1 from "@/assets/images/livret1.jpg"
 import Epargne2 from "@/assets/images/livret2.jpg"
-import Caisse1 from "@/assets/images/cresaf/bon_caisse.webp"
-import Caisse2 from "@/assets/images/cresaf/bon_caisse2.webp"
-import Terme1 from "@/assets/images/cresaf/depot_terme.webp"
-import Terme2 from "@/assets/images/cresaf/depot_terme2.webp"
-import Collecte1 from "@/assets/images/cresaf/collecte3.webp"
+import Caisse1 from "@/assets/images/bon1.jpg"
+import Caisse2 from "@/assets/images/bon2.jpg"
+import Caisse3 from "@/assets/images/bon3.jpg"
+import Terme3 from "@/assets/images/depot1.jpg"
+import Terme4 from "@/assets/images/depot2.jpg"
 import Entreprise1 from "@/assets/images/entreprise1.jpg"
 import Entreprise2 from "@/assets/images/entreprise2.jpg"
 import Salaire1 from "@/assets/images/salaire1.jpg"
@@ -38,15 +37,15 @@ import Association1 from "@/assets/images/association.jpg"
 import Association2 from "@/assets/images/association1.jpg"
 import Association3 from "@/assets/images/association2.jpg"
 
-const Caisse = [Caisse1, Caisse2]
-const Terme = [Terme1, Terme2]
+const Caisse = [Caisse1, Caisse2, Caisse3]
+const Terme = [Terme3, Terme4]
 const Cheque = [Cheque1]
 const Epargne = [Epargne1, Epargne2];
 const Entreprise = [Entreprise1, Entreprise2];
 const Salaire = [Salaire1, Salaire2];
 const Import = [Import1, Import2, Import3];
 const Association = [Association1, Association2, Association3];
-const Products = [Association1, Salaire1, Entreprise1, Epargne1, Terme1, Caisse1];
+const Products = [Association1, Salaire1, Entreprise1, Epargne1, Terme3, Caisse1];
 
 const route = useRoute();
 
@@ -59,60 +58,25 @@ const heroDevice = ref(null);
 
 const products = ref([
   {
-    id: 1,
-    title: "Compte chèque",
-    subtitle: "Particulier, entreprise & salaire",
-    subtitle2: "✅ Gérez vos finances au quotidien avec facilité et rapidité ",
-    description: "Description du compte chèque...",
-    image: Cheque1
+    id: 1
   },
   {
-    id: 2,
-    title: "Bon de caisse",
-    subtitle: "Bon plan pour votre épargne",
-    subtitle2: "💰 Investissez en toute sécurité avec un rendement garanti chez CRESAF !",
-    description: "Description du Bon de caisse...",
-    image: Caisse2
+    id: 2
   },
   {
-    id: 3,
-    title: "Dépôt à terme",
-    description: "Description du dépôt à terme...",
-    subtitle: "Fructifier votre argent",
-    subtitle2: "🤑 Faites fructifier votre argent avec des taux avantageux et sans risque !",
-    image: Terme1
+    id: 3
   },
   {
-    id: 4,
-    title: "Compte d'épargne",
-    subtitle: "Livret & Association",
-    subtitle2: "💳 Épargnez sereinement et faites grandir vos projets avec CRESAF !",
-    description: "Description du compte d'épargne...",
-    image: Epargne1
+    id: 4
   },
   {
-    id: 5,
-    title: "Collecte journalière",
-    subtitle: "Vous suivre au quotidien",
-    subtitle2: "📥 Sécurisez vos revenus quotidiens sans vous déplacer",
-    description: "Description de la collecte journalière...",
-    image: Collecte1
+    id: 5
   },
   {
-    id: 6,
-    title: "Carte visa",
-    subtitle: "Les cartes VISA du CRESAF",
-    subtitle2: "📥 Les cartes VISA du CRESAF offrent une solution sécuriséer",
-    description: "Description de la cartes VISA...",
-    image: Collecte1
+    id: 6
   },
   {
-    id: 7,
-    title: "Carte visa",
-    subtitle: "Les cartes VISA du CRESAF",
-    subtitle2: "📥 Les cartes VISA du CRESAF offrent une solution sécuriséer",
-    description: "Description de la cartes VISA...",
-    image: Collecte1
+    id: 7
   },
 ]);
 const collectes = ref([
@@ -170,7 +134,53 @@ const visas = ref([
     image: Order,
     description: 'Autres moyens de payement en ligne',
   }
-])
+]);
+const Cheques = ref([
+  {
+    title: "Découvert autorisé",
+    description: "Mise en place d'un découvert",
+    conclusion: "À la demande du client"
+  },
+  {
+    title: "Dépôt initial",
+    description: "Dépôt minimum requis",
+    conclusion: "30.000 XAF"
+  },
+  {
+    title: "Transactions rapides",
+    description: "Virements instantanés",
+    conclusion: "24h/24"
+  },
+  {
+    title: "Sécurité maximale",
+    description: "Protection avancée",
+    conclusion: "Garantie 100%"
+  },
+]);
+const Caisses = ref([
+  {
+    title: "Rémunération",
+    description: "Taux de rémunération",
+    conclusion: "Négociable"
+  },
+  {
+    title: "Mode d’intérêt",
+    description: "Précompte ou Postcompte",
+    conclusion: "À la demande du client"
+  },
+]);
+const Termes = ref([
+  {
+    title: "Rémunération",
+    description: "Taux de rémunération",
+    conclusion: "Négociable"
+  },
+  {
+    title: "Intérêt",
+    description: "Taux d’intérêts",
+    conclusion: "Allant jusqu’à 5%"
+  }
+]);
 
 const currentSlide = ref(0);
 const autoPlayInterval = ref(null);
@@ -250,18 +260,6 @@ const animateSlideTransition = (fromIndex, toIndex, direction = 'next') => {
     opacity: 1
   });
 };
-//   tl.set(currentSlideEl, {
-//     x: 0,
-//     zIndex: 1
-//   });
-//   tl.set(currentContent, {
-//     x: 0,
-//     opacity: 0
-//   });
-//   tl.set(nextContent, {
-//     opacity: 1
-//   });
-// };
 
 const nextSlide = () => {
   if (isTransitioning.value) return;
@@ -514,7 +512,7 @@ onUnmounted(() => {
 
     <!-- Hero Section avec slider GSAP -->
     <section class="w-full mx-auto px-4 pt-40 pb-12 lg:pt-40 bg-white" ref="heroSection">
-      <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between">
+      <div class="container mx-auto flex flex-col lg:flex-row items-center justify-center">
         <div class="w-full lg:w-6/12 text-center lg:text-left px-4 lg:px-10" ref="heroText">
           <h1 class="text-4xl lg:text-6xl text-left montserrat montserrat-700 text-primary pb-0">
             Vos projets prennent vie, <span class="text-secondary">nous les accompagnons<em class="montserrat montserrat-800 text-italic ms-3">!</em></span>
@@ -600,8 +598,8 @@ onUnmounted(() => {
               <!-- Advantages Grid -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 advantages-grid">
 
-                <!-- Advantage Card 1 -->
-                <div class="advantage-card group cursor-pointer">
+                <!-- Advantage Cards -->
+                <div class="advantage-card group cursor-pointer" v-for="(cheque, index) in Cheques" :key="index">
                   <div class="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                     <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                          style="background: linear-gradient(135deg, #45ab34, transparent);"></div>
@@ -609,124 +607,36 @@ onUnmounted(() => {
                     <div class="relative z-10">
                       <div class="flex items-center mb-4">
                         <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        </div>
-                        <h4 class="font-semibold text-white">Découvert autorisé</h4>
-                      </div>
-
-                      <p class="text-gray-300 text-sm mb-3">Mise en place d'un découvert</p>
-
-                      <div class="flex items-center">
-                        <span class="text-lg font-bold text-white">À la demande du client</span>
-                      </div>
-                    </div>
-
-                    <!-- Hover effect border -->
-                    <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-green-400/30 transition-colors duration-300"></div>
-                  </div>
-                </div>
-
-                <!-- Advantage Card 2 -->
-                <div class="advantage-card group cursor-pointer">
-                  <div class="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                         style="background: linear-gradient(135deg, #45ab34, transparent);"></div>
-
-                    <div class="relative z-10">
-                      <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-<!--                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
-<!--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />-->
-<!--                          </svg>-->
-                          <IconCurrencyDollar class="h-5 w-5 text-black" />
-                        </div>
-                        <h4 class="font-semibold text-white">Dépôt initial</h4>
-                      </div>
-
-                      <p class="text-gray-300 text-sm mb-3">Dépôt minimum requis</p>
-
-                      <div class="flex items-center">
-                        <span class="text-2xl font-bold text-primary-accent">30.000 XAF</span>
-                      </div>
-                    </div>
-
-                    <!-- Hover effect border -->
-                    <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-green-400/30 transition-colors duration-300"></div>
-                  </div>
-                </div>
-
-                <!-- Additional Feature Cards -->
-                <div class="advantage-card group cursor-pointer">
-                  <div class="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                         style="background: linear-gradient(135deg, #45ab34, transparent);"></div>
-
-                    <div class="relative z-10">
-                      <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <IconCircleCheck v-if="index === 0" class="h-5 w-5 text-black" />
+                          <IconCurrencyDollar v-else-if="index === 1" class="h-5 w-5 text-black" />
+                          <svg v-else-if="index === 2" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                           </svg>
-                        </div>
-                        <h4 class="font-semibold text-white">Transactions rapides</h4>
-                      </div>
-
-                      <p class="text-gray-300 text-sm mb-3">Virements instantanés</p>
-
-                      <div class="flex items-center">
-                        <span class="text-lg font-bold text-white">24h/24</span>
-                      </div>
-                    </div>
-
-                    <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-green-400/30 transition-colors duration-300"></div>
-                  </div>
-                </div>
-
-                <div class="advantage-card group cursor-pointer">
-                  <div class="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                         style="background: linear-gradient(135deg, #45ab34, transparent);"></div>
-
-                    <div class="relative z-10">
-                      <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                           </svg>
                         </div>
-                        <h4 class="font-semibold text-white">Sécurité maximale</h4>
+                        <h4 class="font-semibold text-white">{{ cheque.title }}</h4>
                       </div>
 
-                      <p class="text-gray-300 text-sm mb-3">Protection avancée</p>
+                      <p class="text-gray-300 text-sm mb-3">{{ cheque.description }}</p>
 
                       <div class="flex items-center">
-                        <span class="text-lg font-bold text-white">Garantie 100%</span>
+                        <span class="text-lg font-bold text-white" :class="index===1 ? 'text-primary-accent' : ''">{{ cheque.conclusion }}</span>
                       </div>
                     </div>
 
+                    <!-- Hover effect border -->
                     <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-green-400/30 transition-colors duration-300"></div>
                   </div>
                 </div>
               </div>
-
-              <!-- Call to Action -->
-<!--              <div class="mt-12 text-center cta-section">-->
-<!--                <button class="group relative px-8 py-4 rounded-full font-bold text-white text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"-->
-<!--                        style="background: linear-gradient(135deg, #45ab34, #5bc446);">-->
-<!--                  <span class="relative z-10">Ouvrir un compte</span>-->
-<!--                  <div class="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>-->
-<!--                  <svg xmlns="http://www.w3.org/2000/svg" class="inline h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
-<!--                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />-->
-<!--                  </svg>-->
-<!--                </button>-->
-<!--              </div>-->
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="relative overflow-hidden bg-blue-50">
       <!-- Animated background elements -->
       <div class="absolute inset-0">
@@ -786,46 +696,24 @@ onUnmounted(() => {
               <!-- Advantages Grid -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 advantages-grid">
 
-                <!-- Advantage Card 1 -->
-                <div class="advantage-card group cursor-pointer">
+                <!-- Advantage Cards -->
+                <div class="advantage-card group cursor-pointer" v-for="(caisse, index) in Caisses" :key="index">
                   <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                     <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                     <div class="relative z-10">
                       <div class="flex items-center mb-4">
                         <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                          <IconMoneybagPlus class="h-5 w-5 text-black" />
+                          <IconMoneybagPlus v-if="index === 0" class="h-5 w-5 text-black" />
+                          <IconScriptPlus v-else class="h-5 w-5 text-black" />
                         </div>
-                        <h4 class="font-semibold text-white">Rémunération</h4>
+                        <h4 class="font-semibold text-white">{{ caisse.title }}</h4>
                       </div>
 
-                      <p class="text-gray-300 text-sm mb-3">Taux de rémunération</p>
+                      <p class="text-gray-300 text-sm mb-3">{{ caisse.description }}</p>
 
                       <div class="flex items-center">
-                        <span class="text-lg font-bold text-white">Négociable</span>
-                      </div>
-                    </div>
-
-                    <!-- Hover effect border -->
-                    <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-green-400/30 transition-colors duration-300"></div>
-                  </div>
-                </div>
-                <div class="advantage-card group cursor-pointer">
-                  <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
-
-                    <div class="relative z-10">
-                      <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                          <IconScriptPlus class="h-5 w-5 text-black" />
-                        </div>
-                        <h4 class="font-semibold text-white">Mode d’intérêt</h4>
-                      </div>
-
-                      <p class="text-gray-300 text-sm mb-3">Précompte ou Postcompte</p>
-
-                      <div class="flex items-center">
-                        <span class="text-lg font-bold text-white">À la demande du client</span>
+                        <span class="text-lg font-bold text-white">{{ caisse.conclusion }}</span>
                       </div>
                     </div>
 
@@ -839,6 +727,7 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
+    <!--Dépôt à terme-->
     <div class="relative overflow-hidden bg-primary">
       <!-- Animated background elements -->
       <div class="absolute inset-0">
@@ -896,8 +785,8 @@ onUnmounted(() => {
               <!-- Advantages Grid -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 advantages-grid">
 
-                <!-- Advantage Card 1 -->
-                <div class="advantage-card group cursor-pointer">
+                <!-- Advantage Cards -->
+                <div class="advantage-card group cursor-pointer" v-for="(terme, index) in Termes" :key="index">
                   <div class="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                     <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                          style="background: linear-gradient(135deg, #45ab34, transparent);"></div>
@@ -905,43 +794,16 @@ onUnmounted(() => {
                     <div class="relative z-10">
                       <div class="flex items-center mb-4">
                         <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
+                          <IconMoneybagPlus v-if="index === 0" class="h-5 w-5 text-black" />
+                          <IconScriptPlus v-else class="h-5 w-5 text-black" />
                         </div>
-                        <h4 class="font-semibold text-white">Rémunération</h4>
+                        <h4 class="font-semibold text-white">{{ terme.title }}</h4>
                       </div>
 
-                      <p class="text-gray-300 text-sm mb-3">Taux de rémunération</p>
+                      <p class="text-gray-300 text-sm mb-3">{{ terme.description }}</p>
 
                       <div class="flex items-center">
-                        <span class="text-lg font-bold text-white">Négociable</span>
-                      </div>
-                    </div>
-
-                    <!-- Hover effect border -->
-                    <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-green-400/30 transition-colors duration-300"></div>
-                  </div>
-                </div>
-
-                <!-- Advantage Card 2 -->
-                <div class="advantage-card group cursor-pointer">
-                  <div class="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                         style="background: linear-gradient(135deg, #45ab34, transparent);"></div>
-
-                    <div class="relative z-10">
-                      <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                          <IconCurrencyDollar class="h-5 w-5 text-black" />
-                        </div>
-                        <h4 class="font-semibold text-white">Intérêt</h4>
-                      </div>
-
-                      <p class="text-gray-300 text-sm mb-3">Taux d’intérêts</p>
-
-                      <div class="flex items-center">
-                        <span class="text-2xl font-bold text-white"> Allant jusqu’à 5%</span>
+                        <span class="text-lg font-bold text-white">{{ terme.conclusion }}</span>
                       </div>
                     </div>
 
@@ -956,9 +818,10 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!--Compte d’épargne association-->
+    <!--Compte d’épargne-->
     <div id="section4" class="pb-6 bg-blue-50 py-12 lg:px-8">
 
+      <!--Compte d’épargne association-->
       <div class="relative overflow-hidden">
         <!-- Animated background elements -->
         <div class="absolute inset-0">
@@ -1016,7 +879,7 @@ onUnmounted(() => {
                 <!-- Advantages Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 advantages-grid">
 
-                  <!-- Advantage Card 1 -->
+                  <!-- Advantage Cards -->
                   <div class="advantage-card group cursor-pointer">
                     <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
@@ -1024,7 +887,7 @@ onUnmounted(() => {
                       <div class="relative z-10">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                            <IconCurrencyDollar class="h-5 w-5 text-black" />
+                            <IconPigMoney class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white">Dépôt initial</h4>
                         </div>
@@ -1047,9 +910,7 @@ onUnmounted(() => {
                       <div class="relative z-10">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <IconScriptPlus class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white">Intérêt</h4>
                         </div>
@@ -1136,7 +997,7 @@ onUnmounted(() => {
                       <div class="relative z-10">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                            <IconCurrencyDollar class="h-5 w-5 text-black" />
+                            <IconPigMoney class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white">Dépôt initial</h4>
                         </div>
@@ -1159,9 +1020,7 @@ onUnmounted(() => {
                       <div class="relative z-10">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <IconCalendarDollar class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white">Solde minimum</h4>
                         </div>
@@ -1251,10 +1110,7 @@ onUnmounted(() => {
                       <div class="relative z-10 group">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-<!--                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
-<!--                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />-->
-<!--                            </svg>-->
-                            <IconCurrencyDollar class="h-5 w-5 text-black" />
+                            <IconPigMoney class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white">Dépôt initial</h4>
                         </div>
@@ -1277,9 +1133,7 @@ onUnmounted(() => {
                       <div class="relative z-10">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <IconMoneybagPlus class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white"> Compensation</h4>
                         </div>
@@ -1302,9 +1156,7 @@ onUnmounted(() => {
                       <div class="relative z-10">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <IconReportMoney class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white"> Préfinancement</h4>
                         </div>
@@ -1394,9 +1246,7 @@ onUnmounted(() => {
                       <div class="relative z-10">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <IconCreditCardPay class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white">Virement de salaire</h4>
                         </div>
@@ -1419,9 +1269,7 @@ onUnmounted(() => {
                       <div class="relative z-10">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <IconTrendingUp class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white">Opérations courantes</h4>
                         </div>
@@ -1444,9 +1292,7 @@ onUnmounted(() => {
                       <div class="relative z-10">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <IconFileLike class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white">Découvert autorisé</h4>
                         </div>
@@ -1469,9 +1315,7 @@ onUnmounted(() => {
                       <div class="relative z-10">
                         <div class="flex items-center mb-4">
                           <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <IconDeviceMobileCheck class="h-5 w-5 text-black" />
                           </div>
                           <h4 class="font-semibold text-white"> Accès au crédit</h4>
                         </div>
@@ -1530,11 +1374,11 @@ onUnmounted(() => {
 
     <!--Carte visa-->
     <div id="section6" class="bg-blue-50 lg:px-16 px-8 py-12">
-      <div class="container mx-auto description-text">
-        <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5">
+      <div class="container mx-auto">
+        <h2 class="text-secondary montserrat montserrat-700 text-4xl w-full justify-center text-center pb-5 title-main">
           Carte visa
         </h2>
-        <p class="text-gray-800 font-primary text-lg lg:text-start text-center w-full justify-center leading-relaxed pb-10">
+        <p class="text-gray-800 font-primary text-lg lg:text-start text-center w-full justify-center leading-relaxed pb-10 description-text">
           Les cartes VISA du CRESAF offrent une solution sécurisée pour effectuer des retraits aux guichets automatiques
           et régler des achats de biens ou services, que ce soit via des terminaux de paiement électronique (TPE) ou en ligne.
         </p>
@@ -1620,18 +1464,12 @@ onUnmounted(() => {
                     <div class="relative z-10">
                       <div class="flex items-center mb-4">
                         <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
+                          <IconWorldCheck class="h-5 w-5 text-black" />
                         </div>
                         <h4 class="font-semibold text-white">Expertise internationale</h4>
                       </div>
 
                       <p class="text-gray-300 text-sm mb-3">Maîtrise des opérations d'importations ou de dédouanements</p>
-
-<!--                      <div class="flex items-center">-->
-<!--                        <span class="text-lg font-bold text-white">Chaque fin de mois</span>-->
-<!--                      </div>-->
                     </div>
 
                     <!-- Hover effect border -->
@@ -1645,18 +1483,12 @@ onUnmounted(() => {
                     <div class="relative z-10">
                       <div class="flex items-center mb-4">
                         <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
+                          <IconNetwork class="h-5 w-5 text-black" />
                         </div>
                         <h4 class="font-semibold text-white">Réseau global</h4>
                       </div>
 
                       <p class="text-gray-300 text-sm mb-3">Partenaires dans le monde entier</p>
-
-<!--                      <div class="flex items-center">-->
-<!--                        <span class="text-lg font-bold text-white">Sans contraintes</span>-->
-<!--                      </div>-->
                     </div>
 
                     <!-- Hover effect border -->
@@ -1666,15 +1498,9 @@ onUnmounted(() => {
               </div>
               <div class="advantage-card group cursor-pointer py-10">
                 <div class="relative p-6 pb-10 rounded-xl bg-primary backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-2">
-<!--                  <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>-->
 
                   <div class="relative z-10">
                     <div class="flex items-center mb-4">
-<!--                      <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">-->
-<!--                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
-<!--                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />-->
-<!--                        </svg>-->
-<!--                      </div>-->
                       <h4 class="montserrat montserrat-600 text-xl text-white">Services proposés</h4>
                     </div>
                     <ul class="space-y-4">

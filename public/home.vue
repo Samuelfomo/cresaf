@@ -27,7 +27,7 @@
       </div>
     </section>
 
-    <section class="bg-white px-8 flex flex-col py-12 z-30">
+    <section class="bg-white px-8 flex flex-col py-12 z-30" ref="featuresSection">
       <h2 class="text-primary montserrat montserrat-700 lg:text-3xl text-lg uppercase text-center pb-5">
         nos services de transfert d'argent
       </h2>
@@ -49,8 +49,10 @@
       </div>
       <div class="grid xl:gap-0 lg:gap-3 lg:grid-cols-3 md:grid-cols-2 py-5 container mx-auto lg:gap-y-10 gap-y-5 max-w-7xl">
 
-        <div v-for="(location, index) in locations" :key="index" class="group h-full w-full max-w-sm
-   border rounded-lg bg-blue-50 hover:bg-primary  cursor-pointer">
+        <div v-for="(location, index) in locations" :key="index"
+             class="group h-full w-full max-w-sm border rounded-lg bg-blue-50 hover:bg-primary  cursor-pointer"
+             ref="featureCards"
+        >
 
           <img :src="location.icon" alt="'location.alt'">
           <div class="py-6 px-6 group-hover:text-white">
@@ -77,8 +79,9 @@
       </p>
       <div class="grid lg:grid-cols-3 md:grid-cols-2 lg:gap-3 xl:gap-x-0 grid-cols-1 py-5 container mx-auto lg:gap-y-10 gap-y-5 lg:px-0 px-5 max-w-7xl">
 
-        <div v-for="(location1, index) in locations1" :key="index" class="group h-full w-full max-w-sm
-   border rounded-lg bg-white cursor-pointer transition hover:scale-105 duration-500">
+        <div v-for="(location1, index) in locations1" :key="index"
+             class="group h-full w-full max-w-sm border rounded-lg bg-white cursor-pointer transition hover:scale-105 duration-500"
+        >
 
           <img :src="location1.icon" :alt="location1.alt" @click="goToSection(location1.section)">
           <div class="py-6 px-6">
@@ -126,12 +129,13 @@ import { IconBrandWhatsapp, IconArrowRight } from '@tabler/icons-vue';
 
 import Pdf from "@/assets/pdf/account-condition.pdf"
 import Image1 from "@public/components/image.vue";
-// import Pdf1 from "@/assets/pdf/request-card.pdf"
-// import Pdf2 from "@/assets/pdf/start-investment.pdf"
+import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 const heroSection = ref(null);
 const heroText = ref(null);
 const heroDevice = ref(null);
+const featuresSection = ref(null);
+const featureCards = ref([]);
 
 const openPdf = async (pdf) => {
   try {
@@ -234,7 +238,6 @@ onMounted(() => {
 
   // Animations pour la section Hero
   const heroTimeline = gsap.timeline();
-
   heroTimeline
       .from(heroText.value, {
         x: -50,
@@ -248,6 +251,21 @@ onMounted(() => {
         duration: 1,
         ease: 'power3.out'
       }, "-=0.5");
+
+  ScrollTrigger.create({
+    trigger: featuresSection.value,
+    start: 'top 80%',
+    onEnter: () => {
+      gsap.from(featureCards.value, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out'
+      });
+    }
+  });
+
 });
 // Fonction pour animer la flèche
 const animateArrow = (index, isEnter) => {
