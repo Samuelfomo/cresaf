@@ -112,7 +112,7 @@
                   <span class="text-xs text-gray-500">Confiance, Intégrité et solidarité </span>
                 </router-link>
               </div>
-              <div class="flex items-center hover:text-secondary"  :class="[$route.name === '#' ? activeClass : inactiveClass]">
+              <div class="flex items-center hover:text-secondary hidden"  :class="[$route.name === '#' ? activeClass : inactiveClass]">
                 <img :src="briefcase" alt="briefcase" class="h-5 w-5">
 
                 <router-link to="values" class="flex flex-col font-semibold text-lg px-5 py-2"
@@ -127,7 +127,7 @@
               <div class="flex items-center hover:text-secondary" :class="[$route.name === '#' ? activeClass : inactiveClass]">
                 <img :src="graphUp" alt="graphUp" class="h-5 w-5">
                 <router-link to="/values" class="flex flex-col justify-start font-semibold text-lg px-5 py-2"
-                             @click="closeAndScroll3"
+                             @click="closeAndScroll2"
                 >
                   <h2 class="group relative">Notre vision
                     <span class="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-500 group-hover:w-full"></span>
@@ -378,7 +378,7 @@
                     <span class="text-xs text-gray-400">Confiance, Intégrité et solidarité </span>
                   </router-link>
                 </div>
-                <div class="w-full flex items-center">
+                <div class="w-full flex items-center hidden">
                   <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"
                         stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
                         class="text-gray-400">
@@ -402,7 +402,7 @@
                     <path d="M3 21l17 -17" /><path d="M3 3v18h18" />
                   </svg>
                   <router-link to="/values" class="flex flex-col text-white justify-start font-semibold hover:text-green-500 text-base px-5 py-2"
-                               @click="closeDrawerAndScroll3"
+                               @click="closeDrawerAndScroll2"
                   >
                     <h1>Notre vision</h1>
                     <span class="text-xs text-gray-400">Miser sur l'avenir </span>

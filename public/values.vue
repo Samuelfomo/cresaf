@@ -74,19 +74,41 @@
     </div>
 
     <!-- Section Confiance -->
-    <div class="lg:px-8 flex flex-col py-12 justify-center" ref="confianceSection">
+<!--    <div class="lg:px-8 flex flex-col py-12 justify-center bg-primary" ref="confianceSection">-->
+<!--      <div id="section2" class="container mx-auto">-->
+<!--        <h1 class="text-white lg:text-5xl text-3xl montserrat montserrat-700 text-center" ref="confianceTitle">-->
+<!--          Pourquoi nous faire confiance ?-->
+<!--        </h1>-->
+<!--        <p class="text-gray-200 montserrat montserrat-400 text-xl lg:py-8 w-full lg:px-20 p-6 text-center" ref="confianceSubtitle">-->
+<!--          Nous disposons d'actifs de qualité que nous employons au profit de nos clients-->
+<!--        </p>-->
+<!--        <div class="md:grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:space-x-6 lg:px-0 px-6 lg:space-y-0 space-y-6 container mx-auto" ref="confianceCards">-->
+<!--          <div v-for="(raison, index) in locations2" :key="index"-->
+<!--               class="confiance-card group rounded-lg overflow-hidden flex flex-col h-full shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"-->
+<!--          >-->
+<!--            <div class="h-full bg-gradient-to-br from-primary to-white/80 flex justify-center items-center">-->
+<!--              <div class="p-6 flex-grow">-->
+<!--                <p class="montserrat text-white text-lg leading-relaxed">{{ raison.description }}</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div class="lg:px-8 flex flex-col py-12 justify-center bg-primary" ref="confianceSection">
       <div id="section2" class="container mx-auto">
-        <h1 class="text-secondary lg:text-5xl text-3xl montserrat montserrat-700 text-center" ref="confianceTitle">
-          Pourquoi nous faire confiance ?
+        <h1 class="text-white lg:text-5xl text-3xl montserrat montserrat-700 text-center" ref="confianceTitle">
+          Ensemble, construisons un avenir durable
         </h1>
-        <p class="text-gray-700 montserrat montserrat-400 text-xl lg:py-8 w-full lg:px-20 p-6 text-center" ref="confianceSubtitle">
-          Nous disposons d'actifs de qualité que nous employons au profit de nos clients
+        <p class="text-gray-200 montserrat montserrat-400 text-xl lg:py-8 w-full lg:px-20 p-6 text-center" ref="confianceSubtitle">
+          Chez Cresaf, notre vision ne se limite pas à offrir des services financiers.
+          Elle s’incarne dans un engagement profond envers les personnes, les territoires et le progrès partagé.
         </p>
         <div class="md:grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:space-x-6 lg:px-0 px-6 lg:space-y-0 space-y-6 container mx-auto" ref="confianceCards">
           <div v-for="(raison, index) in locations2" :key="index"
                class="confiance-card group rounded-lg overflow-hidden flex flex-col h-full shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
           >
-            <div class="h-full bg-gradient-to-br from-primary to-secondary flex justify-center items-center">
+            <div class="h-full bg-gradient-to-br from-primary to-white/80 flex justify-center items-center">
               <div class="p-6 flex-grow">
                 <p class="montserrat text-white text-lg leading-relaxed">{{ raison.description }}</p>
               </div>
@@ -97,31 +119,31 @@
     </div>
 
     <!-- Section Avenir -->
-    <div class="lg:px-8 flex flex-col py-12 bg-primary" ref="avenirSection">
-      <div id="section3" class="container mx-auto">
-        <div class="flex lg:flex-nowrap flex-wrap px-5 h-full justify-between items-center w-full gap-2">
-          <div class="flex flex-col" ref="avenirContent">
-            <h1 class="text-white lg:text-5xl text-3xl pb-10 lg:text-left text-center montserrat montserrat-700 w-full">
-              Nous misons sur l'avenir
-            </h1>
-            <div class="md:grid lg:grid-cols-2 grid-cols-1 gap-4 lg:space-y-0 space-y-4 container mx-auto" ref="avenirCards">
-              <div v-for="(vision, index) in visions" :key="index"
-                   class="avenir-card group rounded-lg overflow-hidden flex flex-col h-full shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                <div class="p-6 bg-white flex-grow">
-                  <p class="montserrat text-gray-700 text-lg leading-relaxed">{{ vision.description }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex w-full h-full max-w-lg py-10 justify-start flex-wrap px-5 lg:px-20 gap-2" ref="avenirImage">
-            <img :src="girl" alt="image girl" class="object-cover transition-transform duration-500 hover:scale-105">
-          </div>
-        </div>
-      </div>
-    </div>
+<!--    <div class="lg:px-8 flex flex-col py-12 bg-primary " ref="avenirSection">-->
+<!--      <div id="section3" class="container mx-auto">-->
+<!--        <div class="flex lg:flex-nowrap flex-wrap px-5 h-full justify-between items-center w-full gap-2">-->
+<!--          <div class="flex flex-col" ref="avenirContent">-->
+<!--            <h1 class="text-white lg:text-5xl text-3xl pb-10 lg:text-left text-center montserrat montserrat-700 w-full">-->
+<!--              Nous misons sur l'avenir-->
+<!--            </h1>-->
+<!--            <div class="md:grid lg:grid-cols-2 grid-cols-1 gap-4 lg:space-y-0 space-y-4 container mx-auto" ref="avenirCards">-->
+<!--              <div v-for="(vision, index) in visions" :key="index"-->
+<!--                   class="avenir-card group rounded-lg overflow-hidden flex flex-col h-full shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">-->
+<!--                <div class="p-6 bg-white flex-grow">-->
+<!--                  <p class="montserrat text-gray-700 text-lg leading-relaxed">{{ vision.description }}</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="flex w-full h-full max-w-lg py-10 justify-start flex-wrap px-5 lg:px-20 gap-2" ref="avenirImage">-->
+<!--            <img :src="girl" alt="image girl" class="object-cover transition-transform duration-500 hover:scale-105">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <!-- Section Opportunités -->
-    <div class="lg:px-8 flex flex-col py-12 justify-center" ref="opportunitySection">
+    <div class="lg:px-8 flex flex-col py-12 justify-center bg-white" ref="opportunitySection">
       <div id="section4" class="container mx-auto">
         <h1 class="text-secondary lg:text-5xl text-3xl montserrat-700 montserrat text-center" ref="opportunityTitle">
           Créons des opportunités pour tous !
@@ -144,7 +166,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-6 bg-white flex-grow text-center">
+            <div class="p-6 flex-grow text-center bg-white">
               <p class="montserrat montserrat-400 text-gray-700 text-lg">{{ location3.description }}</p>
             </div>
           </div>
@@ -162,7 +184,7 @@ import Header from "@public/components/header.vue";
 import Footer from "@public/components/footer.vue";
 import Image1 from "@public/components/image.vue";
 
-import Girl from "@/assets/images/girl.webp"
+// import Girl from "@/assets/images/girl.webp"
 import confiance from "@/assets/images/confiance.jpg"
 import Responsibility from "@/assets/images/responsabilite.jpg"
 import Innovation from "@/assets/images/innovation.jpg"
@@ -176,7 +198,7 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 // Enregistrement du plugin ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
-const girl = Girl;
+// const girl = Girl;
 
 // Refs pour les éléments
 const heroSection = ref(null);
@@ -257,18 +279,32 @@ const locations = ref([
 
 const locations2 = ref([
   {
-    description:'Notre connaissance fine du terrain nous permet d\'offrir des solutions adaptées aux besoins réels des populations et des entrepreneurs.'
+    description:'Nous croyons en une croissance inclusive où la technologie reste au service de l’humain.'
   },
   {
-    description:'Nous combinons rigueur, innovation et engagement humain pour maximiser l\'impact de nos interventions.'
+    description:'Chaque relation que nous construisons repose sur l’écoute, l’éthique et la proximité.'
   },
   {
-    description:'Notre réseau de partenaires locaux et internationaux renforce notre capacité à agir efficacement et durablement.'
+    description:'Engagés pour l’excellence et le progrès social, nous accompagnons le développement économique des territoires que nous servons.'
   },
   {
-    description:'Avec une équipe engagée et des outils flexibles, nous faisons de chaque accompagnement une opportunité de transformation.'
+    description:'Plus qu’un établissement financier, nous sommes un partenaire de confiance à vos côtés, pour bâtir ensemble un avenir durable.'
   }
 ]);
+// const locations2 = ref([
+//   {
+//     description:'Notre connaissance fine du terrain nous permet d\'offrir des solutions adaptées aux besoins réels des populations et des entrepreneurs.'
+//   },
+//   {
+//     description:'Nous combinons rigueur, innovation et engagement humain pour maximiser l\'impact de nos interventions.'
+//   },
+//   {
+//     description:'Notre réseau de partenaires locaux et internationaux renforce notre capacité à agir efficacement et durablement.'
+//   },
+//   {
+//     description:'Avec une équipe engagée et des outils flexibles, nous faisons de chaque accompagnement une opportunité de transformation.'
+//   }
+// ]);
 
 const locations3 = ref([
   {
@@ -293,17 +329,17 @@ const locations3 = ref([
   }
 ]);
 
-const visions = ref([
-  {
-    description: 'Nous aspirons à être une force motrice du changement pour transformer et établir le standard du secteur de la microfinance au Cameroun.'
-  },
-  {
-    description: 'Les entrepreneurs sont confrontés à des défis uniques dans leurs activités quotidiennes, notamment le manque de solutions bancaires adaptées à leurs besoins spécifiques.'
-  },
-  {
-    description: 'Nous tirons notre force de notre capacité à répondre à ces défis de manière directe, nous sommes déterminés à apporter des solutions bancaires simples, fiables et accessibles aux entrepreneurs, aux salariés et aux travailleurs indépendants.'
-  },
-]);
+// const visions = ref([
+//   {
+//     description: 'Nous aspirons à être une force motrice du changement pour transformer et établir le standard du secteur de la microfinance au Cameroun.'
+//   },
+//   {
+//     description: 'Les entrepreneurs sont confrontés à des défis uniques dans leurs activités quotidiennes, notamment le manque de solutions bancaires adaptées à leurs besoins spécifiques.'
+//   },
+//   {
+//     description: 'Nous tirons notre force de notre capacité à répondre à ces défis de manière directe, nous sommes déterminés à apporter des solutions bancaires simples, fiables et accessibles aux entrepreneurs, aux salariés et aux travailleurs indépendants.'
+//   },
+// ]);
 
 onMounted(async () => {
   await nextTick();
