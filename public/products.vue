@@ -284,16 +284,26 @@ const stopAutoPlay = () => {
 
 const currentSection = ref(1);
 
+// const scrollToSection = (sectionId) => {
+//   const section = document.getElementById(`section${sectionId}`);
+//   if (section) {
+//     section.scrollIntoView({ behavior: 'smooth' });
+//     currentSection.value = sectionId;
+//   }
+// };
 const scrollToSection = (sectionId) => {
   const section = document.getElementById(`section${sectionId}`);
   if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
+    const offset = section.getBoundingClientRect().top + window.scrollY - 150;
+    window.scrollTo({ top: offset, behavior: 'smooth' });
     currentSection.value = sectionId;
   }
 };
 
+
 // Démarrer l'auto-play au montage du composant
-onMounted(() => {
+onMounted(async () => {
+  await nextTick();
   startAutoPlay();
 
   // Observer pour les sections
@@ -320,14 +330,17 @@ onMounted(() => {
     observer.observe(section);
   });
 
-  nextTick(() => {
+  await nextTick(() => {
     const sectionId = route.query.scrollTo
     if (sectionId) {
       setTimeout(() => {
         const sectionElement = document.getElementById(sectionId)
         if (sectionElement) {
-          sectionElement.scrollIntoView({behavior: 'smooth'})
+          // sectionElement.scrollIntoView({behavior: 'smooth'})
+          const offset = sectionElement.getBoundingClientRect().top + window.scrollY - 150;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
         }
+
       }, 500);
     }
   });
@@ -636,7 +649,7 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
-
+    <!--Bon de caisse-->
     <div class="relative overflow-hidden bg-blue-50">
       <!-- Animated background elements -->
       <div class="absolute inset-0">
@@ -698,7 +711,7 @@ onUnmounted(() => {
 
                 <!-- Advantage Cards -->
                 <div class="advantage-card group cursor-pointer" v-for="(caisse, index) in Caisses" :key="index">
-                  <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                  <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                     <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                     <div class="relative z-10">
@@ -881,7 +894,7 @@ onUnmounted(() => {
 
                   <!-- Advantage Cards -->
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10">
@@ -904,7 +917,7 @@ onUnmounted(() => {
                     </div>
                   </div>
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10">
@@ -991,7 +1004,7 @@ onUnmounted(() => {
 
                   <!-- Advantage Card 1 -->
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10">
@@ -1014,7 +1027,7 @@ onUnmounted(() => {
                     </div>
                   </div>
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10">
@@ -1104,7 +1117,7 @@ onUnmounted(() => {
 
                   <!-- Advantage Card 1 -->
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10 group">
@@ -1127,7 +1140,7 @@ onUnmounted(() => {
                     </div>
                   </div>
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10">
@@ -1150,7 +1163,7 @@ onUnmounted(() => {
                     </div>
                   </div>
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10">
@@ -1240,7 +1253,7 @@ onUnmounted(() => {
 
                   <!-- Advantage Card 1 -->
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10">
@@ -1263,7 +1276,7 @@ onUnmounted(() => {
                     </div>
                   </div>
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10">
@@ -1286,7 +1299,7 @@ onUnmounted(() => {
                     </div>
                   </div>
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10">
@@ -1309,7 +1322,7 @@ onUnmounted(() => {
                     </div>
                   </div>
                   <div class="advantage-card group cursor-pointer">
-                    <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                       <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                       <div class="relative z-10">
@@ -1341,7 +1354,7 @@ onUnmounted(() => {
 
     <!--Collecte journalière-->
     <div id="section5" class="bg-primary lg:px-16 px-8 py-12">
-      <div class="container mx-auto">
+      <div class="container mx-auto max-w-6xl">
         <h1 class="text-white w-full text-center montserrat montserrat-700 lg:text-4xl text-3xl lg:mb-4 title-main">Collecte journalière</h1>
         <p class="w-full my-6 text-xl montserrat montserrat-400 text-gray-200 leading-relaxed description-text lg:text-start text-center">
           La collecte journalière destinée principalement aux travailleurs indépendants (commerçants ou autre)
@@ -1458,7 +1471,7 @@ onUnmounted(() => {
 
                 <!-- Advantage Card 1 -->
                 <div class="advantage-card group cursor-pointer">
-                  <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                  <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                     <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                     <div class="relative z-10">
@@ -1469,7 +1482,7 @@ onUnmounted(() => {
                         <h4 class="font-semibold text-white">Expertise internationale</h4>
                       </div>
 
-                      <p class="text-gray-300 text-sm mb-3">Maîtrise des opérations d'importations ou de dédouanements</p>
+                      <p class="text-gray-300 text-sm mb-3">Maîtrise des opérations d'importations</p>
                     </div>
 
                     <!-- Hover effect border -->
@@ -1477,7 +1490,7 @@ onUnmounted(() => {
                   </div>
                 </div>
                 <div class="advantage-card group cursor-pointer">
-                  <div class="relative p-6 rounded-xl bg-primary/70 opacity-95 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                  <div class="relative p-6 rounded-xl bg-primary backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                     <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary to-primary"></div>
 
                     <div class="relative z-10">

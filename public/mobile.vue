@@ -298,7 +298,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Footer from "@public/components/footer.vue";
@@ -387,7 +387,8 @@ const openPlaystore = () => {
   window.open('https://play.google.com/store/apps/details?id=net.betterplanning.mobileBanking.cresaf&hl=fr','_blank' )
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
       // Animations pour la section Hero
       const heroTimeline = gsap.timeline();
 

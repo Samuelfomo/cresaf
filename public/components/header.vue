@@ -1044,7 +1044,14 @@ const OpenMobile = () => {
 }
 
 const scrollTo = ({id}: { id: any })=> {
-  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+
+  const section = document.getElementById(id);
+  if (section) {
+    const offset = section.getBoundingClientRect().top + window.scrollY - 150;
+    window.scrollTo({ top: offset, behavior: 'smooth' });
+  }
+  // document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+
 }
 
 const contact = () => {

@@ -295,7 +295,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, nextTick } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "@public/components/header.vue";
@@ -481,33 +481,6 @@ const validateForm = () => {
       isFormValid.value = false;
     }
   }
-
-  // detectMobileOperator() {
-  //   const regexNumberCam = /^(\+237|237)?6(2[0]\d{6}|[5-9]\d{7})$/;
-  //   // const orangeRegex = /^(\+237|237)?6(5[5-9]|8[5-9]|9[0-9])\d{6}$/;
-  //   // const mtnRegex = /^(\+237|237)?6(5[0-4]|7[0-9]|8[0-4])\d{6}$/;
-  //   const orangeRegex = /^(00237|237)?6(([9]\d{7}$)|([5|8][5-9]\d{6}))$/;
-  //   const mtnRegex = /^(00237|237)?6(([7]\d{7}$)|([5|8][0-4]\d{6}))$/;
-  //
-  //   const cleanedPhoneNumber = this.phoneNumber.replace(/\s+/g, '');
-  //   // Vérifie si le numéro est camerounais
-  //   if (regexNumberCam.test(cleanedPhoneNumber)) {
-  //     // Vérifie si c'est un numéro MTN
-  //     if (mtnRegex.test(cleanedPhoneNumber)) {
-  //       this.mobileOperator = 'MTN';
-  //     }
-  //     else if (orangeRegex.test(cleanedPhoneNumber)) {
-  //       this.mobileOperator = 'Orange';
-  //     }
-  //     else {
-  //       this.mobileOperator = null
-  //     }
-  //   }
-  //   else {
-  //     this.mobileOperator = null;
-  //   }
-  // },
-
   // Validation du sujet (obligatoire)
   if (!form.value.subject) {
     formErrors.value.subject = 'Veuillez sélectionner un sujet';
@@ -652,34 +625,14 @@ const showMessage = (message, type) => {
   }, 5000);
 };
 
-const showErrorMessage = (message) => {
-  const errorEl = document.createElement('div');
-  errorEl.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 error-message';
-  errorEl.textContent = message;
-  document.body.appendChild(errorEl);
-
-  gsap.fromTo(errorEl,
-      { y: -50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.5, ease: "back.out" }
-  );
-
-  setTimeout(() => {
-    gsap.to(errorEl, {
-      opacity: 0,
-      y: -20,
-      duration: 0.5,
-      onComplete: () => errorEl.remove()
-    });
-  }, 5000);
-};
-
 const openWhatsApp = () => {
   window.open("https://api.whatsapp.com/send/?phone=23799623303&text&type=phone_number&app_absent=0", "_blank");
 }
 
 const featuresSection = ref(null);
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick();
   // Animations GSAP
   const tl = gsap.timeline();
 

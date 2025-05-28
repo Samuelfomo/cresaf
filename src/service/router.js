@@ -7,7 +7,7 @@ router.post('/email', async (req, res) => {
         const {firstName, lastName, email, mobile, subject, message, source} = req.body;
         // const agence = "samuel@imediatis.net";
         const agence = {
-            samuel: "samuel@imediatis.net",
+            samuel: "stevia.kamga@cresaf.com",
             // support: "support@cresaf.com",
             // manfred: "manfred@fredcode.net",
         };
