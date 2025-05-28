@@ -1353,7 +1353,7 @@ onUnmounted(() => {
     </div>
 
     <!--Collecte journalière-->
-    <div id="section5" class="bg-primary lg:px-16 px-8 py-12">
+    <div id="section5" class="bg-primary lg:px-16 px-8 py-12 hidden">
       <div class="container mx-auto max-w-6xl">
         <h1 class="text-white w-full text-center montserrat montserrat-700 lg:text-4xl text-3xl lg:mb-4 title-main">Collecte journalière</h1>
         <p class="w-full my-6 text-xl montserrat montserrat-400 text-gray-200 leading-relaxed description-text lg:text-start text-center">
@@ -1383,6 +1383,95 @@ onUnmounted(() => {
         </div>
       </div>
 
+    </div>
+    <div class="relative overflow-hidden bg-primary">
+      <!-- Animated background elements -->
+      <div class="absolute inset-0">
+        <div class="floating-circle absolute w-32 h-32 rounded-full opacity-10 bg-secondary top-[10%] left-[10%]"></div>
+        <div class="floating-circle absolute w-20 h-20 rounded-full opacity-5 bg-secondary top-[60%] right-[15%]"></div>
+        <div class="floating-circle absolute w-40 h-40 rounded-full opacity-5 bg-secondary bottom-[20%] left-[70%]"></div>
+      </div>
+
+      <div class="relative z-10 lg:px-16 px-8 py-12">
+        <div id="section5" class="container mx-auto">
+
+          <!-- Header Section with staggered animation -->
+          <div class="text-center">
+            <div class="inline-block">
+              <h2 class="text-white montserrat montserrat-700 text-4xl mb-6 title-main">
+                Collecte journalière
+              </h2>
+              <div class="w-24 h-1 mx-auto mb-8 accent-bar bg-white"></div>
+            </div>
+
+            <p class="text-gray-200 text-xl montserrat montserrat-400 max-w-6xl mx-auto leading-relaxed description-text">
+              La collecte journalière destinée principalement aux travailleurs indépendants (commerçants ou autre)
+              permet de sécuriser l’argent sans avoir à se déplacer.
+              Nos agents déployés sur le terrain collectent les fonds et les déposent directement
+              sur les comptes de chaque souscripteur.
+            </p>
+          </div>
+
+          <!-- Main Content Grid -->
+          <div class="lg:grid lg:grid-cols-2 lg:gap-x-16 justify-center">
+
+            <!-- Image Section -->
+            <div class="relative mb-12 lg:mb-0 image-container place-items-end hidden">
+              <div class="relative overflow-hidden rounded-2xl shadow-2xl transform w-full max-w-xl lg:min-h-[32rem]">
+                <!-- Placeholder for actual image -->
+                <Image_compteAss :images="Terme" />
+
+                <!-- Decorative overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+
+                <!-- Floating badge -->
+                <div class="absolute top-0 -right-4 floating-badge">
+                  <div class="px-6 py-3 rounded-full text-white font-bold shadow-lg transform rotate-12 bg-secondary">
+                    ✨ Nouveau
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="content-section mt-16" v-for="(collecte, index) in collectes" :key="index">
+              <div class="max-w-xl pb-2">
+                <h2 class="text-3xl montserrat montserrat-600 text-gray-50 mb-6 benefits-title">
+                  {{ collecte.title }}
+                </h2>
+              </div>
+
+              <!-- Advantages Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 advantages-grid">
+
+                <!-- Advantage Cards -->
+                <div class="advantage-card group cursor-pointer" v-for="(cont, index) in collecte.contain" :key="index">
+                  <div class="relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                         style="background: linear-gradient(135deg, #45ab34, transparent);"></div>
+
+                    <div class="relative z-10">
+                      <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-primary-accent">
+                          <IconMoneybagPlus v-if="index === 0" class="h-5 w-5 text-black" />
+                          <IconScriptPlus v-else class="h-5 w-5 text-black" />
+                        </div>
+                        <h4 class="font-semibold text-white">{{ cont.title }}</h4>
+                      </div>
+
+                      <p class="text-gray-300 text-sm mb-3" :class="cont.description? ``: `text-transparent`">{{ cont.description? cont.description : `noting description` }}</p>
+                    </div>
+
+                    <!-- Hover effect border -->
+                    <div class="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-green-400/30 transition-colors duration-300"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
 
     <!--Carte visa-->

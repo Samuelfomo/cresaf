@@ -16,19 +16,6 @@
                 Nous sommes là pour vous accompagner dans vos projets.
                 Notre équipe d'experts est prête à répondre à vos questions.
               </p>
-<!--              <div class="flex flex-wrap gap-4">-->
-<!--                <div class="flex items-center bg-white p-4 rounded-lg shadow-sm">-->
-<!--                  <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mr-4">-->
-<!--                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">-->
-<!--                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>-->
-<!--                    </svg>-->
-<!--                  </div>-->
-<!--                  <div>-->
-<!--                    <p class="text-sm text-gray-600">Téléphone</p>-->
-<!--                    <p class="font-semibold text-primary">+33 1 23 45 67 89</p>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
               <button
                   type="button"
                   @click="openWhatsApp"
@@ -54,9 +41,6 @@
                         :alt="image.alt"
                         class="w-full object-cover"
                     />
-<!--                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">-->
-<!--                      <h3 class="text-white text-lg font-semibold">{{ image.title }}</h3>-->
-<!--                    </div>-->
                   </div>
                 </div>
               </div>
@@ -222,7 +206,7 @@
               </div>
 
               <div class="grid md:grid-cols-2 gap-6 mb-6">
-                <div class="form-group">
+                <div class="form-group z-40">
                   <label for="subject" class="block text-sm font-semibold text-primary mb-3">
                     Sélectionnez l'objet de votre demande *
                   </label>
@@ -232,12 +216,31 @@
                       :options="subjectOptions"
                       placeholder="Sélectionnez un sujet"
                       :class="{'error-select': formErrors.subject}"
+                      @change="handleSubjectChange"
                   />
                   <p v-if="formErrors.subject" class="text-red-500 text-sm mt-1 error-message">
                     {{ formErrors.subject }}
                   </p>
+
+                  <!-- Champ conditionnel pour "Autre" -->
+                  <div v-if="form.subject === 'autre'" class="mt-4">
+                    <label for="customSubject" class="block text-sm font-semibold text-primary mb-3">
+                      Précisez votre demande *
+                    </label>
+                    <input
+                        type="text"
+                        id="customSubject"
+                        v-model="form.customSubject"
+                        :class="{'border-red-500 focus:ring-red-500': formErrors.customSubject}"
+                        class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-secondary focus:border-transparent transition-all"
+                        placeholder="Décrivez l'objet de votre demande"
+                    />
+                    <p v-if="formErrors.customSubject" class="text-red-500 text-sm mt-1 error-message">
+                      {{ formErrors.customSubject }}
+                    </p>
+                  </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group z-30">
                   <label for="source" class="block text-sm font-semibold text-primary mb-3">
                     Comment avez-vous entendu parler de nous ?
                   </label>
@@ -383,7 +386,6 @@ const agencies = ref([
 
 // Options pour les selects personnalisés
 const subjectOptions = [
-  { value: "consultation", label: "Consultation" },
   { value: "partenariat", label: "Partenariat" },
   { value: "stage", label: "Demande de stage" },
   { value: "autre", label: "Autre" }
@@ -400,6 +402,24 @@ const sourceOptions = sources.value.map(source => ({
   value: source.value,
   label: source.label
 }));
+// Fonction pour gérer le changement de sujet
+const handleSubjectChange = () => {
+  // Réinitialiser le champ personnalisé si on change de sujet
+  if (form.value.subject !== 'autre') {
+    form.value.customSubject = '';
+    formErrors.value.customSubject = '';
+  }
+};
+
+// Fonction pour obtenir le sujet final
+const getFinalSubject = () => {
+  if (form.value.subject === 'autre' && form.value.customSubject.trim()) {
+    return `Autre (${form.value.customSubject.trim()})`;
+  }
+  // Trouver le label correspondant à la valeur sélectionnée
+  const selectedOption = subjectOptions.find(option => option.value === form.value.subject);
+  return selectedOption ? selectedOption.label : form.value.subject;
+};
 
 // État du formulaire
 const form = ref({
@@ -408,6 +428,7 @@ const form = ref({
   email: "",
   phone: "",
   subject: "",
+  customSubject: "",
   message: "",
   source: ""
 });
@@ -418,6 +439,7 @@ const formErrors = ref({
   email: '',
   phone: '',
   subject: '',
+  customSubject: '',
   message: ''
 });
 
@@ -433,6 +455,7 @@ const validateForm = () => {
     email: '',
     phone: '',
     subject: '',
+    customSubject: '',
     message: ''
   };
 
@@ -485,6 +508,17 @@ const validateForm = () => {
   if (!form.value.subject) {
     formErrors.value.subject = 'Veuillez sélectionner un sujet';
     isFormValid.value = false;
+  }
+
+  // Validation du sujet personnalisé si "Autre" est sélectionné
+  if (form.value.subject === 'autre') {
+    if (!form.value.customSubject.trim()) {
+      formErrors.value.customSubject = 'Veuillez préciser l\'objet de votre demande';
+      isFormValid.value = false;
+    } else if (form.value.customSubject.trim().length < 3) {
+      formErrors.value.customSubject = 'L\'objet doit contenir au moins 3 caractères';
+      isFormValid.value = false;
+    }
   }
 
   // Validation du message (obligatoire et minimum 10 caractères)
@@ -558,7 +592,10 @@ const submitForm = async () => {
   const time = new Date().toISOString().split('T')[1].split('.')[0];
   const datetime = `${date} ${time}`;
   try {
-    const emailData = new Email(form.value.firstName, form.value.lastName, form.value.email, form.value.phone, form.value.subject, form.value.message, datetime, null, form.value.source);
+    // Utiliser le sujet final (avec "Autre" personnalisé si applicable)
+    const finalSubject = getFinalSubject();
+
+    const emailData = new Email(form.value.firstName, form.value.lastName, form.value.email, form.value.phone, finalSubject, form.value.message, datetime, null, form.value.source);
     console.log('emailData', emailData);
     const result = await emailData.sendEmail();
 
@@ -580,6 +617,7 @@ const submitForm = async () => {
       email: "",
       phone: "",
       subject: "",
+      customSubject: "",
       message: "",
       source: ""
     };

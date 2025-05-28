@@ -108,7 +108,7 @@
           <div v-for="(raison, index) in locations2" :key="index"
                class="confiance-card group rounded-lg overflow-hidden flex flex-col h-full shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
           >
-            <div class="h-full bg-gradient-to-br from-primary to-white/80 flex justify-center items-center">
+            <div class="h-full bg-gradient-to-br from-primary to-white/55 flex justify-center items-center">
               <div class="p-6 flex-grow">
                 <p class="montserrat text-white text-lg leading-relaxed">{{ raison.description }}</p>
               </div>
